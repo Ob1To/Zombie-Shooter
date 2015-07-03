@@ -224,7 +224,7 @@ public class LoginScreen implements Screen {
                     Gson gson = new Gson();
                     JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                     JsonObject jsonObj = element.getAsJsonObject();
-                    myUser.setUserId(jsonObj.get("userId").getAsInt());
+                    myUser.setUserId(jsonObj.get("userId").getAsInt()); // Initialization of User Id via POST request
                     Gdx.app.postRunnable(new Runnable() {
                         @Override
                         public void run() {

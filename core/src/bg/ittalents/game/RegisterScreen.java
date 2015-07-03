@@ -36,7 +36,6 @@ public class RegisterScreen implements Screen {
     public static final float CONSTANT_PAD_LEFT_AND_RIGHT = Gdx.graphics.getWidth() / 30;
     public static final float CONSTANT_HEIGHT_TITLE = 3;
     public static final int CONSTANT_HEIGHT_REGISTER_BUTTON = 5;
-    public static final String HTTP_SERVER = "http://192.168.6.99:8080/ShootThemAll";
     public static final int CONSTANT_LENGTH_USERNAME_CHECK = 3;
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -204,7 +203,7 @@ public class RegisterScreen implements Screen {
         json.add("email", new JsonPrimitive(emailField.getText()));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(HTTP_SERVER + "/registration");
+        httpRequest.setUrl(Assets.HTTP_SERVER + "registration");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {

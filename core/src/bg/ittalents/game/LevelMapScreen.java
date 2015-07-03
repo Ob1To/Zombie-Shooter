@@ -35,7 +35,6 @@ public class LevelMapScreen implements Screen {
     public static final float CONSTANT_HEIGHT_TITLE = 3;
     public static final double WIDTH_BUTTONS = 3.5;
     public static final int HEIGHT_BUTTONS = 4;
-    public static final String HTTP_SERVER = "http://localhost:8080/ShootThemAll";
     public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
 
     private Game game;
@@ -304,7 +303,7 @@ public class LevelMapScreen implements Screen {
     private void levelInfoJson() {
         game.setScreen(new DifficultyScreen(game));
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(HTTP_SERVER + "/levelManager?userId=" + LoginScreen.myUser.getUserId() + "&level=" + LoginScreen.myUser.getGameLevel());
+        httpGet.setUrl(Assets.HTTP_SERVER + "levelManager?userId=" + LoginScreen.myUser.getUserId() + "&level=" + LoginScreen.myUser.getGameLevel());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();

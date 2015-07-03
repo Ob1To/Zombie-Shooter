@@ -7,7 +7,6 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -37,10 +36,6 @@ public class ProfileScreen implements Screen {
     private static final float CONSTANT_WIDTH_APPLY_BUTTON = 3;
     private static final float CONSTANT_TEXT_WIDTH = 3;
     private static final float CONSTANT_TEXT_HEIGHT = 10;
-
-
-    //    Da se prehvurlqt 4trite konstanti
-    public static final String HTTP_SERVER = "http://192.168.6.99:8080/ShootThemAll";
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -207,7 +202,7 @@ public class ProfileScreen implements Screen {
         json.add("allowNotification", new JsonPrimitive(true));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(HTTP_SERVER + "/userInfoManager");
+        httpRequest.setUrl(Assets.HTTP_SERVER + "userInfoManager");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {

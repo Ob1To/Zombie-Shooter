@@ -26,7 +26,6 @@ import com.google.gson.JsonElement;
 public class HighScoreScreen implements Screen {
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final String HTTP_SERVER = "http://192.168.6.99:8080/ShootThemAll";
     public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
     public static final float CONSTANT_HEIGHT_TITLE = 3;
     public static final float CONSTANT_WIDTH_TITLE = 2;
@@ -113,7 +112,7 @@ public class HighScoreScreen implements Screen {
     private void highScoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         //        Tuk sled kato napravim klasa User da vzimame ve4e ID koeto imame za konkretniq potrebitel
-        httpGet.setUrl(HTTP_SERVER + "/leaderBoard?userId=" + LoginScreen.myUser.getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "leaderBoard?userId=" + LoginScreen.myUser.getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();

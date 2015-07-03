@@ -261,7 +261,7 @@ public class LoginScreen implements Screen {
 
     private void loadUserInformation() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(HTTP_SERVER + "userInfoManager?userId=" + LoginScreen.myUser.getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + LoginScreen.myUser.getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();

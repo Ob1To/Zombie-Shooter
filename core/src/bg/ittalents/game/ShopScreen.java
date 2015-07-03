@@ -31,7 +31,6 @@ import com.google.gson.JsonPrimitive;
 
 public class ShopScreen extends Actor implements Screen {
 
-    public static final String HTTP_SERVER = "http://localhost:8080/ShootThemAll/";
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int CONSTANT_COORDINATES_SCORE_X = WIDTH_SCREEN / 40;
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
@@ -286,7 +285,7 @@ public class ShopScreen extends Actor implements Screen {
         json.add("weaponType", new JsonPrimitive(LoginScreen.myUser.getWeapon()));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(HTTP_SERVER + "weaponManager");
+        httpRequest.setUrl(Assets.HTTP_SERVER + "weaponManager");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {

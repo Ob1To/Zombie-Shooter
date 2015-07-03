@@ -40,7 +40,7 @@ public class GameScreen implements Screen {
     protected static Zombie[] zombieArray;
     protected static int points;
     protected static int lives;
-    protected static int money;
+    protected static int bullets;
     public static Stage mainStage;
     protected Game game;
     protected static Sprite backGroundSprite;
@@ -52,8 +52,8 @@ public class GameScreen implements Screen {
     public GameScreen(Game game) {
         this.game = game;
         this.points = 0;
-        this.lives = 3;
-        this.money = 0;
+        this.lives = LoginScreen.myUser.getGameLevel();
+        this.bullets = LoginScreen.myUser.getGameBulletsForLevel();
     }
 
     @Override
@@ -85,13 +85,14 @@ public class GameScreen implements Screen {
         mainStage.addListener(new ClickListener() { // Adding Shooting sounds to the stage.
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                LoginScreen.myUser.setGameBulletsForLevel(LoginScreen.myUser.getGameBulletsForLevel() - LoginScreen.myUser.getWeapon());
                 Assets.singleShot.play();
                 return true;
             }
         });
 
         for (int y = 0; y < 5; y++) {
-            Zombie newZombie = new Zombie(3, 3);
+            Zombie newZombie = new Zombie(LoginScreen.myUser.getGameDamageZombie(), LoginScreen.myUser.getGameHidingZombie());
             newZombie.setSize(WIDTH_ZOMBIE, HEIGHT_ZOMBIE);
             newZombie.setPosition(zombiePosition[y], ((y != 2) ? zombiePosition[5] : zombiePosition[6]));
             zombieArray[y] = newZombie;
@@ -130,7 +131,7 @@ public class GameScreen implements Screen {
     public void zombieSpawner(float timeSinceLast) {
         this.lastSpawnZombieTimer += timeSinceLast;
         updateZombieTimeLiving(timeSinceLast);
-        if (this.lastSpawnZombieTimer > 1) {
+        if (this.lastSpawnZombieTimer > LoginScreen.myUser.getGameAppearingZombieTime()) {
             this.lastSpawnZombieTimer = 0.0f;
             this.addZombie();
         }
@@ -152,7 +153,7 @@ public class GameScreen implements Screen {
     private void textBitmapFontDraw() {
         textBitmapFont.draw(spriteBatch, "SCORE  " + points, CONSTANT_X_FOR_SCORE, CONSTANT_Y_FOR_SCORE);
         textBitmapFont.draw(spriteBatch, "LIVES  " + lives, CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_LIVES);
-        textBitmapFont.draw(spriteBatch, "MONEY  " + money, CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_MONEY);
+        textBitmapFont.draw(spriteBatch, "BULLETS  " + bullets, CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_MONEY);
     }
 
     public BitmapFont loadFont() {

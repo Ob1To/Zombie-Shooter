@@ -125,7 +125,7 @@ public class User {
     }
 
     public int getGameBulletsForLevel() {
-        return gameBulletsForLevel;
+        return this.gameBulletsForLevel;
     }
 
     public void setGameBulletsForLevel(int gameBulletsForLevel) {

@@ -32,7 +32,7 @@ public class Zombie extends Actor {
     private Texture[] enemiesArray;
     private int initialZombieLevel;
 
-    public Zombie(int zombieLevel, int paragonLevel) {
+    public Zombie(int zombieLevel, float paragonLevel) {
         enemiesArray = new Texture[3];
         enemiesArray[0] = Assets.enemySingleImage;
         enemiesArray[1] = Assets.enemySingleImageLevel2;
@@ -90,7 +90,6 @@ public class Zombie extends Actor {
                 currentZombie.setVisible(false);
                 currentZombie.isDead = false;
                 GameScreen.points += 10 * zombieLevel;
-                GameScreen.money += 10 * zombieLevel;
             }
         }
     }

@@ -3,7 +3,9 @@ package bg.ittalents.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,14 +16,22 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 
 public class ShopScreen extends Actor implements Screen {
 
+    public static final String HTTP_SERVER = "http://localhost:8080/ShootThemAll/";
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int CONSTANT_COORDINATES_SCORE_X = WIDTH_SCREEN / 40;
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
@@ -37,6 +47,8 @@ public class ShopScreen extends Actor implements Screen {
     public static final int CONSTANT_FOR_POSITION_WEAPON_3 = WIDTH_SCREEN / 5;
     public static final double CONSTANT_FOR_POSITION_WEAPON_2 = 2.7;
     public static final int CONSTANT_FOR_POSITION_WEAPON_1 = 25;
+    public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
+
 
     private Game game;
     private SpriteBatch batch;
@@ -54,6 +66,10 @@ public class ShopScreen extends Actor implements Screen {
     private Image weapon1;
     private Image weapon2;
     private Image weapon3;
+
+    private Label labelMessage;
+    private Table tableMessage;
+    private Skin skin;
 
     public ShopScreen(Game game) {
         this.game = game;
@@ -84,6 +100,18 @@ public class ShopScreen extends Actor implements Screen {
         addListenerWeapons();
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setInputProcessor(stage);
+
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+        tableMessage = new Table();
+        tableMessage.setFillParent(true);
+        tableMessage.top();
+
+        labelMessage = new Label("", skin);
+        labelMessage.setColor(Color.WHITE);
+        labelMessage.setAlignment(Align.center);
+        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP); // KAKVO E TOVA VLADO ? EXPANDX() ? KAKVO E TOVA VLADO ? EXPANDX() ? KAKVO E TOVA VLADO ? EXPANDX() ?
+        stage.addActor(tableMessage);
 
     }
 
@@ -224,6 +252,7 @@ public class ShopScreen extends Actor implements Screen {
                 LoginScreen.myUser.setWeapon(1);
                 checkWeapons();
                 setButtonPositionAndAddInStage();
+                addWeaponSelectJson();
             }
         });
 
@@ -233,6 +262,7 @@ public class ShopScreen extends Actor implements Screen {
                     LoginScreen.myUser.setWeapon(2);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
+                    addWeaponSelectJson();
                 }
             }
         });
@@ -243,7 +273,53 @@ public class ShopScreen extends Actor implements Screen {
                     LoginScreen.myUser.setWeapon(3);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
+                    addWeaponSelectJson();
+
                 }
+            }
+        });
+    }
+
+    private void addWeaponSelectJson() {
+        JsonObject json = new JsonObject();
+        json.add("userId", new JsonPrimitive(LoginScreen.myUser.getUserId()));
+        json.add("weaponType", new JsonPrimitive(LoginScreen.myUser.getWeapon()));
+
+        final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
+        httpRequest.setUrl(HTTP_SERVER + "weaponManager");
+        httpRequest.setHeader("Content-Type", "application/json");
+        httpRequest.setContent(json.toString());
+        Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(final Net.HttpResponse httpResponse) {
+                if (httpResponse.getStatus().getStatusCode() == 200) {
+                    Gdx.app.postRunnable(new Runnable() {
+                        @Override
+                        public void run() {
+                            stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                                @Override
+                                public void run() {
+                                    game.setScreen(new PlayScreen(game));
+                                }
+                            })));
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                labelMessage.setText("Please check your Internet connection.");
+            }
+
+            @Override
+            public void cancelled() {
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+//                     ?????
+                    }
+                });
             }
         });
     }

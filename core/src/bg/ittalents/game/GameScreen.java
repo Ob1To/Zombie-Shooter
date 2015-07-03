@@ -40,7 +40,6 @@ public class GameScreen implements Screen {
     protected static Zombie[] zombieArray;
     protected static int points;
     protected static int lives;
-    protected static int bullets;
     public static Stage mainStage;
     protected Game game;
     protected static Sprite backGroundSprite;
@@ -52,8 +51,8 @@ public class GameScreen implements Screen {
     public GameScreen(Game game) {
         this.game = game;
         this.points = 0;
-        this.lives = LoginScreen.myUser.getGameLevel();
-        this.bullets = LoginScreen.myUser.getGameBulletsForLevel();
+        this.lives = LoginScreen.myUser.getUserHealth();
+
     }
 
     @Override
@@ -153,7 +152,7 @@ public class GameScreen implements Screen {
     private void textBitmapFontDraw() {
         textBitmapFont.draw(spriteBatch, "SCORE  " + points, CONSTANT_X_FOR_SCORE, CONSTANT_Y_FOR_SCORE);
         textBitmapFont.draw(spriteBatch, "LIVES  " + lives, CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_LIVES);
-        textBitmapFont.draw(spriteBatch, "BULLETS  " + bullets, CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_MONEY);
+        textBitmapFont.draw(spriteBatch, "BULLETS  " + LoginScreen.myUser.getGameBulletsForLevel(), CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_MONEY);
     }
 
     public BitmapFont loadFont() {

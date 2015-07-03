@@ -3,7 +3,9 @@ package bg.ittalents.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,11 +14,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 
 public class LevelMapScreen implements Screen {
@@ -28,6 +35,8 @@ public class LevelMapScreen implements Screen {
     public static final float CONSTANT_HEIGHT_TITLE = 3;
     public static final double WIDTH_BUTTONS = 3.5;
     public static final int HEIGHT_BUTTONS = 4;
+    public static final String HTTP_SERVER = "http://192.168.6.99:8080/ShootThemAll";
+    public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
 
     private Game game;
     private SpriteBatch batch;
@@ -50,6 +59,12 @@ public class LevelMapScreen implements Screen {
     private Sprite spriteFiveButton;
     private Sprite spriteSixButton;
     private Sprite spriteButtonOne;
+    private int startLevelPlayGame;
+    private Label lblStatus;
+    private Label labelMessage;
+    private Table tableMessage;
+    private Skin skin;
+
 
     public LevelMapScreen(Game game) {
         this.game = game;
@@ -100,6 +115,18 @@ public class LevelMapScreen implements Screen {
         Assets.spriteDefaultColor(spriteButtonOne, spriteTwoButton, spriteThreeButton, spriteFourButton, spriteFiveButton, spriteSixButton);
 
         Gdx.input.setCatchBackKey(true);
+
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+        tableMessage = new Table();
+        tableMessage.setFillParent(true);
+        tableMessage.top();
+
+        labelMessage = new Label("", skin);
+        labelMessage.setColor(Color.WHITE);
+        labelMessage.setAlignment(Align.center);
+        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP); // KAKVO E TOVA VLADO ? EXPANDX() ? KAKVO E TOVA VLADO ? EXPANDX() ? KAKVO E TOVA VLADO ? EXPANDX() ?
+        stage.addActor(tableMessage);
     }
 
     private void addListenerForButton() {
@@ -109,9 +136,7 @@ public class LevelMapScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        LoginScreen.myUser.setGameAppearingZombieAll(40);
-                        LoginScreen.myUser.setGameAppearingZombieTime(1);
-                        LoginScreen.myUser.setGameHidingZombie(2);
+                        startLevelPlayGame = 1;
                         game.setScreen(new DifficultyScreen(game));
                     }
                 })));
@@ -125,9 +150,7 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(60);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.9f);
-                            LoginScreen.myUser.setGameHidingZombie(1.8f);
+                            startLevelPlayGame = 2;
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -142,9 +165,7 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(80);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.8f);
-                            LoginScreen.myUser.setGameHidingZombie(1.6f);
+                            startLevelPlayGame = 3;
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -159,9 +180,7 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(100);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.7f);
-                            LoginScreen.myUser.setGameHidingZombie(1.4f);
+                            startLevelPlayGame = 4;
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -176,9 +195,10 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(120);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.6f);
-                            LoginScreen.myUser.setGameHidingZombie(1.2f);
+                            startLevelPlayGame = 5;
+//                            LoginScreen.myUser.setGameAppearingZombieAll(120);
+//                            LoginScreen.myUser.setGameAppearingZombieTime(0.6f);
+//                            LoginScreen.myUser.setGameHidingZombie(1.2f);
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -193,7 +213,7 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-
+                            startLevelPlayGame = 6;
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -283,6 +303,40 @@ public class LevelMapScreen implements Screen {
             game.setScreen(new PlayScreen(game));
         }
 
+    }
+
+    private void levelInfoJson() {
+        final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
+        httpGet.setUrl(HTTP_SERVER + "levelManager?userId=" + LoginScreen.myUser.getUserId() + "&level=" + startLevelPlayGame);
+        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                Gson gson = new Gson();
+                JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
+                JsonObject jsonObj = element.getAsJsonObject();
+
+                LoginScreen.myUser.setUserHealth(jsonObj.get("userHealth").getAsInt());
+                LoginScreen.myUser.setGameAppearingZombieAll(jsonObj.get("count").getAsInt());
+                LoginScreen.myUser.setGameAppearingZombieTime(jsonObj.get("durationOn").getAsFloat());
+                LoginScreen.myUser.setGameHidingZombie(jsonObj.get("durationOff").getAsFloat());
+                LoginScreen.myUser.setGameBulletsForLevel(jsonObj.get("bullets").getAsInt());
+
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                    labelMessage.setText("Please check your Internet connection.");
+            }
+
+            @Override
+            public void cancelled() {
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+//                     ?????
+                    }
+                });
+            }
+        });
     }
 
     @Override

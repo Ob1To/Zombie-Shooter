@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -117,7 +116,7 @@ public class LoginScreen implements Screen {
         labelMessage = new Label("", skin);
         labelMessage.setColor(Color.WHITE);
         labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP); // KAKVO E TOVA VLADO ? EXPANDX() ? KAKVO E TOVA VLADO ? EXPANDX() ? KAKVO E TOVA VLADO ? EXPANDX() ?
+        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
         stage.addActor(tableMessage);
     }
 
@@ -302,7 +301,6 @@ public class LoginScreen implements Screen {
                 LoginScreen.myUser.setWeaponOneUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(0).getAsJsonObject().get("type").getAsInt());
                 LoginScreen.myUser.setWeaponTwoUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(1).getAsJsonObject().get("type").getAsInt());
                 LoginScreen.myUser.setWeaponTreeUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(2).getAsJsonObject().get("type").getAsInt());
-                System.out.println(LoginScreen.myUser.toString());
             }
 
             @Override
@@ -319,7 +317,7 @@ public class LoginScreen implements Screen {
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
-//                     ?????
+
                     }
                 });
             }

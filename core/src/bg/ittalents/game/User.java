@@ -16,6 +16,8 @@ public class User {
     private float gameAppearingZombieTime;
     private float gameHidingZombie;
     private int gameDamageZombie;
+    private int userHealth;
+    private int gameBulletsForLevel;
 
 
     public int getWeaponOneUnlock() {
@@ -114,6 +116,22 @@ public class User {
         this.gameDamageZombie = gameDamageZombie;
     }
 
+    public int getUserHealth() {
+        return userHealth;
+    }
+
+    public void setUserHealth(int userHealth) {
+        this.userHealth = userHealth;
+    }
+
+    public int getGameBulletsForLevel() {
+        return gameBulletsForLevel;
+    }
+
+    public void setGameBulletsForLevel(int gameBulletsForLevel) {
+        this.gameBulletsForLevel = gameBulletsForLevel;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -124,6 +142,13 @@ public class User {
                 ", weaponOneUnlock=" + weaponOneUnlock +
                 ", weaponTwoUnlock=" + weaponTwoUnlock +
                 ", weaponTreeUnlock=" + weaponTreeUnlock +
+                ", gameLevel=" + gameLevel +
+                ", gameAppearingZombieAll=" + gameAppearingZombieAll +
+                ", gameAppearingZombieTime=" + gameAppearingZombieTime +
+                ", gameHidingZombie=" + gameHidingZombie +
+                ", gameDamageZombie=" + gameDamageZombie +
+                ", userHealth=" + userHealth +
+                ", gameBulletsForLevel=" + gameBulletsForLevel +
                 '}';
     }
 }

@@ -85,7 +85,19 @@ public class GameScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 LoginScreen.myUser.setGameBulletsForLevel(LoginScreen.myUser.getGameBulletsForLevel() - LoginScreen.myUser.getWeapon());
-                Assets.singleShot.play();
+                switch (LoginScreen.myUser.getWeapon()){
+                    case 1:
+                        Assets.singleShot.play();
+                        break;
+                    case 2:
+                        Assets.doubleShot.play();
+                        break;
+                    case 3:
+                        Assets.tripleShot.play();
+                        break;
+                }
+
+
                 return true;
             }
         });

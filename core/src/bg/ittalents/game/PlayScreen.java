@@ -63,7 +63,7 @@ public class PlayScreen implements Screen {
         backgroundSprite = new Sprite(Assets.backgroundMenu);
         backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         titleSprite = new Sprite(Assets.zombieShooterTitle);
-        titleSprite.setColor(1,0,0,0.9f);
+        Assets.spriteDefaultColorSolid(titleSprite);
         spriteDrawableTitle = new SpriteDrawable(titleSprite);
         imageTitle = new Image(spriteDrawableTitle);
 

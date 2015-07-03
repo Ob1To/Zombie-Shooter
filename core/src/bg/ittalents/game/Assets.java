@@ -261,9 +261,9 @@ public class Assets {
 //        sprite1.setColor(1,0,0,0.65f);
     }
 
-//    public static void spriteDefaultColor(Sprite sprite) {
-//        sprite.setColor(1,0,0,0.65f);
-//    }
+    public static void spriteDefaultColorSolid(Sprite sprite) {
+        sprite.setColor(1,0,0,0.9f);
+    }
 
     public static void spriteDefaultColor(Sprite... sprites){
         for (Sprite sprite : sprites){

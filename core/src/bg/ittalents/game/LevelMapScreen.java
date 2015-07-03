@@ -61,11 +61,11 @@ public class LevelMapScreen implements Screen {
 
         batch = new SpriteBatch();
         backgroundSprite = new Sprite(Assets.backgroundMenu);
-        Assets.spriteDefaultColor(backgroundSprite);
         backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
         Sprite spriteTitle = new Sprite(Assets.paragonLevelImage);
+        Assets.spriteDefaultColorSolid(spriteTitle);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
         stage = new Stage(new ScreenViewport());

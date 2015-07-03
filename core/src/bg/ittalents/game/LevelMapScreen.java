@@ -193,9 +193,7 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(140);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.5f);
-                            LoginScreen.myUser.setGameHidingZombie(1);
+
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));

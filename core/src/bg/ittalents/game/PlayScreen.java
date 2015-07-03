@@ -34,6 +34,10 @@ public class PlayScreen implements Screen {
     private SpriteBatch batch;
     private Sprite backgroundSprite;
     private Sprite titleSprite;
+    private Sprite spritePlayButton;
+    private Sprite spriteShopButton;
+    private Sprite spriteHighScoreButton;
+    private Sprite spriteProfileButton;
     private Image imageTitle;
     private Stage stage;
     private Table container;
@@ -59,6 +63,7 @@ public class PlayScreen implements Screen {
         backgroundSprite = new Sprite(Assets.backgroundMenu);
         backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         titleSprite = new Sprite(Assets.zombieShooterTitle);
+        titleSprite.setColor(1,0,0,0.9f);
         spriteDrawableTitle = new SpriteDrawable(titleSprite);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -82,31 +87,42 @@ public class PlayScreen implements Screen {
     }
 
     private void creatingAllTheButtons() {
-        Sprite spritePlayButton = new Sprite(Assets.playButton);
+        spritePlayButton = new Sprite(Assets.playButton);
         spritePlayButton.setSize((float) (WIDTH_SCREEN / WIDTH_PLAY_BUTTON), (float) (HEIGHT_SCREEN / HEIGHT_PLAY_BUTTON));
         SpriteDrawable spriteDrawablePlayButton = new SpriteDrawable(spritePlayButton);
         playButton = new ImageButton(spriteDrawablePlayButton);
 
-        Sprite spriteShopButton = new Sprite(Assets.shopButton);
+        spriteShopButton = new Sprite(Assets.shopButton);
         spriteShopButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableShopButton = new SpriteDrawable(spriteShopButton);
         shopButton = new ImageButton(spriteDrawableShopButton);
 
-        Sprite spriteHighScoreButton = new Sprite(Assets.highScoreButton);
+        spriteHighScoreButton = new Sprite(Assets.highScoreButton);
         spriteHighScoreButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableHighScoreButton = new SpriteDrawable(spriteHighScoreButton);
         highScoreButton = new ImageButton(spriteDrawableHighScoreButton);
 
-        Sprite spriteProfileButton = new Sprite(Assets.profileButton);
+        spriteProfileButton = new Sprite(Assets.profileButton);
         spriteProfileButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableProfileButton = new SpriteDrawable(spriteProfileButton);
         profileButton = new ImageButton(spriteDrawableProfileButton);
+
+        Assets.spriteDefaultColor(spritePlayButton,spriteShopButton,spriteHighScoreButton,spriteProfileButton); // Setting the transparency of the buttons
     }
 
     private void addingListenersToAllButtons() {
         playButton.addListener(new ClickListener() {
-            public void clicked(InputEvent e, float x, float y) {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                spritePlayButton.setColor(1, 0.271f, 0, 0.8f);
+                return true;
+            }
+        });
+        playButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Assets.clickButton.play();
+                spritePlayButton.setColor(0.545f, 0, 0, 0.7f);
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -115,9 +131,19 @@ public class PlayScreen implements Screen {
                 })));
             }
         });
+
         shopButton.addListener(new ClickListener() {
-            public void clicked(InputEvent e, float x, float y) {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                spriteShopButton.setColor(1, 0.271f, 0, 0.8f);
+                return true;
+            }
+        });
+        shopButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Assets.clickButton.play();
+                spriteShopButton.setColor(0.545f, 0, 0, 0.7f);
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -127,8 +153,17 @@ public class PlayScreen implements Screen {
             }
         });
         highScoreButton.addListener(new ClickListener() {
-            public void clicked(InputEvent e, float x, float y) {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                spriteHighScoreButton.setColor(1,0.271f,0,0.8f);
+                return true;
+            }
+        });
+        highScoreButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Assets.clickButton.play();
+                spriteHighScoreButton.setColor(0.545f,0,0,0.7f);
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -138,8 +173,17 @@ public class PlayScreen implements Screen {
             }
         });
         profileButton.addListener(new ClickListener() {
-            public void clicked(InputEvent e, float x, float y) {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                spriteProfileButton.setColor(1,0.271f,0,0.8f);
+                return true;
+            }
+        });
+        profileButton.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Assets.clickButton.play();
+                spriteProfileButton.setColor(0.545f,0,0,0.7f);
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {

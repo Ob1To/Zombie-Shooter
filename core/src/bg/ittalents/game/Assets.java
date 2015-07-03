@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
  * Created by Ob1 on 6/30/2015.
@@ -15,6 +16,7 @@ public class Assets {
     private Assets() {
 
     }
+
     public static final String ZOMBIE_BITE_PATH = "Sounds/ZombieBiteTest.wav";
     public static final String DYING_ZOMBIE_SOUND_PATH = "Sounds/DyingZombie1.wav";
     public static final String DYING_ZOMBIE_SOUND2_PATH = "Sounds/DyingZombie2.wav";
@@ -35,7 +37,7 @@ public class Assets {
     public static final String ENEMY_SINGLE_LEVEL2_IMAGE_PATH = "Images/EnemySingleLevel2.png";
     public static final String ENEMY_SINGLE_LEVEL3_IMAGE_PATH = "Images/EnemySingleLevel3.png";
     public static final String APPLY_BUTTON_PATH = "Images/ApplyButton.png";
-    public static final String BACKGROUND_MENU_PATH = "Images/BackgroundMenu.png";
+    public static final String BACKGROUND_MENU_PATH = "Images/BackgroundMenu.jpg";
     public static final String BUTTON_FIVE_PATH = "Images/ButtonFive.png";
     public static final String BUTTON_FIVE_MARKED_PATH = "Images/ButtonFiveX.png";
     public static final String BUTTON_FOUR_PATH = "Images/ButtonFour.png";
@@ -70,8 +72,6 @@ public class Assets {
     public static final String PROFILE_IMAGE_PATH = "Images/TransperantProfileButton.png";
     public static final String SHOP_IMAGE_PATH = "Images/TransperantShopButton.png";
     public static final String ZOMBIE_SHOOTER_TITLE_PATH = "Images/ZombieShooter.png";
-
-
 
 
     public static Sound zombieBite;
@@ -249,9 +249,26 @@ public class Assets {
         profileImage = manager.get(PROFILE_IMAGE_PATH, Texture.class);
         shopImage = manager.get(SHOP_IMAGE_PATH, Texture.class);
         zombieShooterTitle = manager.get(ZOMBIE_SHOOTER_TITLE_PATH, Texture.class);
+
     }
 
     public static void dispose() {
         manager.dispose();
+    }
+
+    public static void spriteTouchDownColor(Sprite sprite) {
+        sprite.setColor(1, 0.271f, 0, 1);
+//        sprite1.setColor(1,0,0,0.65f);
+    }
+
+//    public static void spriteDefaultColor(Sprite sprite) {
+//        sprite.setColor(1,0,0,0.65f);
+//    }
+
+    public static void spriteDefaultColor(Sprite... sprites){
+        for (Sprite sprite : sprites){
+            sprite.setColor(1,0,0,0.65f);
+//            sprite.setAlpha(0.6f);
+        }
     }
 }

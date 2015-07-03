@@ -197,13 +197,13 @@ public class LoginScreen implements Screen {
         loginButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 Assets.clickButton.play();
-                if ((loginField.getText().toString().length() > CONSTANT_LENGTH_USERNAME_CHECK)
-                        && (passwordField.getText().toString().matches(PASSWORD_PATTERN))) {
-                    login();
-                } else {
-                    labelMessage.setText("Invalid username or password.");
-                }
-//                zombieShooterGame.setScreen(new PlayScreen(zombieShooterGame));
+//                if ((loginField.getText().toString().length() > CONSTANT_LENGTH_USERNAME_CHECK)
+//                        && (passwordField.getText().toString().matches(PASSWORD_PATTERN))) {
+//                    login();
+//                } else {
+//                    labelMessage.setText("Invalid username or password.");
+//                }
+                zombieShooterGame.setScreen(new PlayScreen(zombieShooterGame));
             }
         });
     }

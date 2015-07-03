@@ -31,7 +31,7 @@ public class LevelMapScreen implements Screen {
 
     private Game game;
     private SpriteBatch batch;
-    private Sprite sprite;
+    private Sprite backgroundSprite;
     private Image imageTitle;
     private Stage stage;
     private Table container;
@@ -49,6 +49,7 @@ public class LevelMapScreen implements Screen {
     private Sprite spriteFourButton;
     private Sprite spriteFiveButton;
     private Sprite spriteSixButton;
+    private Sprite spriteButtonOne;
 
     public LevelMapScreen(Game game) {
         this.game = game;
@@ -56,29 +57,27 @@ public class LevelMapScreen implements Screen {
 
     @Override
     public void show() {
-        //Suzdavane na backgraunda
+
+
         batch = new SpriteBatch();
-        sprite = new Sprite(Assets.backgroundMenu);
-        sprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        backgroundSprite = new Sprite(Assets.backgroundMenu);
+        Assets.spriteDefaultColor(backgroundSprite);
+        backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
         Sprite spriteTitle = new Sprite(Assets.paragonLevelImage);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
-
         stage = new Stage(new ScreenViewport());
         container = new Table();
         firstRowContainer = new Table();
         secondRowContainer = new Table();
 
-
         initializeButton();
-
 
         container.setWidth(stage.getWidth());
         container.align(Align.center | Align.top);
         container.setPosition(0, Gdx.graphics.getHeight());
-
         container.add(imageTitle).width(WIDTH_SCREEN)
                 .height(HEIGHT_SCREEN / CONSTANT_HEIGHT_TITLE).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
         container.row();
@@ -88,7 +87,6 @@ public class LevelMapScreen implements Screen {
         container.add(firstRowContainer).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
         container.row();
         secondRowContainer.add(fourButton).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT);
-
         secondRowContainer.add(fiveButton).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT).padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
         secondRowContainer.add(sixButton).padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
         container.add(secondRowContainer);
@@ -99,6 +97,7 @@ public class LevelMapScreen implements Screen {
 
         addListenerForButton();
 
+        Assets.spriteDefaultColor(spriteButtonOne, spriteTwoButton, spriteThreeButton, spriteFourButton, spriteFiveButton, spriteSixButton);
 
         Gdx.input.setCatchBackKey(true);
     }
@@ -207,17 +206,19 @@ public class LevelMapScreen implements Screen {
 
     private void initializeButton() {
 
-        Sprite spriteBuyItButton = new Sprite(Assets.buttonOne);
-        spriteBuyItButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableBuyItButton = new SpriteDrawable(spriteBuyItButton);
+        spriteButtonOne = new Sprite(Assets.buttonOne);
+        spriteButtonOne.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        SpriteDrawable spriteDrawableBuyItButton = new SpriteDrawable(spriteButtonOne);
         oneButton = new ImageButton(spriteDrawableBuyItButton);
 
         int checkForLevel = LoginScreen.myUser.getLevel();
 
         if(checkForLevel >= 2) {
             spriteTwoButton = new Sprite(Assets.buttonTwo);
+            Assets.spriteDefaultColor(spriteTwoButton);
         }else{
             spriteTwoButton = new Sprite(Assets.buttonTwo_marked);
+            Assets.spriteDefaultColor(spriteTwoButton);
         }
         spriteTwoButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableTwoButton = new SpriteDrawable(spriteTwoButton);
@@ -226,8 +227,10 @@ public class LevelMapScreen implements Screen {
 
         if(checkForLevel >= 3) {
             spriteThreeButton = new Sprite(Assets.buttonThree);
+            Assets.spriteDefaultColor(spriteThreeButton);
         }else{
             spriteThreeButton = new Sprite(Assets.buttonThreeMarked);
+            Assets.spriteDefaultColor(spriteThreeButton);
         }
         spriteThreeButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableThreeButton = new SpriteDrawable(spriteThreeButton);
@@ -235,8 +238,10 @@ public class LevelMapScreen implements Screen {
 
         if(checkForLevel >= 4) {
             spriteFourButton = new Sprite(Assets.buttonFour);
+            Assets.spriteDefaultColor(spriteFourButton);
         }else{
             spriteFourButton = new Sprite(Assets.buttonFourMarked);
+            Assets.spriteDefaultColor(spriteFourButton);
         }
         spriteFourButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableFourButton = new SpriteDrawable(spriteFourButton);
@@ -245,8 +250,10 @@ public class LevelMapScreen implements Screen {
 
         if(checkForLevel >= 5) {
             spriteFiveButton = new Sprite(Assets.buttonFive);
+            Assets.spriteDefaultColor(spriteFiveButton);
         }else{
             spriteFiveButton = new Sprite(Assets.buttonFiveMarked);
+            Assets.spriteDefaultColor(spriteFiveButton);
         }
         spriteFiveButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableFiveButton = new SpriteDrawable(spriteFiveButton);
@@ -254,8 +261,10 @@ public class LevelMapScreen implements Screen {
 
         if(checkForLevel >= 6) {
             spriteSixButton = new Sprite(Assets.buttonSix);
+            Assets.spriteDefaultColor(spriteSixButton);
         }else{
             spriteSixButton = new Sprite(Assets.buttonSix_marked);
+            Assets.spriteDefaultColor(spriteSixButton);
         }
         spriteSixButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableSixButton = new SpriteDrawable(spriteSixButton);
@@ -267,8 +276,8 @@ public class LevelMapScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        sprite.draw(batch);
-        batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+        backgroundSprite.draw(batch);
+        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
         batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -79,6 +78,7 @@ public class DifficultyScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
+                        LoginScreen.myUser.setGameDamageZombie(1);
                         game.setScreen(new GameScreen(game));
                     }
                 })));
@@ -91,6 +91,7 @@ public class DifficultyScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
+                        LoginScreen.myUser.setGameDamageZombie(2);
                         game.setScreen(new GameScreen(game));
                     }
                 })));
@@ -103,11 +104,13 @@ public class DifficultyScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
+                        LoginScreen.myUser.setGameDamageZombie(3);
                         game.setScreen(new GameScreen(game));
                     }
                 })));
             }
         });
+
 
         container = new Table();
         container.setWidth(stage.getWidth());

@@ -58,6 +58,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        System.out.println(LoginScreen.myUser.toString());
         Assets.gamePlayMusic.play();
         LoginScreen.stopMenuMusic();
         Assets.gamePlayMusic.setLooping(true);

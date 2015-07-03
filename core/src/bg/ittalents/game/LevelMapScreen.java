@@ -35,7 +35,7 @@ public class LevelMapScreen implements Screen {
     public static final float CONSTANT_HEIGHT_TITLE = 3;
     public static final double WIDTH_BUTTONS = 3.5;
     public static final int HEIGHT_BUTTONS = 4;
-    public static final String HTTP_SERVER = "http://192.168.6.99:8080/ShootThemAll";
+    public static final String HTTP_SERVER = "http://localhost:8080/ShootThemAll";
     public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
 
     private Game game;
@@ -59,8 +59,6 @@ public class LevelMapScreen implements Screen {
     private Sprite spriteFiveButton;
     private Sprite spriteSixButton;
     private Sprite spriteButtonOne;
-    private int startLevelPlayGame;
-    private Label lblStatus;
     private Label labelMessage;
     private Table tableMessage;
     private Skin skin;
@@ -136,8 +134,9 @@ public class LevelMapScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        startLevelPlayGame = 1;
-                        game.setScreen(new DifficultyScreen(game));
+                        LoginScreen.myUser.setGameLevel(1);
+                        levelInfoJson();
+
                     }
                 })));
             }
@@ -150,8 +149,8 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            startLevelPlayGame = 2;
-                            game.setScreen(new DifficultyScreen(game));
+                            LoginScreen.myUser.setGameLevel(2);
+                            levelInfoJson();
                         }
                     })));
                 }
@@ -165,8 +164,8 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            startLevelPlayGame = 3;
-                            game.setScreen(new DifficultyScreen(game));
+                            LoginScreen.myUser.setGameLevel(3);
+                            levelInfoJson();
                         }
                     })));
                 }
@@ -180,8 +179,8 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            startLevelPlayGame = 4;
-                            game.setScreen(new DifficultyScreen(game));
+                            LoginScreen.myUser.setGameLevel(4);
+                            levelInfoJson();
                         }
                     })));
                 }
@@ -195,11 +194,8 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            startLevelPlayGame = 5;
-//                            LoginScreen.myUser.setGameAppearingZombieAll(120);
-//                            LoginScreen.myUser.setGameAppearingZombieTime(0.6f);
-//                            LoginScreen.myUser.setGameHidingZombie(1.2f);
-                            game.setScreen(new DifficultyScreen(game));
+                            LoginScreen.myUser.setGameLevel(5);
+                            levelInfoJson();
                         }
                     })));
                 }
@@ -213,8 +209,8 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            startLevelPlayGame = 6;
-                            game.setScreen(new DifficultyScreen(game));
+                            LoginScreen.myUser.setGameLevel(6);
+                            levelInfoJson();
                         }
                     })));
                 }
@@ -306,8 +302,9 @@ public class LevelMapScreen implements Screen {
     }
 
     private void levelInfoJson() {
+        game.setScreen(new DifficultyScreen(game));
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(HTTP_SERVER + "levelManager?userId=" + LoginScreen.myUser.getUserId() + "&level=" + startLevelPlayGame);
+        httpGet.setUrl(HTTP_SERVER + "/levelManager?userId=" + LoginScreen.myUser.getUserId() + "&level=" + LoginScreen.myUser.getGameLevel());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
@@ -324,7 +321,7 @@ public class LevelMapScreen implements Screen {
 
             @Override
             public void failed(Throwable t) {
-                    labelMessage.setText("Please check your Internet connection.");
+                labelMessage.setText("Please check your Internet connection.");
             }
 
             @Override

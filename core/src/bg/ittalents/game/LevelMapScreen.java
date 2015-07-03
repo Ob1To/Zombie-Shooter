@@ -110,9 +110,9 @@ public class LevelMapScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        LoginScreen.myUser.setGameAppearingZombieAll(20);
+                        LoginScreen.myUser.setGameAppearingZombieAll(40);
                         LoginScreen.myUser.setGameAppearingZombieTime(1);
-                        LoginScreen.myUser.setGameHidingZombie(3);
+                        LoginScreen.myUser.setGameHidingZombie(2);
                         game.setScreen(new DifficultyScreen(game));
                     }
                 })));
@@ -126,9 +126,9 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(25);
+                            LoginScreen.myUser.setGameAppearingZombieAll(60);
                             LoginScreen.myUser.setGameAppearingZombieTime(0.9f);
-                            LoginScreen.myUser.setGameHidingZombie(2.8f);
+                            LoginScreen.myUser.setGameHidingZombie(1.8f);
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -143,9 +143,9 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(30);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.7f);
-                            LoginScreen.myUser.setGameHidingZombie(2.6f);
+                            LoginScreen.myUser.setGameAppearingZombieAll(80);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.8f);
+                            LoginScreen.myUser.setGameHidingZombie(1.6f);
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -160,9 +160,9 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(20);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.6f);
-                            LoginScreen.myUser.setGameHidingZombie(2.4f);
+                            LoginScreen.myUser.setGameAppearingZombieAll(100);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.7f);
+                            LoginScreen.myUser.setGameHidingZombie(1.4f);
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -177,9 +177,9 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(20);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.5f);
-                            LoginScreen.myUser.setGameHidingZombie(2.2f);
+                            LoginScreen.myUser.setGameAppearingZombieAll(120);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.6f);
+                            LoginScreen.myUser.setGameHidingZombie(1.2f);
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));
@@ -194,9 +194,9 @@ public class LevelMapScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            LoginScreen.myUser.setGameAppearingZombieAll(20);
-                            LoginScreen.myUser.setGameAppearingZombieTime(0.4f);
-                            LoginScreen.myUser.setGameHidingZombie(2);
+                            LoginScreen.myUser.setGameAppearingZombieAll(140);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.5f);
+                            LoginScreen.myUser.setGameHidingZombie(1);
                             game.setScreen(new DifficultyScreen(game));
                         }
                     })));

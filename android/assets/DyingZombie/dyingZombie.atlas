@@ -1,0 +1,61 @@
+
+dyingZombie.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+DyingZombie
+  rotate: false
+  xy: 1, 565
+  size: 300, 280
+  orig: 300, 280
+  offset: 0, 0
+  index: 1
+DyingZombie
+  rotate: false
+  xy: 1, 283
+  size: 300, 280
+  orig: 300, 280
+  offset: 0, 0
+  index: 2
+DyingZombie
+  rotate: false
+  xy: 303, 565
+  size: 300, 280
+  orig: 300, 280
+  offset: 0, 0
+  index: 3
+DyingZombie
+  rotate: false
+  xy: 1, 1
+  size: 300, 280
+  orig: 300, 280
+  offset: 0, 0
+  index: 4
+DyingZombie
+  rotate: false
+  xy: 303, 283
+  size: 300, 280
+  orig: 300, 280
+  offset: 0, 0
+  index: 5
+DyingZombie
+  rotate: false
+  xy: 605, 565
+  size: 300, 280
+  orig: 300, 280
+  offset: 0, 0
+  index: 6
+DyingZombie
+  rotate: false
+  xy: 303, 1
+  size: 300, 280
+  orig: 300, 280
+  offset: 0, 0
+  index: 7
+DyingZombie
+  rotate: false
+  xy: 605, 283
+  size: 300, 280
+  orig: 300, 280
+  offset: 0, 0
+  index: 8

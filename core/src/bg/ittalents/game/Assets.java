@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class Assets {
 
     public static final AssetManager manager = new AssetManager();
-    public static final String HTTP_SERVER = "http://localhost:8080/ShootThemAll/";
+    public static final String HTTP_SERVER = "http://46.233.21.83:8080/ShootThemAll/";
 
     private Assets() {
 

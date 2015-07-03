@@ -36,7 +36,6 @@ public class LoginScreen implements Screen {
     public static final int CONSTANCE_HEIGHT_BUTTONS = 5;
     private static final float CONSTANT_WIDTH = 3;
     private static final float CONSTANT_HEIGHT = 10;
-    public static final String HTTP_SERVER = "http://localhost:8080/ShootThemAll/";
     public static final int CONSTANT_LENGTH_USERNAME_CHECK = 3;
     public static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{5,10}";
     public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
@@ -213,7 +212,7 @@ public class LoginScreen implements Screen {
         json.add("password", new JsonPrimitive(password));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(HTTP_SERVER + "login");
+        httpRequest.setUrl(Assets.HTTP_SERVER + "login");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
@@ -296,7 +295,7 @@ public class LoginScreen implements Screen {
 
     private void weaponsStoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(HTTP_SERVER + "weaponsStore?userId=" + LoginScreen.myUser.getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + LoginScreen.myUser.getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();

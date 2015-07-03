@@ -6,34 +6,37 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
-public class ShopScreen implements Screen {
+public class ShopScreen extends Actor implements Screen {
 
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int CONSTANT_COORDINATES_SCORE_X = WIDTH_SCREEN / 40;
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final float CONSTANT_PAD_BOTTOM_AND_TOP = Gdx.graphics.getHeight() / 17;
-    public static final float CONSTANT_PAD_LEFT_AND_RIGHT = Gdx.graphics.getWidth() / 10;
-    public static final float CONSTANT_HEIGHT_TITLE = 3;
-    public static final float CONSTANT_WIDTH_TITLE = 3;
+    public static final float CONSTANT_HEIGHT_TITLE = HEIGHT_SCREEN / 3;
+    public static final float CONSTANT_WIDTH_TITLE = WIDTH_SCREEN / 3;
     public static final int WIDTH_WEAPON_BUTTON = WIDTH_SCREEN / 4;
     public static final int HEIGHT_WEAPON_BUTTON = HEIGHT_SCREEN / 3;
-    public static final int CONSTANT_COORDINATES_TEXT_ROW_FIRST = Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 21;
-    public static final int CONSTANT_COORDINATES_TEXT_ROW_SECOND = Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 8;
+    public static final int CONSTANT_COORDINATES_TEXT_ROW_FIRST = HEIGHT_SCREEN - HEIGHT_SCREEN / 21;
+    public static final int CONSTANT_COORDINATES_TEXT_ROW_SECOND = HEIGHT_SCREEN - HEIGHT_SCREEN / 8;
+    public static final int CONSTANT_FOR_POSITION = 2;
+    public static final int CONSTANT_FOR_POSITION_HEIGHT_WEAPON = HEIGHT_WEAPON_BUTTON / 2;
+    public static final int CONSTANT_FOR_POSITION_HEIGHT_TITLE = 15;
+    public static final int CONSTANT_FOR_POSITION_WEAPON_3 = WIDTH_SCREEN / 5;
+    public static final double CONSTANT_FOR_POSITION_WEAPON_2 = 2.7;
+    public static final int CONSTANT_FOR_POSITION_WEAPON_1 = 25;
 
     private Game game;
     private SpriteBatch batch;
@@ -41,16 +44,16 @@ public class ShopScreen implements Screen {
     private Sprite spriteShop;
     private Image imageTitle;
     private Stage stage;
-    private Table container;
-    private Table weaponContainer;
-
-    private ImageButton weaponButton1;
-    private ImageButton weaponButton2;
-    private ImageButton weaponButton3;
     private BitmapFont textBitmapFont;
+
+
     private Sprite spriteWeaponButton1;
     private Sprite spriteWeaponButton2;
     private Sprite spriteWeaponButton3;
+
+    private Image weapon1;
+    private Image weapon2;
+    private Image weapon3;
 
     public ShopScreen(Game game) {
         this.game = game;
@@ -67,31 +70,16 @@ public class ShopScreen implements Screen {
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteShop);
         imageTitle = new Image(spriteDrawableTitle);
 
-
         stage = new Stage(new ScreenViewport());
-        container = new Table();
-        weaponContainer = new Table();
+
+        imageTitle.setPosition(CONSTANT_WIDTH_TITLE, CONSTANT_HEIGHT_TITLE);
+        imageTitle.setPosition(WIDTH_SCREEN / CONSTANT_FOR_POSITION - imageTitle.getWidth() / CONSTANT_FOR_POSITION, HEIGHT_SCREEN / CONSTANT_FOR_POSITION + HEIGHT_SCREEN / CONSTANT_FOR_POSITION_HEIGHT_TITLE);
+        stage.addActor(imageTitle);
+        textBitmapFont = loadFont();
 
         checkWeapons();
+        setButtonPositionAndAddInStage();
 
-        xxxxxxxxxxxxxxxxxxxxxxxx();
-
-        container.setWidth(stage.getWidth());
-        container.align(Align.center | Align.top);
-        container.setPosition(0, Gdx.graphics.getHeight());
-
-        container.add(imageTitle).width(WIDTH_SCREEN / CONSTANT_WIDTH_TITLE)
-                .height((HEIGHT_SCREEN / CONSTANT_HEIGHT_TITLE)).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
-        container.row();
-        weaponContainer.add(weaponButton1).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT);
-        weaponContainer.add(weaponButton2).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT).padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
-        weaponContainer.add(weaponButton3).padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
-        container.add(weaponContainer).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
-        container.row();
-
-        stage.addActor(container);
-
-        textBitmapFont = loadFont();
 
         addListenerWeapons();
         Gdx.input.setCatchBackKey(true);
@@ -99,7 +87,7 @@ public class ShopScreen implements Screen {
 
     }
 
-    private void xxxxxxxxxxxxxxxxxxxxxxxx() {
+    private void setButtonPositionAndAddInStage() {
         spriteWeaponButton1.setSize(WIDTH_WEAPON_BUTTON, HEIGHT_WEAPON_BUTTON);
         SpriteDrawable spriteDrawableWeaponButton1 = new SpriteDrawable(spriteWeaponButton1);
 
@@ -109,13 +97,19 @@ public class ShopScreen implements Screen {
         spriteWeaponButton3.setSize(WIDTH_WEAPON_BUTTON, HEIGHT_WEAPON_BUTTON);
         SpriteDrawable spriteDrawableWeaponButton3 = new SpriteDrawable(spriteWeaponButton3);
 
+        weapon1 = new Image(spriteDrawableWeaponButton1);
+        weapon1.setPosition(WIDTH_SCREEN / CONSTANT_FOR_POSITION_WEAPON_1, CONSTANT_FOR_POSITION_HEIGHT_WEAPON);
+        weapon2 = new Image(spriteDrawableWeaponButton2);
+        weapon2.setPosition((float) (WIDTH_SCREEN / CONSTANT_FOR_POSITION_WEAPON_2), CONSTANT_FOR_POSITION_HEIGHT_WEAPON);
+        weapon3 = new Image(spriteDrawableWeaponButton3);
+        weapon3.setPosition((float) (WIDTH_SCREEN / CONSTANT_FOR_POSITION + CONSTANT_FOR_POSITION_WEAPON_3), CONSTANT_FOR_POSITION_HEIGHT_WEAPON);
 
-        weaponButton1 = new ImageButton(spriteDrawableWeaponButton1);
-        weaponButton2 = new ImageButton(spriteDrawableWeaponButton2);
-        weaponButton3 = new ImageButton(spriteDrawableWeaponButton3);
+        stage.addActor(weapon1);
+        stage.addActor(weapon2);
+        stage.addActor(weapon3);
+        addListenerWeapons();
+
     }
-
-
 
     private void checkWeapons() {
         if (LoginScreen.myUser.getWeapon() == LoginScreen.myUser.getWeaponOneUnlock()) {
@@ -127,8 +121,9 @@ public class ShopScreen implements Screen {
 
         if (LoginScreen.myUser.getWeapon() == LoginScreen.myUser.getWeaponTwoUnlock()) {
             spriteWeaponButton2 = new Sprite(Assets.railRifleActive);
+
         } else {
-            if (LoginScreen.myUser.getScore() > 1000) {
+            if (LoginScreen.myUser.getWeaponTwoUnlock() != 0) {
                 spriteWeaponButton2 = new Sprite(Assets.railRifleAvailable);
             } else {
                 spriteWeaponButton2 = new Sprite(Assets.railRifleLocked);
@@ -138,7 +133,7 @@ public class ShopScreen implements Screen {
         if (LoginScreen.myUser.getWeapon() == LoginScreen.myUser.getWeaponTreeUnlock()) {
             spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunActive);
         } else {
-            if (LoginScreen.myUser.getScore() > 2000) {
+            if (LoginScreen.myUser.getWeaponTreeUnlock() != 0) {
                 spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunAvailable);
             } else {
                 spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunLocked);
@@ -148,6 +143,15 @@ public class ShopScreen implements Screen {
         System.out.println(LoginScreen.myUser.toString());
     }
 
+
+    public void draw(Batch batch) {
+        batch.draw(spriteWeaponButton1, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(),
+                getScaleX(), getScaleY(), getRotation());
+        batch.draw(spriteWeaponButton2, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(),
+                getScaleX(), getScaleY(), getRotation());
+        batch.draw(spriteWeaponButton3, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(),
+                getScaleX(), getScaleY(), getRotation());
+    }
 
     @Override
     public void render(float delta) {
@@ -193,12 +197,12 @@ public class ShopScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 
     public BitmapFont loadFont() {
@@ -215,30 +219,30 @@ public class ShopScreen implements Screen {
 
     private void addListenerWeapons() {
 
-        weaponButton1.addListener(new ClickListener() {
+        weapon1.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 LoginScreen.myUser.setWeapon(1);
                 checkWeapons();
-                xxxxxxxxxxxxxxxxxxxxxxxx();
+                setButtonPositionAndAddInStage();
             }
         });
 
-        weaponButton2.addListener(new ClickListener() {
+        weapon2.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if (LoginScreen.myUser.getWeaponTwoUnlock() != 0) {
                     LoginScreen.myUser.setWeapon(2);
                     checkWeapons();
-                    xxxxxxxxxxxxxxxxxxxxxxxx();
+                    setButtonPositionAndAddInStage();
                 }
             }
         });
 
-        weaponButton3.addListener(new ClickListener() {
+        weapon3.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if (LoginScreen.myUser.getWeaponTreeUnlock() != 0) {
                     LoginScreen.myUser.setWeapon(3);
                     checkWeapons();
-                    xxxxxxxxxxxxxxxxxxxxxxxx();
+                    setButtonPositionAndAddInStage();
                 }
             }
         });

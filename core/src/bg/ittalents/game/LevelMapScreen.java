@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -45,6 +44,12 @@ public class LevelMapScreen implements Screen {
     private ImageButton fiveButton;
     private ImageButton sixButton;
 
+    private Sprite spriteTwoButton;
+    private Sprite spriteThreeButton;
+    private Sprite spriteFourButton;
+    private Sprite spriteFiveButton;
+    private Sprite spriteSixButton;
+
     public LevelMapScreen(Game game) {
         this.game = game;
     }
@@ -67,35 +72,7 @@ public class LevelMapScreen implements Screen {
         secondRowContainer = new Table();
 
 
-        Sprite spriteBuyItButton = new Sprite(Assets.buttonOne);
-        spriteBuyItButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableBuyItButton = new SpriteDrawable(spriteBuyItButton);
-        oneButton = new ImageButton(spriteDrawableBuyItButton);
-
-        Sprite spriteTwoButton = new Sprite(Assets.buttonThreeMarked);
-        spriteTwoButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableTwoButton = new SpriteDrawable(spriteTwoButton);
-        twoButton = new ImageButton(spriteDrawableTwoButton);
-
-        Sprite spriteThreeBottom = new Sprite(Assets.buttonThreeMarked);
-        spriteThreeBottom.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableThreeButton = new SpriteDrawable(spriteThreeBottom);
-        threeButton = new ImageButton(spriteDrawableThreeButton);
-
-        Sprite spriteFourButton = new Sprite(Assets.buttonFourMarked);
-        spriteFourButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableFourButton = new SpriteDrawable(spriteFourButton);
-        fourButton = new ImageButton(spriteDrawableFourButton);
-
-        Sprite spriteFiveButton = new Sprite(Assets.buttonFiveMarked);
-        spriteFiveButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableFiveButton = new SpriteDrawable(spriteFiveButton);
-        fiveButton = new ImageButton(spriteDrawableFiveButton);
-
-        Sprite spriteSixButton = new Sprite(Assets.buttonSix_marked);
-        spriteSixButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableSixButton = new SpriteDrawable(spriteSixButton);
-        sixButton = new ImageButton(spriteDrawableSixButton);
+        initializeButton();
 
 
         container.setWidth(stage.getWidth());
@@ -120,12 +97,22 @@ public class LevelMapScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
+        addListenerForButton();
+
+
+        Gdx.input.setCatchBackKey(true);
+    }
+
+    private void addListenerForButton() {
         oneButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 Assets.clickButton.play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
+                        LoginScreen.myUser.setGameAppearingZombieAll(20);
+                        LoginScreen.myUser.setGameAppearingZombieTime(1);
+                        LoginScreen.myUser.setGameHidingZombie(3);
                         game.setScreen(new DifficultyScreen(game));
                     }
                 })));
@@ -134,66 +121,145 @@ public class LevelMapScreen implements Screen {
 
         twoButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
-                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.setScreen(new DifficultyScreen(game));
-                    }
-                })));
+                if (LoginScreen.myUser.getLevel() >= 2) {
+                    Assets.clickButton.play();
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            LoginScreen.myUser.setGameAppearingZombieAll(25);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.9f);
+                            LoginScreen.myUser.setGameHidingZombie(2.8f);
+                            game.setScreen(new DifficultyScreen(game));
+                        }
+                    })));
+                }
             }
         });
 
         threeButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
-                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.setScreen(new DifficultyScreen(game));
-                    }
-                })));
+                if (LoginScreen.myUser.getLevel() >= 3) {
+                    Assets.clickButton.play();
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            LoginScreen.myUser.setGameAppearingZombieAll(30);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.7f);
+                            LoginScreen.myUser.setGameHidingZombie(2.6f);
+                            game.setScreen(new DifficultyScreen(game));
+                        }
+                    })));
+                }
             }
         });
 
         fourButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
-                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.setScreen(new DifficultyScreen(game));
-                    }
-                })));
+                if (LoginScreen.myUser.getLevel() >= 4) {
+                    Assets.clickButton.play();
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            LoginScreen.myUser.setGameAppearingZombieAll(20);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.6f);
+                            LoginScreen.myUser.setGameHidingZombie(2.4f);
+                            game.setScreen(new DifficultyScreen(game));
+                        }
+                    })));
+                }
             }
         });
 
         fiveButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
-                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.setScreen(new DifficultyScreen(game));
-                    }
-                })));
+                if (LoginScreen.myUser.getLevel() >= 5) {
+                    Assets.clickButton.play();
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            LoginScreen.myUser.setGameAppearingZombieAll(20);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.5f);
+                            LoginScreen.myUser.setGameHidingZombie(2.2f);
+                            game.setScreen(new DifficultyScreen(game));
+                        }
+                    })));
+                }
             }
         });
 
         sixButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
-                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.setScreen(new DifficultyScreen(game));
-                    }
-                })));
+                if (LoginScreen.myUser.getLevel() >= 6) {
+                    Assets.clickButton.play();
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            LoginScreen.myUser.setGameAppearingZombieAll(20);
+                            LoginScreen.myUser.setGameAppearingZombieTime(0.4f);
+                            LoginScreen.myUser.setGameHidingZombie(2);
+                            game.setScreen(new DifficultyScreen(game));
+                        }
+                    })));
+                }
             }
         });
+    }
+
+    private void initializeButton() {
+
+        Sprite spriteBuyItButton = new Sprite(Assets.buttonOne);
+        spriteBuyItButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        SpriteDrawable spriteDrawableBuyItButton = new SpriteDrawable(spriteBuyItButton);
+        oneButton = new ImageButton(spriteDrawableBuyItButton);
+
+        int checkForLevel = LoginScreen.myUser.getLevel();
+
+        if(checkForLevel >= 2) {
+            spriteTwoButton = new Sprite(Assets.buttonTwo);
+        }else{
+            spriteTwoButton = new Sprite(Assets.buttonTwo_marked);
+        }
+        spriteTwoButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        SpriteDrawable spriteDrawableTwoButton = new SpriteDrawable(spriteTwoButton);
+        twoButton = new ImageButton(spriteDrawableTwoButton);
 
 
-        Gdx.input.setCatchBackKey(true);
+        if(checkForLevel >= 3) {
+            spriteThreeButton = new Sprite(Assets.buttonThree);
+        }else{
+            spriteThreeButton = new Sprite(Assets.buttonThreeMarked);
+        }
+        spriteThreeButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        SpriteDrawable spriteDrawableThreeButton = new SpriteDrawable(spriteThreeButton);
+        threeButton = new ImageButton(spriteDrawableThreeButton);
+
+        if(checkForLevel >= 4) {
+            spriteFourButton = new Sprite(Assets.buttonFour);
+        }else{
+            spriteFourButton = new Sprite(Assets.buttonFourMarked);
+        }
+        spriteFourButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        SpriteDrawable spriteDrawableFourButton = new SpriteDrawable(spriteFourButton);
+        fourButton = new ImageButton(spriteDrawableFourButton);
+
+
+        if(checkForLevel >= 5) {
+            spriteFiveButton = new Sprite(Assets.buttonFive);
+        }else{
+            spriteFiveButton = new Sprite(Assets.buttonFiveMarked);
+        }
+        spriteFiveButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        SpriteDrawable spriteDrawableFiveButton = new SpriteDrawable(spriteFiveButton);
+        fiveButton = new ImageButton(spriteDrawableFiveButton);
+
+        if(checkForLevel >= 6) {
+            spriteSixButton = new Sprite(Assets.buttonSix);
+        }else{
+            spriteSixButton = new Sprite(Assets.buttonSix_marked);
+        }
+        spriteSixButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        SpriteDrawable spriteDrawableSixButton = new SpriteDrawable(spriteSixButton);
+        sixButton = new ImageButton(spriteDrawableSixButton);
     }
 
     @Override

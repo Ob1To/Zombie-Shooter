@@ -11,6 +11,12 @@ public class User {
     private int weaponTwoUnlock;
     private int weaponTreeUnlock;
 
+    private int gameLevel;
+    private int gameAppearingZombieAll;
+    private float gameAppearingZombieTime;
+    private float gameHidingZombie;
+    private int gameDamageZombie;
+
 
     public int getWeaponOneUnlock() {
         return weaponOneUnlock;
@@ -22,19 +28,6 @@ public class User {
 
     public int getWeaponTwoUnlock() {
         return weaponTwoUnlock;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", weapon=" + weapon +
-                ", score=" + score +
-                ", level=" + level +
-                ", weaponOneUnlock=" + weaponOneUnlock +
-                ", weaponTwoUnlock=" + weaponTwoUnlock +
-                ", weaponTreeUnlock=" + weaponTreeUnlock +
-                '}';
     }
 
     public void setWeaponTwoUnlock(int weaponTwoUnlock) {
@@ -81,4 +74,56 @@ public class User {
         this.level = level;
     }
 
+    public int getGameLevel() {
+        return gameLevel;
+    }
+
+    public void setGameLevel(int gameLevel) {
+        this.gameLevel = gameLevel;
+    }
+
+    public int getGameAppearingZombieAll() {
+        return gameAppearingZombieAll;
+    }
+
+    public void setGameAppearingZombieAll(int gameAppearingZombieAll) {
+        this.gameAppearingZombieAll = gameAppearingZombieAll;
+    }
+
+    public float getGameAppearingZombieTime() {
+        return gameAppearingZombieTime;
+    }
+
+    public void setGameAppearingZombieTime(float gameAppearingZombieTime) {
+        this.gameAppearingZombieTime = gameAppearingZombieTime;
+    }
+
+    public float getGameHidingZombie() {
+        return gameHidingZombie;
+    }
+
+    public void setGameHidingZombie(float gameHidingZombie) {
+        this.gameHidingZombie = gameHidingZombie;
+    }
+
+    public int getGameDamageZombie() {
+        return gameDamageZombie;
+    }
+
+    public void setGameDamageZombie(int gameDamageZombie) {
+        this.gameDamageZombie = gameDamageZombie;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", weapon=" + weapon +
+                ", score=" + score +
+                ", level=" + level +
+                ", weaponOneUnlock=" + weaponOneUnlock +
+                ", weaponTwoUnlock=" + weaponTwoUnlock +
+                ", weaponTreeUnlock=" + weaponTreeUnlock +
+                '}';
+    }
 }

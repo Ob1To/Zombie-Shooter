@@ -83,7 +83,7 @@ public class Assets {
     public static Sound gameOver;
     public static Sound clickButton;
 
-//    public static Music introMusic;
+    //    public static Music introMusic;
     public static Music gamePlayMusic;
     public static Music gameMenuMusic;
 
@@ -100,6 +100,8 @@ public class Assets {
     public static Texture buttonFour;
     public static Texture buttonFourMarked;
     public static Texture buttonOne;
+    public static Texture buttonTwo;
+    public static Texture buttonTwo_marked;
     public static Texture buttonSix;
     public static Texture buttonSix_marked;
     public static Texture buttonThree;
@@ -220,6 +222,8 @@ public class Assets {
         buttonFour = manager.get(BUTTON_FOUR_PATH, Texture.class);
         buttonFourMarked = manager.get(BUTTON_FOUR_MARKED_PATH, Texture.class);
         buttonOne = manager.get(BUTTON_ONE_PATH, Texture.class);
+        buttonTwo = manager.get(BUTTON_TWO_PATH, Texture.class);
+        buttonTwo_marked = manager.get(BUTTON_TWO_MARKED_PATH, Texture.class);
         buttonSix = manager.get(BUTTON_SIX_PATH, Texture.class);
         buttonSix_marked = manager.get(BUTTON_SIX_MARKED_PATH, Texture.class);
         buttonThree = manager.get(BUTTON_THREE_PATH, Texture.class);

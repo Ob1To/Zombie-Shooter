@@ -26,7 +26,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 
-public class RegisterScreen implements Screen {
+public class RegisterScreen extends LoginScreen implements Screen {
 
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
@@ -65,6 +65,7 @@ public class RegisterScreen implements Screen {
     private Table tableMessage;
 
     public RegisterScreen(Game game) {
+        super(game);
         this.game = game;
     }
 
@@ -217,6 +218,7 @@ public class RegisterScreen implements Screen {
                             stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                                 @Override
                                 public void run() {
+                                    login(userField.getText().toString(),passwordField.getText().toString(),false);
                                     game.setScreen(new PlayScreen(game));
                                 }
                             })));

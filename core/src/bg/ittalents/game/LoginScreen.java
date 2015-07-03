@@ -198,7 +198,7 @@ public class LoginScreen implements Screen {
                 Assets.clickButton.play();
                 if ((loginField.getText().toString().length() > CONSTANT_LENGTH_USERNAME_CHECK)
                         && (passwordField.getText().toString().matches(PASSWORD_PATTERN))) {
-                    login();
+                    login(loginField.getText(), passwordField.getText(), true);
                 } else {
                     labelMessage.setText("Invalid username or password.");
                 }
@@ -207,10 +207,10 @@ public class LoginScreen implements Screen {
         });
     }
 
-    private void login() {
+    public void login(String user, String password,final boolean loginScreenStart) {
         JsonObject json = new JsonObject();
-        json.add("username", new JsonPrimitive(loginField.getText()));
-        json.add("password", new JsonPrimitive(passwordField.getText()));
+        json.add("username", new JsonPrimitive(user));
+        json.add("password", new JsonPrimitive(password));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
         httpRequest.setUrl(HTTP_SERVER + "login");
@@ -227,14 +227,19 @@ public class LoginScreen implements Screen {
                     Gdx.app.postRunnable(new Runnable() {
                         @Override
                         public void run() {
-                            stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                                @Override
-                                public void run() {
-                                    loadUserInformation();
-                                    weaponsStoreJson();
-                                    zombieShooterGame.setScreen(new PlayScreen(zombieShooterGame));
-                                }
-                            })));
+                            if(loginScreenStart){
+                                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        loadUserInformation();
+                                        weaponsStoreJson();
+                                        zombieShooterGame.setScreen(new PlayScreen(zombieShooterGame));
+                                    }
+                                })));
+                            }else{
+                                loadUserInformation();
+                                weaponsStoreJson();
+                            }
                         }
                     });
                 } else {

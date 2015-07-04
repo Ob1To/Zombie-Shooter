@@ -23,7 +23,7 @@ public class GameOverScreen implements Screen{
     private SpriteBatch batch;
     private Sprite backgroundSprite;
     private Stage stage;
-    private int minSeeScreen;
+    private float minSeeScreen;
 
 
     public GameOverScreen(Game game){

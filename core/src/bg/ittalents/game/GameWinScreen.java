@@ -4,8 +4,11 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -23,7 +26,8 @@ public class GameWinScreen implements Screen{
     private SpriteBatch batch;
     private Sprite backgroundSprite;
     private Stage stage;
-    private int minSeeScreen;
+    private float minSeeScreen;
+    private BitmapFont textBitmapFont;
 
 
     public GameWinScreen(Game game){
@@ -41,10 +45,12 @@ public class GameWinScreen implements Screen{
         Assets.gameWinMusic.play();
 
         Gdx.input.setInputProcessor(stage);
+        textBitmapFont = loadFont();
 
         stage.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.print(minSeeScreen);
                 if (minSeeScreen > CONSTANT_SEE_SCREEN) {
                     Assets.gameWinMusic.stop();
                     Assets.gameMenuMusic.play();
@@ -64,7 +70,7 @@ public class GameWinScreen implements Screen{
         batch.begin();
         backgroundSprite.draw(batch);
         batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-
+        textBitmapFont.draw(batch, "SCORE  " + GameScreen.points, Gdx.graphics.getWidth() / 3, Gdx.graphics.getHeight() / 2 - textBitmapFont.getLineHeight() / 2);
         batch.end();
         setTimeSeeScreen(Gdx.graphics.getDeltaTime());
         stage.act(Gdx.graphics.getDeltaTime());
@@ -75,6 +81,17 @@ public class GameWinScreen implements Screen{
         minSeeScreen += delta;
     }
 
+    public BitmapFont loadFont() {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("game-font.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontParameter.size = Gdx.graphics.getHeight() / 8;
+
+        BitmapFont defaultFont = generator.generateFont(fontParameter);
+
+        defaultFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        return defaultFont;
+    }
     @Override
     public void resize(int width, int height) {
 

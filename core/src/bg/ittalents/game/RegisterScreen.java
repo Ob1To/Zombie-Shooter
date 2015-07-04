@@ -81,6 +81,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
 
         // Adding the game title to the screen
         Sprite spriteTitle = new Sprite(Assets.zombieShooterTitle);
+        Assets.spriteDefaultColorSolid(spriteTitle);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -148,6 +149,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
 
     private void creatingRegisterButton() {
         Sprite spriteRegisterButton = new Sprite(Assets.registerButton);
+        Assets.spriteDefaultColor(spriteRegisterButton);
         spriteRegisterButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
         SpriteDrawable registerSpriteDrawable = new SpriteDrawable(spriteRegisterButton);
         registerButton = new ImageButton(registerSpriteDrawable);
@@ -155,9 +157,13 @@ public class RegisterScreen extends LoginScreen implements Screen {
 
     private void creatingTheTextFields() {
         userField = new TextField(USER_NAME, skin);
+        userField.setColor(1,0,0,0.5f);
         passwordField = new TextField(PASSWORD, skin);
+        passwordField.setColor(1,0,0,0.5f);
         passwordCheckField = new TextField(RE_PASSWORD, skin);
+        passwordCheckField.setColor(1,0,0,0.5f);
         emailField = new TextField(EMAIL, skin);
+        emailField.setColor(1,0,0,0.5f);
     }
 
     private void settingTextFieldsTextToCenter() {

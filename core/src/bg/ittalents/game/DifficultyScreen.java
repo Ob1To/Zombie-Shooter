@@ -51,6 +51,7 @@ public class DifficultyScreen implements Screen {
 
         //Dobavqne na zaglavieto na igrata
         Sprite spriteTitle = new Sprite(Assets.zombieShooterTitle);
+        Assets.spriteDefaultColorSolid(spriteTitle);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -66,6 +67,8 @@ public class DifficultyScreen implements Screen {
         Sprite spriteHardButton = new Sprite(Assets.hardLevelButton);
         spriteHardButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
         SpriteDrawable hardSpriteDrawable = new SpriteDrawable(spriteHardButton);
+
+        Assets.spriteDefaultColor(spriteEasyButton,spriteNormalButton,spriteHardButton);
 
         easyButton = new ImageButton(easySpriteDrawable);
         normalButton = new ImageButton(normalSpriteDrawable);

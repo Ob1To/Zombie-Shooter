@@ -26,6 +26,10 @@ public class Assets {
     public static final String TRIPLE_SHOT_PATH = "Sounds/TripleShot.ogg";
     public static final String GAME_OVER_SOUND_PATH = "Sounds/GameOverAlt.ogg";
     public static final String PUSH_BUTTON_SOUND_PATH = "Sounds/ClickButton.wav";
+    public static final String BOSS_SOUND_1 = "Sounds/Boss/maikati1.wav";
+    public static final String BOSS_SOUND_2 = "Sounds/Boss/maikati2.wav";
+    public static final String BOSS_SOUND_3 = "Sounds/Boss/maikati3.wav";
+    public static final String BOSS_SOUND_4 = "Sounds/Boss/amateurs.wav";
 
     public static final String GAME_PLAY_MUSIC_PATH = "Sounds/GamePlayMusic1.ogg";
     public static final String GAME_MENU_MUSIC_PATH = "Sounds/GameMenuMusic2.ogg";
@@ -83,6 +87,10 @@ public class Assets {
     public static Sound tripleShot;
     public static Sound gameOver;
     public static Sound clickButton;
+    public static Sound bossSound1;
+    public static Sound bossSound2;
+    public static Sound bossSound3;
+    public static Sound bossSound4;
 
     //    public static Music introMusic;
     public static Music gamePlayMusic;
@@ -140,6 +148,10 @@ public class Assets {
         manager.load(TRIPLE_SHOT_PATH, Sound.class);
         manager.load(GAME_OVER_SOUND_PATH, Sound.class);
         manager.load(PUSH_BUTTON_SOUND_PATH, Sound.class);
+        manager.load(BOSS_SOUND_1, Sound.class);
+        manager.load(BOSS_SOUND_2, Sound.class);
+        manager.load(BOSS_SOUND_3, Sound.class);
+        manager.load(BOSS_SOUND_4, Sound.class);
 
         manager.load(GAME_PLAY_MUSIC_PATH, Music.class);
         manager.load(GAME_MENU_MUSIC_PATH, Music.class);
@@ -202,6 +214,10 @@ public class Assets {
         tripleShot = manager.get(TRIPLE_SHOT_PATH, Sound.class);
         gameOver = manager.get(GAME_OVER_SOUND_PATH, Sound.class);
         clickButton = manager.get(PUSH_BUTTON_SOUND_PATH, Sound.class);
+        bossSound1 = manager.get(BOSS_SOUND_1, Sound.class);
+        bossSound2 = manager.get(BOSS_SOUND_2, Sound.class);
+        bossSound3 = manager.get(BOSS_SOUND_3, Sound.class);
+        bossSound4 = manager.get(BOSS_SOUND_4, Sound.class);
 
 //        introMusic = manager.get(INTRO_MUSIC_PATH, Music.class);
         gamePlayMusic = manager.get(GAME_PLAY_MUSIC_PATH, Music.class);
@@ -269,7 +285,6 @@ public class Assets {
     public static void spriteDefaultColor(Sprite... sprites){
         for (Sprite sprite : sprites){
             sprite.setColor(1,0,0,0.65f);
-//            sprite.setAlpha(0.6f);
         }
     }
 }

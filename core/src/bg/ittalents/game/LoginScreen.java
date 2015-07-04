@@ -86,6 +86,8 @@ public class LoginScreen implements Screen {
         passwordField = new TextField(PASSWORD, skin);
         loginField.setAlignment(Align.center);
         passwordField.setAlignment(Align.center);
+        loginField.setColor(1, 0, 0, 0.5f);
+        passwordField.setColor(1,0,0,0.5f);
 
 
         loginButton = new ImageButton(spriteDrawableRegisterButton);
@@ -134,14 +136,17 @@ public class LoginScreen implements Screen {
 
     private void spriteDrawableCreator() { // Creating the image title, register and login buttons
         zombieShooterSpriteTitle = new Sprite(Assets.zombieShooterTitle);
+        Assets.spriteDefaultColorSolid(zombieShooterSpriteTitle);
         zombieShooterSpriteDrawable = new SpriteDrawable(zombieShooterSpriteTitle);
         imageTitle = new Image(zombieShooterSpriteDrawable);
 
         spriteRegisterButton = new Sprite(Assets.loginButton);
+        Assets.spriteDefaultColor(spriteRegisterButton);
         spriteRegisterButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANCE_HEIGHT_BUTTONS));
         spriteDrawableRegisterButton = new SpriteDrawable(spriteRegisterButton);
 
         spriteLoginButton = new Sprite(Assets.registerButton);
+        Assets.spriteDefaultColor(spriteLoginButton);
         spriteLoginButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANCE_HEIGHT_BUTTONS));
         spriteDrawableLoginButton = new SpriteDrawable(spriteLoginButton);
     }

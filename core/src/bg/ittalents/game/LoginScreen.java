@@ -56,16 +56,13 @@ public class LoginScreen implements Screen {
     private Sprite zombieShooterSpriteTitle;
     private Sprite spriteRegisterButton;
     private Sprite spriteLoginButton;
-    private Sprite offlineModeSpriteRed;
-    private Sprite offlineModeSpriteGreen;
+    private Sprite offlineModeSprite;
     private SpriteDrawable zombieShooterSpriteDrawable;
     private SpriteDrawable spriteDrawableRegisterButton;
     private SpriteDrawable spriteDrawableLoginButton;
-    private SpriteDrawable offlineModeSpriteDrawableRed;
-    private SpriteDrawable offlineModeSpriteDrawableGreen;
+    private SpriteDrawable offlineModeSpriteDrawable;
     private Image imageTitle;
     private Image offlineModeImage;
-    private Image offlineModeImageGreen;
     private Label lblStatus;
     private Label labelMessage;
     private Table tableMessage;
@@ -77,7 +74,7 @@ public class LoginScreen implements Screen {
 
     @Override
     public void show() {
-        if (!counterForStartMusicOneTime) { // KO PRAVESHE TOVA VLADO ... SHTO E TAKA KO PRAVESHE TOVA VLADO ... SHTO E TAKAKO PRAVESHE TOVA VLADO ... SHTO E TAKA
+        if (!counterForStartMusicOneTime) {
             gameMenuMusic();
             counterForStartMusicOneTime = true;
         }
@@ -156,43 +153,35 @@ public class LoginScreen implements Screen {
         spriteLoginButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANCE_HEIGHT_BUTTONS));
         spriteDrawableLoginButton = new SpriteDrawable(spriteLoginButton);
 
-        offlineModeSpriteRed = new Sprite(Assets.offlineModeRedImage);
-        Assets.spriteDefaultColor(offlineModeSpriteRed);
-        offlineModeSpriteDrawableRed = new SpriteDrawable(offlineModeSpriteRed);
-        offlineModeImage = new Image(offlineModeSpriteDrawableRed);
+        offlineModeSprite = new Sprite(Assets.offlineModeRedImage);
+        Assets.spriteDefaultColor(offlineModeSprite);
+        offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
+        offlineModeImage = new Image(offlineModeSpriteDrawable);
 
-
-//        offlineModeSpriteGreen = new Sprite(Assets.offlineModeGreenImage);
-//        offlineModeSpriteDrawableGreen = new SpriteDrawable(offlineModeSpriteGreen);
-//        offlineModeImageGreen = new Image(offlineModeSpriteDrawableGreen);
     }
 
-    public void changeImageButtonColor() {
-        if (currentColor.equals("red")) {
-            offlineModeSpriteRed = new Sprite(Assets.offlineModeGreenImage);
-            offlineModeSpriteRed.setColor(0, 1, 0, 0.7f);
-            offlineModeSpriteDrawableRed = new SpriteDrawable(offlineModeSpriteRed);
-            offlineModeImage = new Image(offlineModeSpriteDrawableRed);
-            initializationContainer();
-        } else {
-            offlineModeSpriteRed = new Sprite(Assets.offlineModeRedImage);
-            Assets.spriteDefaultColor(offlineModeSpriteRed);
-            offlineModeSpriteDrawableRed = new SpriteDrawable(offlineModeSpriteRed);
-            offlineModeImage = new Image(offlineModeSpriteDrawableRed);
-            initializationContainer();
-        }
-    }
-
-    private void callOfflineListener(){
-        offlineModeImage.addListener(new ClickListener() {
-            public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
-                changeImageButtonColor();
-            }
-        });
-    }
+//    public void changeImageButtonColor() {
+//        if (currentColor.equals("red")) {
+//            offlineModeImage.remove();
+//            offlineModeSprite = new Sprite(Assets.offlineModeGreenImage);
+//            offlineModeSprite.setColor(0, 1, 0, 0.7f);
+//            offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
+//            offlineModeImage = new Image(offlineModeSpriteDrawable);
+//            initializationContainer();
+//        }
+//        if (currentColor.equals("green")){
+//            offlineModeImage.remove();
+//            offlineModeSprite = new Sprite(Assets.offlineModeRedImage);
+//            Assets.spriteDefaultColor(offlineModeSprite);
+//            offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
+//            offlineModeImage = new Image(offlineModeSpriteDrawable);
+//            currentColor = "green";
+//            initializationContainer();
+//        }
+//    }
 
     private void initializationContainer() { // Arranging the screen and how all the things are sorted in it.
+
         container.clear();
         container.setWidth(stage.getWidth());
         container.align(Align.center | Align.top);
@@ -210,7 +199,6 @@ public class LoginScreen implements Screen {
         buttonsContainer.add(registerButton).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT);
         container.add(buttonsContainer);
         stage.addActor(container);
-        callOfflineListener();
     }
 
     private void clickListenerHandler() {
@@ -255,17 +243,24 @@ public class LoginScreen implements Screen {
 
         offlineModeImage.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-
                 Assets.clickButton.play();
                 if (currentColor.equals("red")) {
-                    changeImageButtonColor();
+                    currentColor = "green";
+                    offlineModeSprite = new Sprite(Assets.offlineModeGreenImage);
+                    offlineModeSprite.setColor(0, 1, 0, 0.7f);
+                    offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
+                    offlineModeImage = new Image(offlineModeSpriteDrawable);
+                    clickListenerHandler();
+                    initializationContainer();
+                } else {
+                    currentColor = "red";
+                    offlineModeSprite = new Sprite(Assets.offlineModeRedImage);
+                    Assets.spriteDefaultColor(offlineModeSprite);
+                    offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
+                    offlineModeImage = new Image(offlineModeSpriteDrawable);
+                    clickListenerHandler();
+                    initializationContainer();
                 }
-//                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-//                    @Override
-//                    public void run() {
-////                        zombieShooterGame.setScreen(new RegisterScreen(zombieShooterGame));
-//                    }
-//                })));
             }
         });
     }

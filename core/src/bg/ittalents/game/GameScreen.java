@@ -11,7 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.Random;
@@ -47,8 +49,10 @@ public class GameScreen implements Screen {
     private float[] zombiePosition;
     private float lastSpawnZombieTimer;
     private BitmapFont textBitmapFont;
-    private Texture[] arrayTextureBoss;
     private Texture bossTexture;
+    private Sprite spriteBoss;
+    private float timerBoss;
+    private Image imageBoss;
 
 
     public GameScreen(Game game) {
@@ -163,7 +167,9 @@ public class GameScreen implements Screen {
         spriteBatch.begin();
         backGroundSprite.draw(spriteBatch);
         textBitmapFontDraw();
+        startTimerBoss(Gdx.graphics.getDeltaTime());
         spriteBatch.end();
+
 
     }
 
@@ -209,18 +215,57 @@ public class GameScreen implements Screen {
     public void dispose() {
     }
 
-    private void addTexture(){
-        arrayTextureBoss = new Texture[9];
-        arrayTextureBoss[0] = Assets.bossTexture1;
-        arrayTextureBoss[1] = Assets.bossTexture2;
-        arrayTextureBoss[2] = Assets.bossTexture3;
-        arrayTextureBoss[3] = Assets.bossTexture4;
-        arrayTextureBoss[4] = Assets.bossTexture5;
-        arrayTextureBoss[5] = Assets.bossTexture6;
-        arrayTextureBoss[6] = Assets.bossTexture7;
-        arrayTextureBoss[7] = Assets.bossTexture8;
-        arrayTextureBoss[8] = Assets.bossTexture9;
+
+    private void addBossTextu(){
+        if( timerBoss <= 3 ){
+            bossTexture = Assets.bossTexture1;
+        }
+        if((timerBoss >= 3 )&&( timerBoss <= 6 )){
+            bossTexture = Assets.bossTexture2;
+        }
+        if((timerBoss >= 6 )&&( timerBoss <= 9 )){
+            bossTexture = Assets.bossTexture2;
+        }
+        if((timerBoss >= 9 )&&( timerBoss <= 12 )){
+            bossTexture = Assets.bossTexture2;
+        }
+        if((timerBoss >= 12 )&&( timerBoss <= 15 )){
+            bossTexture = Assets.bossTexture2;
+        }
+        if((timerBoss >= 15 )&&( timerBoss <= 18 )){
+            bossTexture = Assets.bossTexture2;
+        }
+        if((timerBoss >= 18 )&&( timerBoss <= 21 )){
+            bossTexture = Assets.bossTexture2;
+        }
+        if((timerBoss >= 21 )&&( timerBoss <= 24 )){
+            bossTexture = Assets.bossTexture2;
+        }
+        if((timerBoss >= 24)&&( timerBoss <= 27 )){
+            bossTexture = Assets.bossTexture2;
+        }
+
+        spriteBoss.setSize((float)(WIDTH_SCREEN / 2.2), HEIGHT_SCREEN);
+        SpriteDrawable spriteDrawableBoss = new SpriteDrawable(spriteBoss);
+        imageBoss = new Image(spriteDrawableBoss);
+        imageBoss.addListener(new ClickListener() { // Adding Shooting sounds to the stage.
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                points += 2 * User.getSingletonUser().getWeapon();
+                return true;
+            }
+        });
+
+        if(User.getSingletonUser().getGameAppearingZombieAll() <=0) {
+            mainStage.addActor(imageBoss);
+        }
+
     }
 
-    private void addBossTextu
+    private void startTimerBoss(float delta){
+        if(User.getSingletonUser().getGameAppearingZombieAll() <=0){
+            timerBoss += delta;
+        }
+    }
+
 }

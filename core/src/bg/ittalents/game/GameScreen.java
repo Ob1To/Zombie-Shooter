@@ -185,6 +185,7 @@ public class GameScreen implements Screen {
         addBossTexture();
         playingBossSounds();
         checkForGameOver();
+        checkWinScreen();
 
 
     }
@@ -236,36 +237,28 @@ public class GameScreen implements Screen {
         if ((timerBoss <= 8) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture1;
-        }
-        if ((timerBoss >= 8) && (timerBoss <= 11) && (checkForAddTextureBoss == true)) {
-            checkForAddTextureBoss = false;
+        }else if ((timerBoss > 8) && (timerBoss <= 11) && (checkForAddTextureBoss == true)){
+                checkForAddTextureBoss = false;
             bossTexture = Assets.bossTexture2;
-        }
-        if ((timerBoss >= 11) && (timerBoss <= 16) && (checkForAddTextureBoss == false)) {
+        }else if ((timerBoss > 11) && (timerBoss <= 14) && (checkForAddTextureBoss == false)){
             checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture3;
-        }
-        if ((timerBoss >= 16) && (timerBoss <= 21)&& (checkForAddTextureBoss == true)) {
+        }else if ((timerBoss > 14) && (timerBoss <= 17)&& (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
             bossTexture = Assets.bossTexture4;
-        }
-        if ((timerBoss >= 21) && (timerBoss <= 26) && (checkForAddTextureBoss == false)) {
+        }else if ((timerBoss > 17) && (timerBoss <= 20) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture5;
-        }
-        if ((timerBoss >= 26) && (timerBoss <= 31)&& (checkForAddTextureBoss == true)) {
+        }else if ((timerBoss > 20) && (timerBoss <= 23)&& (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
             bossTexture = Assets.bossTexture6;
-        }
-        if ((timerBoss >= 31) && (timerBoss <= 36) && (checkForAddTextureBoss == false)) {
+        }else if ((timerBoss > 23) && (timerBoss <= 26) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture7;
-        }
-        if ((timerBoss >= 36) && (timerBoss <= 41)&& (checkForAddTextureBoss == true)) {
+        }else if ((timerBoss > 26) && (timerBoss <= 29)&& (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
             bossTexture = Assets.bossTexture8;
-        }
-        if ((timerBoss >= 41) && (timerBoss <= 45) && (checkForAddTextureBoss == false)) {
+        }else if ((timerBoss > 29) && (timerBoss <= 32) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture9;
         }
@@ -283,7 +276,6 @@ public class GameScreen implements Screen {
             }
         });
         if ((User.getSingletonUser().getGameAppearingZombieAll() <= 0) && (timerBoss >= 5)) {
-            imageBoss.setZIndex(3);
             mainStage.addActor(imageBoss);
         }
     }
@@ -336,6 +328,13 @@ public class GameScreen implements Screen {
         if(lives <= 0){
             game.setScreen(new GameOverScreen(game));
         }
+    }
+
+    private void checkWinScreen(){
+        if((lives > 0)&& (timerBoss > 45)){
+        game.setScreen(new GameWinScreen(game));
+        }
+
     }
 
 }

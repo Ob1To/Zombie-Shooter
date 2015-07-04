@@ -17,11 +17,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class GameWinScreen implements Screen{
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
+    public static final int CONSTANT_SEE_SCREEN = 3;
 
     private Game game;
     private SpriteBatch batch;
     private Sprite backgroundSprite;
     private Stage stage;
+    private int minSeeScreen;
 
 
     public GameWinScreen(Game game){
@@ -43,10 +45,12 @@ public class GameWinScreen implements Screen{
         stage.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Assets.gameWinMusic.stop();
-                Assets.gameMenuMusic.play();
-                Assets.gameMenuMusic.setLooping(true);
-                game.setScreen(new PlayScreen(game));
+                if (minSeeScreen > CONSTANT_SEE_SCREEN) {
+                    Assets.gameWinMusic.stop();
+                    Assets.gameMenuMusic.play();
+                    Assets.gameMenuMusic.setLooping(true);
+                    game.setScreen(new PlayScreen(game));
+                }
                 return true;
             }
         });
@@ -62,9 +66,13 @@ public class GameWinScreen implements Screen{
         batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
 
         batch.end();
-
+        setTimeSeeScreen(Gdx.graphics.getDeltaTime());
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+    }
+
+    private void setTimeSeeScreen(float delta){
+        minSeeScreen += delta;
     }
 
     @Override

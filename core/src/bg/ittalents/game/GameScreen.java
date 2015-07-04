@@ -116,7 +116,7 @@ public class GameScreen implements Screen {
                         long idDouble = Assets.doubleShot.play(0.08f);
                         break;
                     case 3:
-                        long idTriple = Assets.doubleShot.play(0.08f);
+                        long idTriple = Assets.tripleShot.play(0.08f);
                         break;
                 }
                 return true;

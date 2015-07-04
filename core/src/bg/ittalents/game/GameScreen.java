@@ -51,13 +51,13 @@ public class GameScreen implements Screen {
     public GameScreen(Game game) {
         this.game = game;
         this.points = 0;
-        this.lives = LoginScreen.myUser.getUserHealth();
+        this.lives = User.singletonUser().getUserHealth();
 
     }
 
     @Override
     public void show() {
-        System.out.println(LoginScreen.myUser.toString());
+        System.out.println(User.singletonUser().toString());
         Assets.gamePlayMusic.play();
         LoginScreen.stopMenuMusic();
         Assets.gamePlayMusic.setLooping(true);
@@ -84,8 +84,8 @@ public class GameScreen implements Screen {
         mainStage.addListener(new ClickListener() { // Adding Shooting sounds to the stage.
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                LoginScreen.myUser.setGameBulletsForLevel(LoginScreen.myUser.getGameBulletsForLevel() - LoginScreen.myUser.getWeapon());
-                switch (LoginScreen.myUser.getWeapon()){
+                User.singletonUser().setGameBulletsForLevel(User.singletonUser().getGameBulletsForLevel() - User.singletonUser().getWeapon());
+                switch (User.singletonUser().getWeapon()){
                     case 1:
                         Assets.singleShot.play();
                         break;
@@ -103,7 +103,7 @@ public class GameScreen implements Screen {
         });
 
         for (int y = 0; y < 5; y++) {
-            Zombie newZombie = new Zombie(LoginScreen.myUser.getGameDamageZombie(), LoginScreen.myUser.getGameHidingZombie());
+            Zombie newZombie = new Zombie(User.singletonUser().getGameDamageZombie(), User.singletonUser().getGameHidingZombie());
             newZombie.setSize(WIDTH_ZOMBIE, HEIGHT_ZOMBIE);
             newZombie.setPosition(zombiePosition[y], ((y != 2) ? zombiePosition[5] : zombiePosition[6]));
             zombieArray[y] = newZombie;
@@ -142,7 +142,7 @@ public class GameScreen implements Screen {
     public void zombieSpawner(float timeSinceLast) {
         this.lastSpawnZombieTimer += timeSinceLast;
         updateZombieTimeLiving(timeSinceLast);
-        if (this.lastSpawnZombieTimer > LoginScreen.myUser.getGameAppearingZombieTime()) {
+        if (this.lastSpawnZombieTimer > User.singletonUser().getGameAppearingZombieTime()) {
             this.lastSpawnZombieTimer = 0.0f;
             this.addZombie();
         }
@@ -164,7 +164,7 @@ public class GameScreen implements Screen {
     private void textBitmapFontDraw() {
         textBitmapFont.draw(spriteBatch, "SCORE  " + points, CONSTANT_X_FOR_SCORE, CONSTANT_Y_FOR_SCORE);
         textBitmapFont.draw(spriteBatch, "LIVES  " + lives, CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_LIVES);
-        textBitmapFont.draw(spriteBatch, "BULLETS  " + LoginScreen.myUser.getGameBulletsForLevel(), CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_MONEY);
+        textBitmapFont.draw(spriteBatch, "BULLETS  " + User.singletonUser().getGameBulletsForLevel(), CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_MONEY);
     }
 
     public BitmapFont loadFont() {

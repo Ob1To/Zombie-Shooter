@@ -61,7 +61,7 @@ public class Zombie extends Actor {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dyingZombieSound();
-                tapCounter += LoginScreen.myUser.getWeapon();
+                tapCounter += User.singletonUser().getWeapon();
 //                currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
                 if (tapCounter >= currentZombie.zombieShootCounter) {
                     currentZombie.isDead = true;

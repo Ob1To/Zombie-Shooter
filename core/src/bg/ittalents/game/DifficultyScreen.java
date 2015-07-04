@@ -78,7 +78,7 @@ public class DifficultyScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        LoginScreen.myUser.setGameDamageZombie(1);
+                        User.singletonUser().setGameDamageZombie(1);
                         game.setScreen(new GameScreen(game));
                     }
                 })));
@@ -91,7 +91,7 @@ public class DifficultyScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        LoginScreen.myUser.setGameDamageZombie(2);
+                        User.singletonUser().setGameDamageZombie(2);
                         game.setScreen(new GameScreen(game));
                     }
                 })));
@@ -104,7 +104,7 @@ public class DifficultyScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        LoginScreen.myUser.setGameDamageZombie(3);
+                        User.singletonUser().setGameDamageZombie(3);
                         game.setScreen(new GameScreen(game));
                     }
                 })));

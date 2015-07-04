@@ -1,6 +1,14 @@
 package bg.ittalents.game;
 
 public class User {
+    public static User singletonUser = new User();
+
+    private User(){
+    }
+
+    public static User singletonUser(){
+        return singletonUser;
+    }
 
 
     private int userId;

@@ -139,35 +139,35 @@ public class ShopScreen extends Actor implements Screen {
     }
 
     private void checkWeapons() {
-        if (LoginScreen.myUser.getWeapon() == LoginScreen.myUser.getWeaponOneUnlock()) {
+        if (User.singletonUser().getWeapon() == User.singletonUser().getWeaponOneUnlock()) {
             spriteWeaponButton1 = new Sprite(Assets.pistolActive);
         } else {
             spriteWeaponButton1 = new Sprite(Assets.pistolAvailable);
         }
 
 
-        if (LoginScreen.myUser.getWeapon() == LoginScreen.myUser.getWeaponTwoUnlock()) {
+        if (User.singletonUser().getWeapon() == User.singletonUser().getWeaponTwoUnlock()) {
             spriteWeaponButton2 = new Sprite(Assets.railRifleActive);
 
         } else {
-            if (LoginScreen.myUser.getWeaponTwoUnlock() != 0) {
+            if (User.singletonUser().getWeaponTwoUnlock() != 0) {
                 spriteWeaponButton2 = new Sprite(Assets.railRifleAvailable);
             } else {
                 spriteWeaponButton2 = new Sprite(Assets.railRifleLocked);
             }
         }
 
-        if (LoginScreen.myUser.getWeapon() == LoginScreen.myUser.getWeaponTreeUnlock()) {
+        if (User.singletonUser().getWeapon() == User.singletonUser().getWeaponTreeUnlock()) {
             spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunActive);
         } else {
-            if (LoginScreen.myUser.getWeaponTreeUnlock() != 0) {
+            if (User.singletonUser().getWeaponTreeUnlock() != 0) {
                 spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunAvailable);
             } else {
                 spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunLocked);
             }
         }
 
-        System.out.println(LoginScreen.myUser.toString());
+        System.out.println(User.singletonUser().toString());
     }
 
 
@@ -203,7 +203,7 @@ public class ShopScreen extends Actor implements Screen {
 
     private void textBitmapFontDraw() {
         textBitmapFont.draw(batch, "SCORE", CONSTANT_COORDINATES_SCORE_X, CONSTANT_COORDINATES_TEXT_ROW_FIRST);
-        textBitmapFont.draw(batch, "" + LoginScreen.myUser.getScore(), CONSTANT_COORDINATES_SCORE_X, CONSTANT_COORDINATES_TEXT_ROW_SECOND);
+        textBitmapFont.draw(batch, "" + User.singletonUser().getScore(), CONSTANT_COORDINATES_SCORE_X, CONSTANT_COORDINATES_TEXT_ROW_SECOND);
     }
 
 
@@ -248,7 +248,7 @@ public class ShopScreen extends Actor implements Screen {
 
         weapon1.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                LoginScreen.myUser.setWeapon(1);
+                User.singletonUser().setWeapon(1);
                 checkWeapons();
                 setButtonPositionAndAddInStage();
                 addWeaponSelectJson();
@@ -257,8 +257,8 @@ public class ShopScreen extends Actor implements Screen {
 
         weapon2.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (LoginScreen.myUser.getWeaponTwoUnlock() != 0) {
-                    LoginScreen.myUser.setWeapon(2);
+                if (User.singletonUser().getWeaponTwoUnlock() != 0) {
+                    User.singletonUser().setWeapon(2);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
                     addWeaponSelectJson();
@@ -268,8 +268,8 @@ public class ShopScreen extends Actor implements Screen {
 
         weapon3.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (LoginScreen.myUser.getWeaponTreeUnlock() != 0) {
-                    LoginScreen.myUser.setWeapon(3);
+                if (User.singletonUser().getWeaponTreeUnlock() != 0) {
+                    User.singletonUser().setWeapon(3);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
                     addWeaponSelectJson();
@@ -281,8 +281,8 @@ public class ShopScreen extends Actor implements Screen {
 
     private void addWeaponSelectJson() {
         JsonObject json = new JsonObject();
-        json.add("userId", new JsonPrimitive(LoginScreen.myUser.getUserId()));
-        json.add("weaponType", new JsonPrimitive(LoginScreen.myUser.getWeapon()));
+        json.add("userId", new JsonPrimitive(User.singletonUser().getUserId()));
+        json.add("weaponType", new JsonPrimitive(User.singletonUser().getWeapon()));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
         httpRequest.setUrl(Assets.HTTP_SERVER + "weaponManager");

@@ -63,7 +63,6 @@ public class LoginScreen implements Screen {
     private Label lblStatus;
     private Label labelMessage;
     private Table tableMessage;
-    public static User myUser;
 
     public LoginScreen(Game game) {
         zombieShooterGame = game;
@@ -71,7 +70,6 @@ public class LoginScreen implements Screen {
 
     @Override
     public void show() {
-        myUser = new User();
         if (!counterForStartMusicOneTime) { // KO PRAVESHE TOVA VLADO ... SHTO E TAKA KO PRAVESHE TOVA VLADO ... SHTO E TAKAKO PRAVESHE TOVA VLADO ... SHTO E TAKA
             gameMenuMusic();
             counterForStartMusicOneTime = true;
@@ -222,7 +220,7 @@ public class LoginScreen implements Screen {
                     Gson gson = new Gson();
                     JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                     JsonObject jsonObj = element.getAsJsonObject();
-                    myUser.setUserId(jsonObj.get("userId").getAsInt()); // Initialization of User Id via POST request
+                    User.singletonUser().setUserId(jsonObj.get("userId").getAsInt()); // Initialization of User Id via POST request
                     Gdx.app.postRunnable(new Runnable() {
                         @Override
                         public void run() {
@@ -265,15 +263,15 @@ public class LoginScreen implements Screen {
 
     private void loadUserInformation() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + LoginScreen.myUser.getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + User.singletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
                 JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                 JsonObject jsonObj = element.getAsJsonObject();
-                LoginScreen.myUser.setWeapon(jsonObj.get("weapon").getAsJsonObject().get("type").getAsInt());
-                LoginScreen.myUser.setLevel(jsonObj.get("level").getAsInt());
-                LoginScreen.myUser.setScore(jsonObj.get("score").getAsInt());
+                User.singletonUser().setWeapon(jsonObj.get("weapon").getAsJsonObject().get("type").getAsInt());
+                User.singletonUser().setLevel(jsonObj.get("level").getAsInt());
+                User.singletonUser().setScore(jsonObj.get("score").getAsInt());
             }
 
             @Override
@@ -295,16 +293,16 @@ public class LoginScreen implements Screen {
 
     private void weaponsStoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + LoginScreen.myUser.getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + User.singletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
                 JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                 JsonObject jsonObj = element.getAsJsonObject();
 
-                LoginScreen.myUser.setWeaponOneUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(0).getAsJsonObject().get("type").getAsInt());
-                LoginScreen.myUser.setWeaponTwoUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(1).getAsJsonObject().get("type").getAsInt());
-                LoginScreen.myUser.setWeaponTreeUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(2).getAsJsonObject().get("type").getAsInt());
+                User.singletonUser().setWeaponOneUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(0).getAsJsonObject().get("type").getAsInt());
+                User.singletonUser().setWeaponTwoUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(1).getAsJsonObject().get("type").getAsInt());
+                User.singletonUser().setWeaponTreeUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(2).getAsJsonObject().get("type").getAsInt());
             }
 
             @Override

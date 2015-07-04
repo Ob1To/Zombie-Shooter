@@ -76,7 +76,6 @@ public class Zombie extends Actor {
         this.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("PUCAM ZOMBITO");
                 dyingZombieSound();
                 tapCounter += User.getSingletonUser().getWeapon();
 //                currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
@@ -169,17 +168,19 @@ public class Zombie extends Actor {
                 Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        GameScreen.backGroundSprite.setTexture(Assets.scaryZombieImage);
+                        GameScreen.scaryZombieBackgroundImage.setVisible(true);
+//                        GameScreen.backGroundSprite.setTexture(Assets.scaryZombieImage);
                     }
                 }),
-                Actions.delay(0.2f),
+                Actions.delay(0.17f),
                 Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        GameScreen.backGroundSprite.setTexture(Assets.policeBuildingBackground);
+                        GameScreen.scaryZombieBackgroundImage.setVisible(false);
+//                        GameScreen.backGroundSprite.setTexture(Assets.policeBuildingBackground);
                     }
                 }),
-                Actions.delay(2f),
+                Actions.delay(1.8f),
                 Actions.run(new Runnable() {
                     @Override
                     public void run() {

@@ -30,6 +30,8 @@ public class Assets {
     public static final String BOSS_SOUND_2 = "Sounds/Boss/maikati2.wav";
     public static final String BOSS_SOUND_3 = "Sounds/Boss/maikati3.wav";
     public static final String BOSS_SOUND_4 = "Sounds/Boss/amateurs.wav";
+    public static final String BOSS_INTRO = "Sounds/Boss/BossIntro.wav";
+    public static final String TAKING_DAMAGE = "Sounds/TakingDamage.wav";
 
     public static final String GAME_PLAY_MUSIC_PATH = "Sounds/GamePlayMusic1.ogg";
     public static final String GAME_MENU_MUSIC_PATH = "Sounds/GameMenuMusic2.ogg";
@@ -111,6 +113,8 @@ public class Assets {
     public static Sound bossSound2;
     public static Sound bossSound3;
     public static Sound bossSound4;
+    public static Sound bossIntro;
+    public static Sound takingDamage;
 
     //    public static Music introMusic;
     public static Music gamePlayMusic;
@@ -189,6 +193,8 @@ public class Assets {
         manager.load(BOSS_SOUND_2, Sound.class);
         manager.load(BOSS_SOUND_3, Sound.class);
         manager.load(BOSS_SOUND_4, Sound.class);
+        manager.load(BOSS_INTRO, Sound.class);
+        manager.load(TAKING_DAMAGE, Sound.class);
 
         manager.load(GAME_PLAY_MUSIC_PATH, Music.class);
         manager.load(GAME_MENU_MUSIC_PATH, Music.class);
@@ -272,6 +278,8 @@ public class Assets {
         bossSound2 = manager.get(BOSS_SOUND_2, Sound.class);
         bossSound3 = manager.get(BOSS_SOUND_3, Sound.class);
         bossSound4 = manager.get(BOSS_SOUND_4, Sound.class);
+        bossIntro = manager.get(BOSS_INTRO, Sound.class);
+        takingDamage = manager.get(TAKING_DAMAGE, Sound.class);
 
 
 //        introMusic = manager.get(INTRO_MUSIC_PATH, Music.class);

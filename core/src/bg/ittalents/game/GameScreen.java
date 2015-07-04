@@ -61,6 +61,7 @@ public class GameScreen implements Screen {
     private Boolean alreadyPlayed = true;
     private Zombie newZombie;
     private boolean checkForAddTextureBoss;
+    protected static boolean outOfAmmo;
 
 
     public GameScreen(Game game) {
@@ -107,17 +108,21 @@ public class GameScreen implements Screen {
         mainStage.addListener(new ClickListener() { // Adding Shooting sounds to the stage.
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                User.getSingletonUser().setGameBulletsForLevel(User.getSingletonUser().getGameBulletsForLevel() - User.getSingletonUser().getWeapon());
-                switch (User.getSingletonUser().getWeapon()) {
-                    case 1:
-                        long id = Assets.singleShot.play(0.08f);
-                        break;
-                    case 2:
-                        long idDouble = Assets.doubleShot.play(0.08f);
-                        break;
-                    case 3:
-                        long idTriple = Assets.tripleShot.play(0.08f);
-                        break;
+                if (User.getSingletonUser().getGameBulletsForLevel() <= 0) {
+                    Assets.emptyClip.play();
+                } else {
+                    User.getSingletonUser().setGameBulletsForLevel(User.getSingletonUser().getGameBulletsForLevel() - User.getSingletonUser().getWeapon());
+                    switch (User.getSingletonUser().getWeapon()) {
+                        case 1:
+                            long id = Assets.singleShot.play(0.08f);
+                            break;
+                        case 2:
+                            long idDouble = Assets.doubleShot.play(0.08f);
+                            break;
+                        case 3:
+                            long idTriple = Assets.tripleShot.play(0.08f);
+                            break;
+                    }
                 }
                 return true;
             }
@@ -179,6 +184,12 @@ public class GameScreen implements Screen {
         }
     }
 
+    private void settingOutOfAmmo() {
+        if (User.getSingletonUser().getGameBulletsForLevel() <= 0) {
+            outOfAmmo = true;
+        }
+    }
+
 
     @Override
     public void render(float delta) {
@@ -195,7 +206,7 @@ public class GameScreen implements Screen {
         playingBossSounds();
         checkForGameOver();
         checkWinScreen();
-
+        settingOutOfAmmo();
 
     }
 

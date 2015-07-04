@@ -76,21 +76,25 @@ public class Zombie extends Actor {
         this.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                dyingZombieSound();
-                tapCounter += User.getSingletonUser().getWeapon();
-//                currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
-                if (tapCounter >= currentZombie.zombieShootCounter) {
-                    currentZombie.isDead = true;
+                if (GameScreen.outOfAmmo == true) {
                     return true;
                 } else {
-                    if (position) {
-                        currentRegion = new TextureRegion(enemiesArray[((currentZombie.zombieLevel - 1) - 1)]);
-                        currentZombie.zombieLevel -= 1;
+                    dyingZombieSound();
+                    tapCounter += User.getSingletonUser().getWeapon();
+//                currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
+                    if (tapCounter >= currentZombie.zombieShootCounter) {
+                        currentZombie.isDead = true;
                         return true;
                     } else {
-                        currentRegion = new TextureRegion(enemiesArrayWindow[((currentZombie.zombieLevel - 1) - 1)]);
-                        currentZombie.zombieLevel -= 1;
-                        return true;
+                        if (position) {
+                            currentRegion = new TextureRegion(enemiesArray[((currentZombie.zombieLevel - 1) - 1)]);
+                            currentZombie.zombieLevel -= 1;
+                            return true;
+                        } else {
+                            currentRegion = new TextureRegion(enemiesArrayWindow[((currentZombie.zombieLevel - 1) - 1)]);
+                            currentZombie.zombieLevel -= 1;
+                            return true;
+                        }
                     }
                 }
             }

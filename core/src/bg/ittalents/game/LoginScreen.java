@@ -30,7 +30,7 @@ import com.google.gson.JsonPrimitive;
 public class LoginScreen implements Screen {
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 12;
+    public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 30;
     public static final float CONSTANT_PAD_LEFT_AND_RIGHT = Gdx.graphics.getWidth() / 30;
     public static final float CONSTANT_HEIGHT_TITLE = 3;
     public static final int CONSTANCE_HEIGHT_BUTTONS = 5;
@@ -56,13 +56,20 @@ public class LoginScreen implements Screen {
     private Sprite zombieShooterSpriteTitle;
     private Sprite spriteRegisterButton;
     private Sprite spriteLoginButton;
+    private Sprite offlineModeSpriteRed;
+    private Sprite offlineModeSpriteGreen;
     private SpriteDrawable zombieShooterSpriteDrawable;
     private SpriteDrawable spriteDrawableRegisterButton;
     private SpriteDrawable spriteDrawableLoginButton;
+    private SpriteDrawable offlineModeSpriteDrawableRed;
+    private SpriteDrawable offlineModeSpriteDrawableGreen;
     private Image imageTitle;
+    private Image offlineModeImage;
+    private Image offlineModeImageGreen;
     private Label lblStatus;
     private Label labelMessage;
     private Table tableMessage;
+    private String currentColor;
 
     public LoginScreen(Game game) {
         zombieShooterGame = game;
@@ -76,6 +83,7 @@ public class LoginScreen implements Screen {
         }
         spriteDrawableCreator(); // Creating the image title, register and login buttons
 
+        this.currentColor = "red";
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         stage = new Stage(new ScreenViewport());
         container = new Table();
@@ -87,7 +95,7 @@ public class LoginScreen implements Screen {
         loginField.setAlignment(Align.center);
         passwordField.setAlignment(Align.center);
         loginField.setColor(1, 0, 0, 0.5f);
-        passwordField.setColor(1,0,0,0.5f);
+        passwordField.setColor(1, 0, 0, 0.5f);
 
 
         loginButton = new ImageButton(spriteDrawableRegisterButton);
@@ -96,8 +104,6 @@ public class LoginScreen implements Screen {
         clickListenerHandler();
 
         initializationContainer();
-
-        stage.addActor(container);
 
         Gdx.input.setInputProcessor(stage); // This is needed to set up the stage so it can receive inputs from our users.
 
@@ -149,9 +155,45 @@ public class LoginScreen implements Screen {
         Assets.spriteDefaultColor(spriteLoginButton);
         spriteLoginButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANCE_HEIGHT_BUTTONS));
         spriteDrawableLoginButton = new SpriteDrawable(spriteLoginButton);
+
+        offlineModeSpriteRed = new Sprite(Assets.offlineModeRedImage);
+        Assets.spriteDefaultColor(offlineModeSpriteRed);
+        offlineModeSpriteDrawableRed = new SpriteDrawable(offlineModeSpriteRed);
+        offlineModeImage = new Image(offlineModeSpriteDrawableRed);
+
+
+//        offlineModeSpriteGreen = new Sprite(Assets.offlineModeGreenImage);
+//        offlineModeSpriteDrawableGreen = new SpriteDrawable(offlineModeSpriteGreen);
+//        offlineModeImageGreen = new Image(offlineModeSpriteDrawableGreen);
+    }
+
+    public void changeImageButtonColor() {
+        if (currentColor.equals("red")) {
+            offlineModeSpriteRed = new Sprite(Assets.offlineModeGreenImage);
+            offlineModeSpriteRed.setColor(0, 1, 0, 0.7f);
+            offlineModeSpriteDrawableRed = new SpriteDrawable(offlineModeSpriteRed);
+            offlineModeImage = new Image(offlineModeSpriteDrawableRed);
+            initializationContainer();
+        } else {
+            offlineModeSpriteRed = new Sprite(Assets.offlineModeRedImage);
+            Assets.spriteDefaultColor(offlineModeSpriteRed);
+            offlineModeSpriteDrawableRed = new SpriteDrawable(offlineModeSpriteRed);
+            offlineModeImage = new Image(offlineModeSpriteDrawableRed);
+            initializationContainer();
+        }
+    }
+
+    private void callOfflineListener(){
+        offlineModeImage.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                Assets.clickButton.play();
+                changeImageButtonColor();
+            }
+        });
     }
 
     private void initializationContainer() { // Arranging the screen and how all the things are sorted in it.
+        container.clear();
         container.setWidth(stage.getWidth());
         container.align(Align.center | Align.top);
         container.setPosition(0, HEIGHT_SCREEN);
@@ -162,10 +204,13 @@ public class LoginScreen implements Screen {
         container.row();
         container.add(passwordField).width(WIDTH_SCREEN / CONSTANT_WIDTH).height(HEIGHT_SCREEN / CONSTANT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM);
         container.row();
+        container.add(offlineModeImage).width(WIDTH_SCREEN / CONSTANT_WIDTH).height(HEIGHT_SCREEN / CONSTANT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM);
+        container.row();
         buttonsContainer.add(loginButton).padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
         buttonsContainer.add(registerButton).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT);
         container.add(buttonsContainer);
-
+        stage.addActor(container);
+        callOfflineListener();
     }
 
     private void clickListenerHandler() {
@@ -207,9 +252,25 @@ public class LoginScreen implements Screen {
 //                zombieShooterGame.setScreen(new PlayScreen(zombieShooterGame));
             }
         });
+
+        offlineModeImage.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+
+                Assets.clickButton.play();
+                if (currentColor.equals("red")) {
+                    changeImageButtonColor();
+                }
+//                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        zombieShooterGame.setScreen(new RegisterScreen(zombieShooterGame));
+//                    }
+//                })));
+            }
+        });
     }
 
-    public void login(String user, String password,final boolean loginScreenStart) {
+    public void login(String user, String password, final boolean loginScreenStart) {
         JsonObject json = new JsonObject();
         json.add("username", new JsonPrimitive(user));
         json.add("password", new JsonPrimitive(password));
@@ -229,7 +290,7 @@ public class LoginScreen implements Screen {
                     Gdx.app.postRunnable(new Runnable() {
                         @Override
                         public void run() {
-                            if(loginScreenStart){
+                            if (loginScreenStart) {
                                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                                     @Override
                                     public void run() {
@@ -238,7 +299,7 @@ public class LoginScreen implements Screen {
                                         zombieShooterGame.setScreen(new PlayScreen(zombieShooterGame));
                                     }
                                 })));
-                            }else{
+                            } else {
                                 loadUserInformation();
                                 weaponsStoreJson();
                             }

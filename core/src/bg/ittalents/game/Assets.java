@@ -36,6 +36,8 @@ public class Assets {
 //    public static final String INTRO_MUSIC_PATH = "Sounds/IntroMusic1.mp3";
 
     public static final String SCARY_ZOMBIE_IMAGE_PATH = "Images/ScaryZombie.jpg";
+    public static final String OFFLINE_MODE_GREEN_PATH = "Images/offlinemodeGreen.png";
+    public static final String OFFLINE_MODE_RED_PATH = "Images/offlinemodeRed.png";
     public static final String BUY_BUTTON_PATH = "Images/BuyButton.png";
     public static final String IT_TALENTS_LOGO_PATH = "Images/ittalentslogo.png";
     public static final String ENEMY_SINGLE_IMAGE_PATH = "Images/EnemySingle.png";
@@ -97,6 +99,8 @@ public class Assets {
     public static Music gameMenuMusic;
 
     public static Texture scaryZombieImage;
+    public static Texture offlineModeGreenImage;
+    public static Texture offlineModeRedImage;
     public static Texture buyButton;
     public static Texture itTalentsLogo;
     public static Texture enemySingleImage;
@@ -158,6 +162,8 @@ public class Assets {
 //        manager.load(INTRO_MUSIC_PATH, Music.class);
 
         manager.load(SCARY_ZOMBIE_IMAGE_PATH, Texture.class);
+        manager.load(OFFLINE_MODE_GREEN_PATH, Texture.class);
+        manager.load(OFFLINE_MODE_RED_PATH, Texture.class);
         manager.load(BUY_BUTTON_PATH, Texture.class);
         manager.load(IT_TALENTS_LOGO_PATH, Texture.class);
         manager.load(ENEMY_SINGLE_IMAGE_PATH, Texture.class);
@@ -225,6 +231,8 @@ public class Assets {
 
 
         scaryZombieImage = manager.get(SCARY_ZOMBIE_IMAGE_PATH, Texture.class);
+        offlineModeGreenImage = manager.get(OFFLINE_MODE_GREEN_PATH, Texture.class);
+        offlineModeRedImage = manager.get(OFFLINE_MODE_RED_PATH, Texture.class);
         easyLevelButton = manager.get(EASY_BUTTON_PATH, Texture.class);
         hardLevelButton = manager.get(HARD_BUTTON_PATH, Texture.class);
         buyButton = manager.get(BUY_BUTTON_PATH, Texture.class);
@@ -284,7 +292,7 @@ public class Assets {
 
     public static void spriteDefaultColor(Sprite... sprites){
         for (Sprite sprite : sprites){
-            sprite.setColor(1,0,0,0.65f);
+            sprite.setColor(1,0,0,0.7f);
         }
     }
 }

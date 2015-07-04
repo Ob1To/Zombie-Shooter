@@ -120,7 +120,7 @@ public class GameScreen implements Screen {
             newZombie.setPosition(zombiePosition[y], ((y != 2) ? zombiePosition[5] : zombiePosition[6]));
             zombieArray[y] = newZombie;
             zombieArray[y].setVisible(false);
-            newZombie.setZIndex(1);
+            newZombie.setZIndex(4);
             mainStage.addActor(newZombie);
 
         }
@@ -159,7 +159,7 @@ public class GameScreen implements Screen {
             updateZombieTimeLiving(timeSinceLast);
             if (this.lastSpawnZombieTimer > User.getSingletonUser().getGameAppearingZombieTime()) {
                 this.lastSpawnZombieTimer = 0.0f;
-                if(User.getSingletonUser().getGameAppearingZombieAll() >= 0) {
+                if(User.getSingletonUser().getGameAppearingZombieAll() > 0) {
                     User.getSingletonUser().setGameAppearingZombieAll(User.getSingletonUser().getGameAppearingZombieAll() - 1);
                 this.addZombie();
             }

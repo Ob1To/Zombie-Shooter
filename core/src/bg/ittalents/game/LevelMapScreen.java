@@ -130,14 +130,7 @@ public class LevelMapScreen implements Screen {
         oneButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 Assets.clickButton.play();
-                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        User.getSingletonUser().setGameLevel(1);
-                        levelInfoJson();
-
-                    }
-                })));
+                changeTheScreenMethod(1);
             }
         });
 
@@ -145,13 +138,7 @@ public class LevelMapScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 2) {
                     Assets.clickButton.play();
-                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            User.getSingletonUser().setGameLevel(2);
-                            levelInfoJson();
-                        }
-                    })));
+                    changeTheScreenMethod(2);
                 }
             }
         });
@@ -160,13 +147,7 @@ public class LevelMapScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 3) {
                     Assets.clickButton.play();
-                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            User.getSingletonUser().setGameLevel(3);
-                            levelInfoJson();
-                        }
-                    })));
+                        changeTheScreenMethod(3);
                 }
             }
         });
@@ -175,13 +156,7 @@ public class LevelMapScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 4) {
                     Assets.clickButton.play();
-                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            User.getSingletonUser().setGameLevel(4);
-                            levelInfoJson();
-                        }
-                    })));
+                    changeTheScreenMethod(4);
                 }
             }
         });
@@ -190,175 +165,185 @@ public class LevelMapScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 5) {
                     Assets.clickButton.play();
-                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            User.getSingletonUser().setGameLevel(5);
-                            levelInfoJson();
-                        }
-                    })));
+                    changeTheScreenMethod(5);
                 }
             }
         });
 
-        sixButton.addListener(new ClickListener() {
+            sixButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 6) {
                     Assets.clickButton.play();
-                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            User.getSingletonUser().setGameLevel(6);
-                            levelInfoJson();
-                        }
-                    })));
+                    User.getSingletonUser().setGameLevel(6);
+                    changeTheScreenMethod(6);
                 }
             }
         });
     }
 
-    private void initializeButton() {
+        private void initializeButton () {
 
-        spriteButtonOne = new Sprite(Assets.buttonOne);
-        spriteButtonOne.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableBuyItButton = new SpriteDrawable(spriteButtonOne);
-        oneButton = new ImageButton(spriteDrawableBuyItButton);
+            spriteButtonOne = new Sprite(Assets.buttonOne);
+            spriteButtonOne.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+            SpriteDrawable spriteDrawableBuyItButton = new SpriteDrawable(spriteButtonOne);
+            oneButton = new ImageButton(spriteDrawableBuyItButton);
 
-        int checkForLevel = User.getSingletonUser().getLevel();
+            int checkForLevel = User.getSingletonUser().getLevel();
 
-        if(checkForLevel >= 2) {
-            spriteTwoButton = new Sprite(Assets.buttonTwo);
-            Assets.spriteDefaultColor(spriteTwoButton);
-        }else{
-            spriteTwoButton = new Sprite(Assets.buttonTwo_marked);
-            Assets.spriteDefaultColor(spriteTwoButton);
-        }
-        spriteTwoButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableTwoButton = new SpriteDrawable(spriteTwoButton);
-        twoButton = new ImageButton(spriteDrawableTwoButton);
-
-
-        if(checkForLevel >= 3) {
-            spriteThreeButton = new Sprite(Assets.buttonThree);
-            Assets.spriteDefaultColor(spriteThreeButton);
-        }else{
-            spriteThreeButton = new Sprite(Assets.buttonThreeMarked);
-            Assets.spriteDefaultColor(spriteThreeButton);
-        }
-        spriteThreeButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableThreeButton = new SpriteDrawable(spriteThreeButton);
-        threeButton = new ImageButton(spriteDrawableThreeButton);
-
-        if(checkForLevel >= 4) {
-            spriteFourButton = new Sprite(Assets.buttonFour);
-            Assets.spriteDefaultColor(spriteFourButton);
-        }else{
-            spriteFourButton = new Sprite(Assets.buttonFourMarked);
-            Assets.spriteDefaultColor(spriteFourButton);
-        }
-        spriteFourButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableFourButton = new SpriteDrawable(spriteFourButton);
-        fourButton = new ImageButton(spriteDrawableFourButton);
+            if (checkForLevel >= 2) {
+                spriteTwoButton = new Sprite(Assets.buttonTwo);
+                Assets.spriteDefaultColor(spriteTwoButton);
+            } else {
+                spriteTwoButton = new Sprite(Assets.buttonTwo_marked);
+                Assets.spriteDefaultColor(spriteTwoButton);
+            }
+            spriteTwoButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+            SpriteDrawable spriteDrawableTwoButton = new SpriteDrawable(spriteTwoButton);
+            twoButton = new ImageButton(spriteDrawableTwoButton);
 
 
-        if(checkForLevel >= 5) {
-            spriteFiveButton = new Sprite(Assets.buttonFive);
-            Assets.spriteDefaultColor(spriteFiveButton);
-        }else{
-            spriteFiveButton = new Sprite(Assets.buttonFiveMarked);
-            Assets.spriteDefaultColor(spriteFiveButton);
-        }
-        spriteFiveButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableFiveButton = new SpriteDrawable(spriteFiveButton);
-        fiveButton = new ImageButton(spriteDrawableFiveButton);
+            if (checkForLevel >= 3) {
+                spriteThreeButton = new Sprite(Assets.buttonThree);
+                Assets.spriteDefaultColor(spriteThreeButton);
+            } else {
+                spriteThreeButton = new Sprite(Assets.buttonThreeMarked);
+                Assets.spriteDefaultColor(spriteThreeButton);
+            }
+            spriteThreeButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+            SpriteDrawable spriteDrawableThreeButton = new SpriteDrawable(spriteThreeButton);
+            threeButton = new ImageButton(spriteDrawableThreeButton);
 
-        if(checkForLevel >= 6) {
-            spriteSixButton = new Sprite(Assets.buttonSix);
-            Assets.spriteDefaultColor(spriteSixButton);
-        }else{
-            spriteSixButton = new Sprite(Assets.buttonSix_marked);
-            Assets.spriteDefaultColor(spriteSixButton);
-        }
-        spriteSixButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
-        SpriteDrawable spriteDrawableSixButton = new SpriteDrawable(spriteSixButton);
-        sixButton = new ImageButton(spriteDrawableSixButton);
-    }
+            if (checkForLevel >= 4) {
+                spriteFourButton = new Sprite(Assets.buttonFour);
+                Assets.spriteDefaultColor(spriteFourButton);
+            } else {
+                spriteFourButton = new Sprite(Assets.buttonFourMarked);
+                Assets.spriteDefaultColor(spriteFourButton);
+            }
+            spriteFourButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+            SpriteDrawable spriteDrawableFourButton = new SpriteDrawable(spriteFourButton);
+            fourButton = new ImageButton(spriteDrawableFourButton);
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        backgroundSprite.draw(batch);
-        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-        batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            game.setScreen(new PlayScreen(game));
+
+            if (checkForLevel >= 5) {
+                spriteFiveButton = new Sprite(Assets.buttonFive);
+                Assets.spriteDefaultColor(spriteFiveButton);
+            } else {
+                spriteFiveButton = new Sprite(Assets.buttonFiveMarked);
+                Assets.spriteDefaultColor(spriteFiveButton);
+            }
+            spriteFiveButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+            SpriteDrawable spriteDrawableFiveButton = new SpriteDrawable(spriteFiveButton);
+            fiveButton = new ImageButton(spriteDrawableFiveButton);
+
+            if (checkForLevel >= 6) {
+                spriteSixButton = new Sprite(Assets.buttonSix);
+                Assets.spriteDefaultColor(spriteSixButton);
+            } else {
+                spriteSixButton = new Sprite(Assets.buttonSix_marked);
+                Assets.spriteDefaultColor(spriteSixButton);
+            }
+            spriteSixButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+            SpriteDrawable spriteDrawableSixButton = new SpriteDrawable(spriteSixButton);
+            sixButton = new ImageButton(spriteDrawableSixButton);
         }
 
-    }
-
-    private void levelInfoJson() {
-        game.setScreen(new DifficultyScreen(game));
-        final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(Assets.HTTP_SERVER + "levelManager?userId=" + User.getSingletonUser().getUserId() + "&level=" + User.getSingletonUser().getGameLevel());
-        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
-            public void handleHttpResponse(Net.HttpResponse httpResponse) {
-                Gson gson = new Gson();
-                JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
-                JsonObject jsonObj = element.getAsJsonObject();
-
-                User.getSingletonUser().setUserHealth(jsonObj.get("userHealth").getAsInt());
-                User.getSingletonUser().setGameAppearingZombieAll(jsonObj.get("count").getAsInt());
-                User.getSingletonUser().setGameAppearingZombieTime(jsonObj.get("durationOn").getAsFloat());
-                User.getSingletonUser().setGameHidingZombie(jsonObj.get("durationOff").getAsFloat());
-                User.getSingletonUser().setGameBulletsForLevel(jsonObj.get("bullets").getAsInt());
-
+        @Override
+        public void render ( float delta){
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            batch.begin();
+            backgroundSprite.draw(batch);
+            batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
+            batch.end();
+            stage.act(Gdx.graphics.getDeltaTime());
+            stage.draw();
+            if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+                game.setScreen(new PlayScreen(game));
             }
 
-            @Override
-            public void failed(Throwable t) {
-                labelMessage.setText("Please check your Internet connection.");
-            }
+        }
 
-            @Override
-            public void cancelled() {
-                Gdx.app.postRunnable(new Runnable() {
-                    @Override
-                    public void run() {
+        private void levelInfoJson () {
+
+            final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
+            httpGet.setUrl(Assets.HTTP_SERVER + "levelManager?userId=" + User.getSingletonUser().getUserId() + "&level=" + User.getSingletonUser().getGameLevel());
+            Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
+                public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                    Gson gson = new Gson();
+                    JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
+                    JsonObject jsonObj = element.getAsJsonObject();
+
+                    User.getSingletonUser().setUserHealth(jsonObj.get("userHealth").getAsInt());
+                    User.getSingletonUser().setGameAppearingZombieAll(jsonObj.get("count").getAsInt());
+                    User.getSingletonUser().setGameAppearingZombieTime(jsonObj.get("durationOn").getAsFloat());
+                    User.getSingletonUser().setGameHidingZombie(jsonObj.get("durationOff").getAsFloat());
+                    User.getSingletonUser().setGameBulletsForLevel(jsonObj.get("bullets").getAsInt());
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            game.setScreen(new DifficultyScreen(game));
+                        }
+                    })));
+
+
+                }
+
+                @Override
+                public void failed(Throwable t) {
+                    labelMessage.setText("Please check your Internet connection.");
+                }
+
+                @Override
+                public void cancelled() {
+                    Gdx.app.postRunnable(new Runnable() {
+                        @Override
+                        public void run() {
 //                     ?????
-                    }
-                });
-            }
-        });
+                        }
+                    });
+                }
+            });
+        }
+
+        @Override
+        public void resize ( int width, int height){
+
+        }
+
+        @Override
+        public void pause () {
+
+        }
+
+        @Override
+        public void resume () {
+
+        }
+
+        @Override
+        public void hide () {
+
+        }
+
+        @Override
+        public void dispose () {
+            game.dispose();
+            stage.dispose();
+            batch.dispose();
+        }
+
+    private void changeTheScreenMethod(final int z){
+        if (!LoginScreen.offlineModeSelect) {
+            levelInfoJson();
+        } else {
+            stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    ResourcesForOffline.levelMapResources(z);
+                    game.setScreen(new DifficultyScreen(game));
+                }
+            })));
+        }
     }
-
-    @Override
-    public void resize(int width, int height) {
-
     }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-        game.dispose();
-        stage.dispose();
-        batch.dispose();
-    }
-}

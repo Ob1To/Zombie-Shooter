@@ -107,7 +107,7 @@ public class PlayScreen implements Screen {
         SpriteDrawable spriteDrawableProfileButton = new SpriteDrawable(spriteProfileButton);
         profileButton = new ImageButton(spriteDrawableProfileButton);
 
-        Assets.spriteDefaultColor(spritePlayButton,spriteShopButton,spriteHighScoreButton,spriteProfileButton); // Setting the transparency of the buttons
+        Assets.spriteDefaultColor(spritePlayButton, spriteShopButton, spriteHighScoreButton, spriteProfileButton); // Setting the transparency of the buttons
     }
 
     private void addingListenersToAllButtons() {
@@ -155,7 +155,7 @@ public class PlayScreen implements Screen {
         highScoreButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                spriteHighScoreButton.setColor(1,0.271f,0,0.8f);
+                spriteHighScoreButton.setColor(1, 0.271f, 0, 0.8f);
                 return true;
             }
         });
@@ -163,19 +163,21 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Assets.clickButton.play();
-                spriteHighScoreButton.setColor(0.545f,0,0,0.7f);
-                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.setScreen(new HighScoreScreen(game));
-                    }
-                })));
+                spriteHighScoreButton.setColor(0.545f, 0, 0, 0.7f);
+                if (!LoginScreen.offlineModeSelect) {
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            game.setScreen(new HighScoreScreen(game));
+                        }
+                    })));
+                }
             }
         });
         profileButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                spriteProfileButton.setColor(1,0.271f,0,0.8f);
+                spriteProfileButton.setColor(1, 0.271f, 0, 0.8f);
                 return true;
             }
         });
@@ -183,13 +185,15 @@ public class PlayScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Assets.clickButton.play();
-                spriteProfileButton.setColor(0.545f,0,0,0.7f);
-                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.setScreen(new ProfileScreen(game));
-                    }
-                })));
+                spriteProfileButton.setColor(0.545f, 0, 0, 0.7f);
+                if (!LoginScreen.offlineModeSelect) {
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            game.setScreen(new ProfileScreen(game));
+                        }
+                    })));
+                }
             }
         });
     }

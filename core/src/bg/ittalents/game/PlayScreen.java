@@ -3,7 +3,9 @@ package bg.ittalents.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,11 +14,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 public class PlayScreen implements Screen {
 
@@ -29,6 +36,7 @@ public class PlayScreen implements Screen {
     public static final int HEIGHT_BUTTONS = 6;
     public static final int WIDTH_PLAY_BUTTON = 2;
     public static final int HEIGHT_PLAY_BUTTON = 3;
+    public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
 
     private Game game;
     private SpriteBatch batch;
@@ -47,6 +55,9 @@ public class PlayScreen implements Screen {
     private ImageButton highScoreButton;
     private ImageButton profileButton;
     private SpriteDrawable spriteDrawableTitle;
+    public static Label labelMessage;
+    private Table tableMessage;
+    private Skin skin;
 
     public PlayScreen(Game game) {
         this.game = game;
@@ -84,6 +95,22 @@ public class PlayScreen implements Screen {
         addingListenersToAllButtons();
 
         Gdx.input.setInputProcessor(stage);
+
+        tableMessage = new Table();
+        tableMessage.setFillParent(true);
+        tableMessage.top();
+
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
+        labelMessage = new Label("", skin);
+        labelMessage.setColor(Color.WHITE);
+        labelMessage.setAlignment(Align.center);
+        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        stage.addActor(tableMessage);
+        if(!LoginScreen.offlineModeSelect) {
+            loadUserInformation();
+            weaponsStoreJson();
+        }
+
     }
 
     private void creatingAllTheButtons() {
@@ -252,6 +279,70 @@ public class PlayScreen implements Screen {
         batch.dispose();
         stage.dispose();
         game.dispose();
+    }
+    private void loadUserInformation() {
+        final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
+        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
+        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                Gson gson = new Gson();
+                JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
+                JsonObject jsonObj = element.getAsJsonObject();
+                User.getSingletonUser().setWeapon(jsonObj.get("weapon").getAsJsonObject().get("type").getAsInt());
+                User.getSingletonUser().setLevel(jsonObj.get("level").getAsInt());
+                User.getSingletonUser().setScore(jsonObj.get("score").getAsInt());
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                System.out.println(t + "purvata");
+                labelMessage.setText("Please check your Internet connection.");
+            }
+
+            @Override
+            public void cancelled() {
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+//                     ?????
+                    }
+                });
+            }
+        });
+    }
+
+    private void weaponsStoreJson() {
+        final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
+        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + User.getSingletonUser().getUserId());
+        Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                Gson gson = new Gson();
+                JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
+                JsonObject jsonObj = element.getAsJsonObject();
+                User.getSingletonUser().setWeaponOneUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(0).getAsJsonObject().get("type").getAsInt());
+                User.getSingletonUser().setWeaponTwoUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(1).getAsJsonObject().get("type").getAsInt());
+                User.getSingletonUser().setWeaponTreeUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(2).getAsJsonObject().get("type").getAsInt());
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                if (t instanceof IndexOutOfBoundsException) {
+                    System.out.print("This is ok!");
+                } else {
+                    labelMessage.setText("Please check your Internet connection.");
+                }
+            }
+
+            @Override
+            public void cancelled() {
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                });
+            }
+        });
     }
 
 }

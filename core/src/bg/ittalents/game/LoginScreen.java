@@ -64,8 +64,7 @@ public class LoginScreen implements Screen {
     private SpriteDrawable offlineModeSpriteDrawable;
     private Image imageTitle;
     private Image offlineModeImage;
-    private Label lblStatus;
-    private Label labelMessage;
+    public static Label labelMessage;
     private Table tableMessage;
     private String currentColor;
 
@@ -109,7 +108,6 @@ public class LoginScreen implements Screen {
         batch = new SpriteBatch();
         backgroundSprite = new Sprite(Assets.backgroundMenu);
         backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
-        lblStatus = new Label("", skin);
 
 
         tableMessage = new Table();
@@ -365,7 +363,7 @@ public class LoginScreen implements Screen {
 
             @Override
             public void failed(Throwable t) {
-                if (t.equals(NullPointerException.class)) {
+                if (t instanceof IndexOutOfBoundsException) {
                     System.out.print("This is ok!");
                 } else {
                     labelMessage.setText("Please check your Internet connection.");

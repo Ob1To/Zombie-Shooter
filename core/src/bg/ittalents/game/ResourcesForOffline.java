@@ -55,6 +55,6 @@ abstract class ResourcesForOffline {
         User.getSingletonUser().setGameAppearingZombieAll(count);
         User.getSingletonUser().setGameAppearingZombieTime(durationOn);
         User.getSingletonUser().setGameHidingZombie(durationOff);
-        User.getSingletonUser().setGameBulletsForLevel((int)(count * BULLETS_COEFFICIENT));
+        User.getSingletonUser().setGameBulletsForLevel((int)((count * BULLETS_COEFFICIENT) * (User.getSingletonUser().getWeapon())));
     }
 }

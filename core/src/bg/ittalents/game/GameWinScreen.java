@@ -2,6 +2,7 @@ package bg.ittalents.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 /**
  * Created by Ob1 on 7/4/2015.
@@ -21,6 +24,8 @@ public class GameWinScreen implements Screen{
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
     public static final int CONSTANT_SEE_SCREEN = 3;
+    public static final int CONSTANT_UNLOCKED_WEAPON_2 = 15000;
+    public static final int CONSTANT_UNLOCKED_WEAPON_3 = 25000;
 
     private Game game;
     private SpriteBatch batch;
@@ -59,6 +64,10 @@ public class GameWinScreen implements Screen{
                 return true;
             }
         });
+
+        if(!LoginScreen.offlineModeSelect) {
+            postJsonScore();
+        }
     }
 
     @Override
@@ -91,6 +100,80 @@ public class GameWinScreen implements Screen{
 
         return defaultFont;
     }
+
+    private void postJsonScore() {
+        JsonObject json = new JsonObject();
+        json.add("userId", new JsonPrimitive(User.getSingletonUser().getUserId()));
+        json.add("level", new JsonPrimitive(User.getSingletonUser().getGameLevel()));
+        json.add("score", new JsonPrimitive(GameScreen.points));
+        final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
+        httpRequest.setUrl(Assets.HTTP_SERVER + "levelManager");
+        httpRequest.setHeader("Content-Type", "application/json");
+        httpRequest.setContent(json.toString());
+        Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(final Net.HttpResponse httpResponse) {
+                if (httpResponse.getStatus().getStatusCode() == 200) {
+                    System.out.println(httpResponse.getResultAsString());
+                    if (((User.getSingletonUser().getScore() + GameScreen.points)  > CONSTANT_UNLOCKED_WEAPON_2) &&(User.getSingletonUser().getWeaponTwoUnlock() == 0)){
+                        postJsonWeapons(2);
+                }
+                    if (((User.getSingletonUser().getScore() + GameScreen.points)  > CONSTANT_UNLOCKED_WEAPON_3) &&(User.getSingletonUser().getWeaponTreeUnlock() == 0)){
+                        postJsonWeapons(3);
+                    }
+                }
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                LoginScreen.labelMessage.setText("Please check your Internet connection.");
+                game.setScreen(new LoginScreen(game));
+            }
+
+            @Override
+            public void cancelled() {
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+//                     ?????
+                    }
+                });
+            }
+        });
+    }
+
+    private void postJsonWeapons(int weapont) {
+        JsonObject json = new JsonObject();
+        json.add("userId", new JsonPrimitive(User.getSingletonUser().getUserId()));
+        json.add("weaponType", new JsonPrimitive(weapont));
+        final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
+        httpRequest.setUrl(Assets.HTTP_SERVER + "weaponsStore");
+        httpRequest.setHeader("Content-Type", "application/json");
+        httpRequest.setContent(json.toString());
+        Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(final Net.HttpResponse httpResponse) {
+                if (httpResponse.getStatus().getStatusCode() == 200) {
+                }
+            }
+
+            @Override
+            public void failed(Throwable t) {
+            }
+
+            @Override
+            public void cancelled() {
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+//                     ?????
+                    }
+                });
+            }
+        });
+    }
+
+
     @Override
     public void resize(int width, int height) {
 

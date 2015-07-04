@@ -130,6 +130,7 @@ public class LevelMapScreen implements Screen {
         oneButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 Assets.clickButton.play();
+                User.getSingletonUser().setGameLevel(1);
                 changeTheScreenMethod(1);
             }
         });
@@ -138,6 +139,7 @@ public class LevelMapScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 2) {
                     Assets.clickButton.play();
+                    User.getSingletonUser().setGameLevel(2);
                     changeTheScreenMethod(2);
                 }
             }
@@ -147,6 +149,7 @@ public class LevelMapScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 3) {
                     Assets.clickButton.play();
+                    User.getSingletonUser().setGameLevel(3);
                         changeTheScreenMethod(3);
                 }
             }
@@ -156,6 +159,7 @@ public class LevelMapScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 4) {
                     Assets.clickButton.play();
+                    User.getSingletonUser().setGameLevel(4);
                     changeTheScreenMethod(4);
                 }
             }
@@ -165,6 +169,7 @@ public class LevelMapScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 5) {
                     Assets.clickButton.play();
+                    User.getSingletonUser().setGameLevel(5);
                     changeTheScreenMethod(5);
                 }
             }

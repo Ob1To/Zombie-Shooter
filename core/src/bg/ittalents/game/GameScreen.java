@@ -279,7 +279,6 @@ public class GameScreen implements Screen {
     private void startTimerBoss(float delta){
         if(User.getSingletonUser().getGameAppearingZombieAll() <=0){
             timerBoss += delta;
-            System.out.println(timerBoss);
         }
     }
 

@@ -272,6 +272,7 @@ public class GameScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 points += 2 * User.getSingletonUser().getWeapon();
+                User.getSingletonUser().setGameBulletsForLevel(User.getSingletonUser().getGameBulletsForLevel() + User.getSingletonUser().getWeapon());
                 return true;
             }
         });

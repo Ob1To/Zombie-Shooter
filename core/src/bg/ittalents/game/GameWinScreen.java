@@ -50,7 +50,6 @@ public class GameWinScreen implements Screen{
         stage.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.print(minSeeScreen);
                 if (minSeeScreen > CONSTANT_SEE_SCREEN) {
                     Assets.gameWinMusic.stop();
                     Assets.gameMenuMusic.play();

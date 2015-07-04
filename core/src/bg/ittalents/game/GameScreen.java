@@ -216,7 +216,7 @@ public class GameScreen implements Screen {
     }
 
 
-    private void addBossTextu(){
+    private void addBossTexture(){
         if( timerBoss <= 3 ){
             bossTexture = Assets.bossTexture1;
         }

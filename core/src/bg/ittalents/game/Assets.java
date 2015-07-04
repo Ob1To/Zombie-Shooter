@@ -80,15 +80,15 @@ public class Assets {
     public static final String SHOP_IMAGE_PATH = "Images/TransperantShopButton.png";
     public static final String ZOMBIE_SHOOTER_TITLE_PATH = "Images/ZombieShooter.png";
     public static final String GAME_OVER_SCREEN = "Images/gameover.png";
-    public static final String THE_BOSS_1 = "Images/Boss/Niki1.png";
-    public static final String THE_BOSS_2 = "Images/Boss/Niki2.png";
-    public static final String THE_BOSS_3 = "Images/Boss/Niki3.png";
-    public static final String THE_BOSS_4 = "Images/Boss/Niki4.png";
-    public static final String THE_BOSS_5 = "Images/Boss/Niki5.png";
-    public static final String THE_BOSS_6 = "Images/Boss/Niki6.png";
-    public static final String THE_BOSS_7 = "Images/Boss/Niki7.png";
-    public static final String THE_BOSS_8 = "Images/Boss/Niki8.png";
-    public static final String THE_BOSS_9 = "Images/Boss/Niki9.png";
+    public static final String THE_BOSS_1 = "Images/Boss/Niki1.jpg";
+    public static final String THE_BOSS_2 = "Images/Boss/Niki2.jpg";
+    public static final String THE_BOSS_3 = "Images/Boss/Niki3.jpg";
+    public static final String THE_BOSS_4 = "Images/Boss/Niki4.jpg";
+    public static final String THE_BOSS_5 = "Images/Boss/Niki5.jpg";
+    public static final String THE_BOSS_6 = "Images/Boss/Niki6.jpg";
+    public static final String THE_BOSS_7 = "Images/Boss/Niki7.jpg";
+    public static final String THE_BOSS_8 = "Images/Boss/Niki8.jpg";
+    public static final String THE_BOSS_9 = "Images/Boss/Niki9.jpg";
 
 
 
@@ -307,14 +307,14 @@ public class Assets {
         zombieShooterTitle = manager.get(ZOMBIE_SHOOTER_TITLE_PATH, Texture.class);
         gameOverScreen = manager.get(GAME_OVER_SCREEN, Texture.class);
         bossTexture1 = manager.get(THE_BOSS_1, Texture.class);
-        bossTexture2 = manager.get(THE_BOSS_1, Texture.class);
-        bossTexture3 = manager.get(THE_BOSS_1, Texture.class);
-        bossTexture4 = manager.get(THE_BOSS_1, Texture.class);
-        bossTexture5 = manager.get(THE_BOSS_1, Texture.class);
-        bossTexture6 = manager.get(THE_BOSS_1, Texture.class);
-        bossTexture7 = manager.get(THE_BOSS_1, Texture.class);
-        bossTexture8 = manager.get(THE_BOSS_1, Texture.class);
-        bossTexture9 = manager.get(THE_BOSS_1, Texture.class);
+        bossTexture2 = manager.get(THE_BOSS_2, Texture.class);
+        bossTexture3 = manager.get(THE_BOSS_3, Texture.class);
+        bossTexture4 = manager.get(THE_BOSS_4, Texture.class);
+        bossTexture5 = manager.get(THE_BOSS_5, Texture.class);
+        bossTexture6 = manager.get(THE_BOSS_6, Texture.class);
+        bossTexture7 = manager.get(THE_BOSS_7, Texture.class);
+        bossTexture8 = manager.get(THE_BOSS_8, Texture.class);
+        bossTexture9 = manager.get(THE_BOSS_9, Texture.class);
 
     }
 

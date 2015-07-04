@@ -60,6 +60,7 @@ public class Zombie extends Actor {
         this.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("PUCAM ZOMBITO");
                 dyingZombieSound();
                 tapCounter += User.getSingletonUser().getWeapon();
 //                currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);

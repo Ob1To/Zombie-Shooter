@@ -97,7 +97,7 @@ public class GameScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 User.getSingletonUser().setGameBulletsForLevel(User.getSingletonUser().getGameBulletsForLevel() - User.getSingletonUser().getWeapon());
-                switch (User.getSingletonUser().getWeapon()){
+                switch (User.getSingletonUser().getWeapon()) {
                     case 1:
                         Assets.singleShot.play();
                         break;
@@ -108,8 +108,6 @@ public class GameScreen implements Screen {
                         Assets.tripleShot.play();
                         break;
                 }
-
-
                 return true;
             }
         });
@@ -135,7 +133,7 @@ public class GameScreen implements Screen {
                 zombieArray[x].setVisible(true);
                 return;
             } else {
-                if (x < zombieArray.length-1) {
+                if (x < zombieArray.length - 1) {
                     x++;
                 } else {
                     x = 0;
@@ -155,17 +153,16 @@ public class GameScreen implements Screen {
 
     public void zombieSpawner(float timeSinceLast) {
 
-            this.lastSpawnZombieTimer += timeSinceLast;
-            updateZombieTimeLiving(timeSinceLast);
-            if (this.lastSpawnZombieTimer > User.getSingletonUser().getGameAppearingZombieTime()) {
-                this.lastSpawnZombieTimer = 0.0f;
-                if(User.getSingletonUser().getGameAppearingZombieAll() > 0) {
-                    User.getSingletonUser().setGameAppearingZombieAll(User.getSingletonUser().getGameAppearingZombieAll() - 1);
+        this.lastSpawnZombieTimer += timeSinceLast;
+        updateZombieTimeLiving(timeSinceLast);
+        if (this.lastSpawnZombieTimer > User.getSingletonUser().getGameAppearingZombieTime()) {
+            this.lastSpawnZombieTimer = 0.0f;
+            if (User.getSingletonUser().getGameAppearingZombieAll() > 0) {
+                User.getSingletonUser().setGameAppearingZombieAll(User.getSingletonUser().getGameAppearingZombieAll() - 1);
                 this.addZombie();
             }
         }
     }
-
 
 
     @Override
@@ -180,8 +177,6 @@ public class GameScreen implements Screen {
         spriteBatch.end();
         startTimerBoss(Gdx.graphics.getDeltaTime());
         addBossTexture();
-
-
 
 
     }
@@ -229,37 +224,37 @@ public class GameScreen implements Screen {
     }
 
 
-    private void addBossTexture(){
-        if(timerBoss <= 8 ){
+    private void addBossTexture() {
+        if (timerBoss <= 8) {
             bossTexture = Assets.bossTexture1;
         }
-        if((timerBoss >= 8 )&&( timerBoss <= 11 )){
+        if ((timerBoss >= 8) && (timerBoss <= 11)) {
             bossTexture = Assets.bossTexture2;
         }
-        if((timerBoss >= 11 )&&( timerBoss <= 16 )){
+        if ((timerBoss >= 11) && (timerBoss <= 16)) {
             bossTexture = Assets.bossTexture3;
         }
-        if((timerBoss >= 16 )&&( timerBoss <= 21 )){
+        if ((timerBoss >= 16) && (timerBoss <= 21)) {
             bossTexture = Assets.bossTexture4;
         }
-        if((timerBoss >= 21 )&&( timerBoss <= 26 )){
+        if ((timerBoss >= 21) && (timerBoss <= 26)) {
             bossTexture = Assets.bossTexture5;
         }
-        if((timerBoss >= 26 )&&( timerBoss <= 31 )){
+        if ((timerBoss >= 26) && (timerBoss <= 31)) {
             bossTexture = Assets.bossTexture6;
         }
-        if((timerBoss >= 31 )&&( timerBoss <= 36 )){
+        if ((timerBoss >= 31) && (timerBoss <= 36)) {
             bossTexture = Assets.bossTexture7;
         }
-        if((timerBoss >= 36 )&&( timerBoss <= 41 )){
+        if ((timerBoss >= 36) && (timerBoss <= 41)) {
             bossTexture = Assets.bossTexture8;
         }
-        if((timerBoss >= 41)&&( timerBoss <= 45 )){
+        if ((timerBoss >= 41) && (timerBoss <= 45)) {
             bossTexture = Assets.bossTexture9;
         }
 
-        spriteBoss=new Sprite(bossTexture);
-        spriteBoss.setSize((float)(WIDTH_SCREEN / 2.2), HEIGHT_SCREEN);
+        spriteBoss = new Sprite(bossTexture);
+        spriteBoss.setSize((float) (WIDTH_SCREEN / 2.2), HEIGHT_SCREEN);
         SpriteDrawable spriteDrawableBoss = new SpriteDrawable(spriteBoss);
         imageBoss = new Image(spriteDrawableBoss);
         imageBoss.setPosition(WIDTH_SCREEN / 2 - imageBoss.getWidth() / 2, HEIGHT_SCREEN / 2 - imageBoss.getHeight() / 2);
@@ -270,14 +265,14 @@ public class GameScreen implements Screen {
                 return true;
             }
         });
-        if((User.getSingletonUser().getGameAppearingZombieAll() <= 0) && (timerBoss >= 5)) {
+        if ((User.getSingletonUser().getGameAppearingZombieAll() <= 0) && (timerBoss >= 5)) {
             imageBoss.setZIndex(3);
             mainStage.addActor(imageBoss);
         }
     }
 
-    private void startTimerBoss(float delta){
-        if(User.getSingletonUser().getGameAppearingZombieAll() <=0){
+    private void startTimerBoss(float delta) {
+        if (User.getSingletonUser().getGameAppearingZombieAll() <= 0) {
             timerBoss += delta;
         }
     }

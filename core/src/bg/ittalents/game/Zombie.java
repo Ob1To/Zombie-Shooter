@@ -142,7 +142,7 @@ public class Zombie extends Actor {
                         GameScreen.backGroundSprite.setTexture(Assets.scaryZombieImage);
                     }
                 }),
-                Actions.delay(0.3f),
+                Actions.delay(0.2f),
                 Actions.run(new Runnable() {
                     @Override
                     public void run() {

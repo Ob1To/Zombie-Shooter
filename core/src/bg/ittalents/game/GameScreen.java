@@ -184,6 +184,7 @@ public class GameScreen implements Screen {
         startTimerBoss(Gdx.graphics.getDeltaTime());
         addBossTexture();
         playingBossSounds();
+        checkForGameOver();
 
 
     }
@@ -328,6 +329,12 @@ public class GameScreen implements Screen {
     private void startTimerBoss(float delta) {
         if (User.getSingletonUser().getGameAppearingZombieAll() <= 0) {
             timerBoss += delta;
+        }
+    }
+
+    private void checkForGameOver(){
+        if(lives <= 0){
+            game.setScreen(new GameOverScreen(game));
         }
     }
 

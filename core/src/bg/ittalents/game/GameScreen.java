@@ -57,6 +57,7 @@ public class GameScreen implements Screen {
     private SpriteDrawable spriteDrawableBackGround;
     private Boolean alreadyPlayed = true;
     private Zombie newZombie;
+    private boolean checkForAddTextureBoss;
 
 
     public GameScreen(Game game) {
@@ -231,31 +232,40 @@ public class GameScreen implements Screen {
 
 
     private void addBossTexture() {
-        if (timerBoss <= 8) {
+        if ((timerBoss <= 8) && (checkForAddTextureBoss == false)) {
+            checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture1;
         }
-        if ((timerBoss >= 8) && (timerBoss <= 11)) {
+        if ((timerBoss >= 8) && (timerBoss <= 11) && (checkForAddTextureBoss == true)) {
+            checkForAddTextureBoss = false;
             bossTexture = Assets.bossTexture2;
         }
-        if ((timerBoss >= 11) && (timerBoss <= 16)) {
+        if ((timerBoss >= 11) && (timerBoss <= 16) && (checkForAddTextureBoss == false)) {
+            checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture3;
         }
-        if ((timerBoss >= 16) && (timerBoss <= 21)) {
+        if ((timerBoss >= 16) && (timerBoss <= 21)&& (checkForAddTextureBoss == true)) {
+            checkForAddTextureBoss = false;
             bossTexture = Assets.bossTexture4;
         }
-        if ((timerBoss >= 21) && (timerBoss <= 26)) {
+        if ((timerBoss >= 21) && (timerBoss <= 26) && (checkForAddTextureBoss == false)) {
+            checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture5;
         }
-        if ((timerBoss >= 26) && (timerBoss <= 31)) {
+        if ((timerBoss >= 26) && (timerBoss <= 31)&& (checkForAddTextureBoss == true)) {
+            checkForAddTextureBoss = false;
             bossTexture = Assets.bossTexture6;
         }
-        if ((timerBoss >= 31) && (timerBoss <= 36)) {
+        if ((timerBoss >= 31) && (timerBoss <= 36) && (checkForAddTextureBoss == false)) {
+            checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture7;
         }
-        if ((timerBoss >= 36) && (timerBoss <= 41)) {
+        if ((timerBoss >= 36) && (timerBoss <= 41)&& (checkForAddTextureBoss == true)) {
+            checkForAddTextureBoss = false;
             bossTexture = Assets.bossTexture8;
         }
-        if ((timerBoss >= 41) && (timerBoss <= 45)) {
+        if ((timerBoss >= 41) && (timerBoss <= 45) && (checkForAddTextureBoss == false)) {
+            checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture9;
         }
 

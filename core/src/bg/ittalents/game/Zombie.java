@@ -30,22 +30,38 @@ public class Zombie extends Actor {
     private final int zombieShootCounter;
     private float paragonLevel;
     private Texture[] enemiesArray;
+    private Texture[] enemiesArrayWindow;
     private int initialZombieLevel;
+    private boolean position;
 
-    public Zombie(int zombieLevel, float paragonLevel) {
+    public Zombie(int zombieLevel, float paragonLevel, final boolean position) {
+        this.position = position;
         enemiesArray = new Texture[3];
         enemiesArray[0] = Assets.enemySingleImage;
         enemiesArray[1] = Assets.enemySingleImageLevel2;
         enemiesArray[2] = Assets.enemySingleImageLevel3;
 
-        if (zombieLevel == 3){
-            this.currentRegion = new TextureRegion(enemiesArray[2]); //red enemy
-        }
-        else if (zombieLevel == 2) {
-            this.currentRegion = new TextureRegion(enemiesArray[1]); // green enemy
-        }
-        else{
-            this.currentRegion = new TextureRegion(enemiesArray[0]); //white enemy
+        enemiesArrayWindow = new Texture[3];
+        enemiesArrayWindow[0] = Assets.enemySingleImageWindow;
+        enemiesArrayWindow[1] = Assets.enemySingleImageLevel2Window;
+        enemiesArrayWindow[2] = Assets.enemySingleImageLevel3Window;
+
+        if(position) {
+            if (zombieLevel == 3) {
+                this.currentRegion = new TextureRegion(enemiesArray[2]); //red enemy
+            } else if (zombieLevel == 2) {
+                this.currentRegion = new TextureRegion(enemiesArray[1]); // green enemy
+            } else {
+                this.currentRegion = new TextureRegion(enemiesArray[0]); //white enemy
+            }
+        }else{
+            if (zombieLevel == 3) {
+                this.currentRegion = new TextureRegion(enemiesArrayWindow[2]); //red enemy
+            } else if (zombieLevel == 2) {
+                this.currentRegion = new TextureRegion(enemiesArrayWindow[1]); // green enemy
+            } else {
+                this.currentRegion = new TextureRegion(enemiesArrayWindow[0]); //white enemy
+            }
         }
         this.zombieShootCounter = zombieLevel;
         this.tapCounter = 0;
@@ -69,9 +85,15 @@ public class Zombie extends Actor {
                     return true;
                 }
                 else {
-                    currentRegion = new TextureRegion(enemiesArray[((currentZombie.zombieLevel - 1) - 1)]);
-                    currentZombie.zombieLevel -= 1;
-                    return true;
+                    if(position) {
+                        currentRegion = new TextureRegion(enemiesArray[((currentZombie.zombieLevel - 1) - 1)]);
+                        currentZombie.zombieLevel -= 1;
+                        return true;
+                    }else{
+                        currentRegion = new TextureRegion(enemiesArrayWindow[((currentZombie.zombieLevel - 1) - 1)]);
+                        currentZombie.zombieLevel -= 1;
+                        return true;
+                    }
                 }
             }
         });
@@ -84,7 +106,11 @@ public class Zombie extends Actor {
             stateTime += delta;
             this.currentRegion = this.animation.getKeyFrame(stateTime);
             if (stateTime >= 1 / 2f) {
-                this.currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
+                if (position) {
+                    this.currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
+                }else{
+                    this.currentRegion = new TextureRegion(enemiesArrayWindow[zombieLevel - 1]);
+                }
                 this.stateTime = 0;
                 this.tapCounter = 0;
                 this.timeLiving = paragonLevel;
@@ -106,7 +132,11 @@ public class Zombie extends Actor {
             currentZombie.setVisible(false);
             Assets.zombieBite.play();
             this.zombieLevel = initialZombieLevel;
-            this.currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
+            if(position) {
+                this.currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
+            }else{
+                this.currentRegion = new TextureRegion(enemiesArrayWindow[zombieLevel - 1]);
+            }
             GameScreen.lives -= 1;
             this.timeLiving = paragonLevel;
             tapCounter = 0;

@@ -273,6 +273,7 @@ public class Assets {
         bossSound3 = manager.get(BOSS_SOUND_3, Sound.class);
         bossSound4 = manager.get(BOSS_SOUND_4, Sound.class);
 
+
 //        introMusic = manager.get(INTRO_MUSIC_PATH, Music.class);
         gamePlayMusic = manager.get(GAME_PLAY_MUSIC_PATH, Music.class);
         gameMenuMusic = manager.get(GAME_MENU_MUSIC_PATH, Music.class);
@@ -337,6 +338,9 @@ public class Assets {
         bossTexture7 = manager.get(THE_BOSS_7, Texture.class);
         bossTexture8 = manager.get(THE_BOSS_8, Texture.class);
         bossTexture9 = manager.get(THE_BOSS_9, Texture.class);
+
+        gamePlayMusic.setVolume(0.15f);
+        gameMenuMusic.setVolume(0.15f);
 
     }
 

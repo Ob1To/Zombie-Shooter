@@ -101,13 +101,13 @@ public class GameScreen implements Screen {
                 User.getSingletonUser().setGameBulletsForLevel(User.getSingletonUser().getGameBulletsForLevel() - User.getSingletonUser().getWeapon());
                 switch (User.getSingletonUser().getWeapon()) {
                     case 1:
-                        Assets.singleShot.play();
+                        long id = Assets.singleShot.play(0.05f);
                         break;
                     case 2:
-                        Assets.doubleShot.play();
+                        long idDouble = Assets.doubleShot.play(0.05f);
                         break;
                     case 3:
-                        Assets.tripleShot.play();
+                        long idTriple = Assets.doubleShot.play(0.05f);
                         break;
                 }
                 return true;

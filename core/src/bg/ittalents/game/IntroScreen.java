@@ -37,6 +37,7 @@ public class IntroScreen extends ApplicationAdapter implements Screen {
     @Override
     public void show() {
         introMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/IntroMusic1.mp3"));
+        introMusic.setVolume(0.4f);
         introMusic.play();
 
         camera = new OrthographicCamera(2, 1.5f);

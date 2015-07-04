@@ -36,7 +36,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
     public static final float CONSTANT_PAD_LEFT_AND_RIGHT = Gdx.graphics.getWidth() / 30;
     public static final float CONSTANT_HEIGHT_TITLE = 3;
     public static final int CONSTANT_HEIGHT_REGISTER_BUTTON = 5;
-    public static final int CONSTANT_LENGTH_USERNAME_CHECK = 3;
+    public static final String USER_PATTERN = "(?=.*[a-z]).{3,10}";
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -293,10 +293,10 @@ public class RegisterScreen extends LoginScreen implements Screen {
     }
 
     private boolean checkUserField(String logField) {
-        if (logField.length() > CONSTANT_LENGTH_USERNAME_CHECK) {
+        if (logField.matches(USER_PATTERN)) {
             return true;
         }
-        labelMessage.setText("Username must be at least 3 characters long.");
+        labelMessage.setText("Username must be at least 3 characters long and one letter.");
         return false;
     }
 

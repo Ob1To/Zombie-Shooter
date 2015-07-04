@@ -37,8 +37,8 @@ public class LoginScreen implements Screen {
     public static final int CONSTANCE_HEIGHT_BUTTONS = 5;
     private static final float CONSTANT_WIDTH = 3;
     private static final float CONSTANT_HEIGHT = 10;
-    public static final int CONSTANT_LENGTH_USERNAME_CHECK = 3;
     public static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{5,10}";
+    public static final String USER_PATTERN = "(?=.*[a-z]).{3,10}";
     public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
     public static final String USER_NAME = "USER NAME";
     public static final String PASSWORD = "PASSWORD";
@@ -109,8 +109,7 @@ public class LoginScreen implements Screen {
         batch = new SpriteBatch();
         backgroundSprite = new Sprite(Assets.backgroundMenu);
         backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
-        lblStatus = new Label("", skin); // KAKVO E TOVA VLADO ??? KAKVO E TOVA VLADO ???KAKVO E TOVA VLADO ???KAKVO E TOVA VLADO ???
-//        lblStatus.se
+        lblStatus = new Label("", skin);
 
 
         tableMessage = new Table();
@@ -161,26 +160,6 @@ public class LoginScreen implements Screen {
         offlineModeImage = new Image(offlineModeSpriteDrawable);
 
     }
-
-//    public void changeImageButtonColor() {
-//        if (currentColor.equals("red")) {
-//            offlineModeImage.remove();
-//            offlineModeSprite = new Sprite(Assets.offlineModeGreenImage);
-//            offlineModeSprite.setColor(0, 1, 0, 0.7f);
-//            offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
-//            offlineModeImage = new Image(offlineModeSpriteDrawable);
-//            initializationContainer();
-//        }
-//        if (currentColor.equals("green")){
-//            offlineModeImage.remove();
-//            offlineModeSprite = new Sprite(Assets.offlineModeRedImage);
-//            Assets.spriteDefaultColor(offlineModeSprite);
-//            offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
-//            offlineModeImage = new Image(offlineModeSpriteDrawable);
-//            currentColor = "green";
-//            initializationContainer();
-//        }
-//    }
 
     private void initializationContainer() { // Arranging the screen and how all the things are sorted in it.
 
@@ -234,7 +213,7 @@ public class LoginScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 Assets.clickButton.play();
                 if (!offlineModeSelect){
-                    if ((loginField.getText().toString().length() > CONSTANT_LENGTH_USERNAME_CHECK)
+                    if ((loginField.getText().toString().matches(USER_PATTERN))
                             && (passwordField.getText().toString().matches(PASSWORD_PATTERN))) {
                         login(loginField.getText(), passwordField.getText(), true);
                     } else {

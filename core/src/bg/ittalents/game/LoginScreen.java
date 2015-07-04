@@ -281,7 +281,7 @@ public class LoginScreen implements Screen {
                     Gson gson = new Gson();
                     JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                     JsonObject jsonObj = element.getAsJsonObject();
-                    User.singletonUser().setUserId(jsonObj.get("userId").getAsInt()); // Initialization of User Id via POST request
+                    User.getSingletonUser().setUserId(jsonObj.get("userId").getAsInt()); // Initialization of User Id via POST request
                     Gdx.app.postRunnable(new Runnable() {
                         @Override
                         public void run() {
@@ -324,15 +324,15 @@ public class LoginScreen implements Screen {
 
     private void loadUserInformation() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + User.singletonUser().getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
                 JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                 JsonObject jsonObj = element.getAsJsonObject();
-                User.singletonUser().setWeapon(jsonObj.get("weapon").getAsJsonObject().get("type").getAsInt());
-                User.singletonUser().setLevel(jsonObj.get("level").getAsInt());
-                User.singletonUser().setScore(jsonObj.get("score").getAsInt());
+                User.getSingletonUser().setWeapon(jsonObj.get("weapon").getAsJsonObject().get("type").getAsInt());
+                User.getSingletonUser().setLevel(jsonObj.get("level").getAsInt());
+                User.getSingletonUser().setScore(jsonObj.get("score").getAsInt());
             }
 
             @Override
@@ -354,16 +354,16 @@ public class LoginScreen implements Screen {
 
     private void weaponsStoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + User.singletonUser().getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
                 JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                 JsonObject jsonObj = element.getAsJsonObject();
 
-                User.singletonUser().setWeaponOneUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(0).getAsJsonObject().get("type").getAsInt());
-                User.singletonUser().setWeaponTwoUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(1).getAsJsonObject().get("type").getAsInt());
-                User.singletonUser().setWeaponTreeUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(2).getAsJsonObject().get("type").getAsInt());
+                User.getSingletonUser().setWeaponOneUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(0).getAsJsonObject().get("type").getAsInt());
+                User.getSingletonUser().setWeaponTwoUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(1).getAsJsonObject().get("type").getAsInt());
+                User.getSingletonUser().setWeaponTreeUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(2).getAsJsonObject().get("type").getAsInt());
             }
 
             @Override

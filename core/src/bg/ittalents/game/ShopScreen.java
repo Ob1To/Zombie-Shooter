@@ -137,35 +137,35 @@ public class ShopScreen extends Actor implements Screen {
     }
 
     private void checkWeapons() {
-        if (User.singletonUser().getWeapon() == User.singletonUser().getWeaponOneUnlock()) {
+        if (User.getSingletonUser().getWeapon() == User.getSingletonUser().getWeaponOneUnlock()) {
             spriteWeaponButton1 = new Sprite(Assets.pistolActive);
         } else {
             spriteWeaponButton1 = new Sprite(Assets.pistolAvailable);
         }
 
 
-        if (User.singletonUser().getWeapon() == User.singletonUser().getWeaponTwoUnlock()) {
+        if (User.getSingletonUser().getWeapon() == User.getSingletonUser().getWeaponTwoUnlock()) {
             spriteWeaponButton2 = new Sprite(Assets.railRifleActive);
 
         } else {
-            if (User.singletonUser().getWeaponTwoUnlock() != 0) {
+            if (User.getSingletonUser().getWeaponTwoUnlock() != 0) {
                 spriteWeaponButton2 = new Sprite(Assets.railRifleAvailable);
             } else {
                 spriteWeaponButton2 = new Sprite(Assets.railRifleLocked);
             }
         }
 
-        if (User.singletonUser().getWeapon() == User.singletonUser().getWeaponTreeUnlock()) {
+        if (User.getSingletonUser().getWeapon() == User.getSingletonUser().getWeaponTreeUnlock()) {
             spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunActive);
         } else {
-            if (User.singletonUser().getWeaponTreeUnlock() != 0) {
+            if (User.getSingletonUser().getWeaponTreeUnlock() != 0) {
                 spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunAvailable);
             } else {
                 spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunLocked);
             }
         }
 
-        System.out.println(User.singletonUser().toString());
+        System.out.println(User.getSingletonUser().toString());
     }
 
 
@@ -201,7 +201,7 @@ public class ShopScreen extends Actor implements Screen {
 
     private void textBitmapFontDraw() {
         textBitmapFont.draw(batch, "SCORE", CONSTANT_COORDINATES_SCORE_X, CONSTANT_COORDINATES_TEXT_ROW_FIRST);
-        textBitmapFont.draw(batch, "" + User.singletonUser().getScore(), CONSTANT_COORDINATES_SCORE_X, CONSTANT_COORDINATES_TEXT_ROW_SECOND);
+        textBitmapFont.draw(batch, "" + User.getSingletonUser().getScore(), CONSTANT_COORDINATES_SCORE_X, CONSTANT_COORDINATES_TEXT_ROW_SECOND);
     }
 
 
@@ -246,7 +246,7 @@ public class ShopScreen extends Actor implements Screen {
 
         weapon1.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                User.singletonUser().setWeapon(1);
+                User.getSingletonUser().setWeapon(1);
                 checkWeapons();
                 setButtonPositionAndAddInStage();
                 addWeaponSelectJson();
@@ -255,8 +255,8 @@ public class ShopScreen extends Actor implements Screen {
 
         weapon2.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (User.singletonUser().getWeaponTwoUnlock() != 0) {
-                    User.singletonUser().setWeapon(2);
+                if (User.getSingletonUser().getWeaponTwoUnlock() != 0) {
+                    User.getSingletonUser().setWeapon(2);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
                     addWeaponSelectJson();
@@ -266,8 +266,8 @@ public class ShopScreen extends Actor implements Screen {
 
         weapon3.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (User.singletonUser().getWeaponTreeUnlock() != 0) {
-                    User.singletonUser().setWeapon(3);
+                if (User.getSingletonUser().getWeaponTreeUnlock() != 0) {
+                    User.getSingletonUser().setWeapon(3);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
                     addWeaponSelectJson();
@@ -279,8 +279,8 @@ public class ShopScreen extends Actor implements Screen {
 
     private void addWeaponSelectJson() {
         JsonObject json = new JsonObject();
-        json.add("userId", new JsonPrimitive(User.singletonUser().getUserId()));
-        json.add("weaponType", new JsonPrimitive(User.singletonUser().getWeapon()));
+        json.add("userId", new JsonPrimitive(User.getSingletonUser().getUserId()));
+        json.add("weaponType", new JsonPrimitive(User.getSingletonUser().getWeapon()));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
         httpRequest.setUrl(Assets.HTTP_SERVER + "weaponManager");

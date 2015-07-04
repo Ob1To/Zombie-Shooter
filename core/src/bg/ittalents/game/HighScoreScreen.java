@@ -112,7 +112,7 @@ public class HighScoreScreen implements Screen {
     private void highScoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         //        Tuk sled kato napravim klasa User da vzimame ve4e ID koeto imame za konkretniq potrebitel
-        httpGet.setUrl(Assets.HTTP_SERVER + "leaderBoard?userId=" + User.singletonUser().getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "leaderBoard?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();

@@ -61,7 +61,7 @@ public class Zombie extends Actor {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 dyingZombieSound();
-                tapCounter += User.singletonUser().getWeapon();
+                tapCounter += User.getSingletonUser().getWeapon();
 //                currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
                 if (tapCounter >= currentZombie.zombieShootCounter) {
                     currentZombie.isDead = true;
@@ -79,6 +79,7 @@ public class Zombie extends Actor {
     @Override
     public void act(float delta) {
         if (isDead) {
+            User.getSingletonUser().setGameAppearingZombieAll(User.getSingletonUser().getGameAppearingZombieAll() - 1);
             this.zombieLevel = initialZombieLevel;
             stateTime += delta;
             this.currentRegion = this.animation.getKeyFrame(stateTime);
@@ -102,6 +103,7 @@ public class Zombie extends Actor {
 
     public void checkTimeLiving() {
         if ((timeLiving <= 0) && (this.isVisible())) {
+            User.getSingletonUser().setGameAppearingZombieAll(User.getSingletonUser().getGameAppearingZombieAll() - 1);
             Assets.zombieBite.play();
             dyingZombieBackground();
             this.zombieLevel = initialZombieLevel;

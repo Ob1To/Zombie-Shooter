@@ -133,7 +133,7 @@ public class LevelMapScreen implements Screen {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        User.singletonUser().setGameLevel(1);
+                        User.getSingletonUser().setGameLevel(1);
                         levelInfoJson();
 
                     }
@@ -143,12 +143,12 @@ public class LevelMapScreen implements Screen {
 
         twoButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (User.singletonUser().getLevel() >= 2) {
+                if (User.getSingletonUser().getLevel() >= 2) {
                     Assets.clickButton.play();
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            User.singletonUser().setGameLevel(2);
+                            User.getSingletonUser().setGameLevel(2);
                             levelInfoJson();
                         }
                     })));
@@ -158,12 +158,12 @@ public class LevelMapScreen implements Screen {
 
         threeButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (User.singletonUser().getLevel() >= 3) {
+                if (User.getSingletonUser().getLevel() >= 3) {
                     Assets.clickButton.play();
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            User.singletonUser().setGameLevel(3);
+                            User.getSingletonUser().setGameLevel(3);
                             levelInfoJson();
                         }
                     })));
@@ -173,12 +173,12 @@ public class LevelMapScreen implements Screen {
 
         fourButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (User.singletonUser().getLevel() >= 4) {
+                if (User.getSingletonUser().getLevel() >= 4) {
                     Assets.clickButton.play();
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            User.singletonUser().setGameLevel(4);
+                            User.getSingletonUser().setGameLevel(4);
                             levelInfoJson();
                         }
                     })));
@@ -188,12 +188,12 @@ public class LevelMapScreen implements Screen {
 
         fiveButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (User.singletonUser().getLevel() >= 5) {
+                if (User.getSingletonUser().getLevel() >= 5) {
                     Assets.clickButton.play();
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            User.singletonUser().setGameLevel(5);
+                            User.getSingletonUser().setGameLevel(5);
                             levelInfoJson();
                         }
                     })));
@@ -203,12 +203,12 @@ public class LevelMapScreen implements Screen {
 
         sixButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                if (User.singletonUser().getLevel() >= 6) {
+                if (User.getSingletonUser().getLevel() >= 6) {
                     Assets.clickButton.play();
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
-                            User.singletonUser().setGameLevel(6);
+                            User.getSingletonUser().setGameLevel(6);
                             levelInfoJson();
                         }
                     })));
@@ -224,7 +224,7 @@ public class LevelMapScreen implements Screen {
         SpriteDrawable spriteDrawableBuyItButton = new SpriteDrawable(spriteButtonOne);
         oneButton = new ImageButton(spriteDrawableBuyItButton);
 
-        int checkForLevel = User.singletonUser().getLevel();
+        int checkForLevel = User.getSingletonUser().getLevel();
 
         if(checkForLevel >= 2) {
             spriteTwoButton = new Sprite(Assets.buttonTwo);
@@ -303,18 +303,18 @@ public class LevelMapScreen implements Screen {
     private void levelInfoJson() {
         game.setScreen(new DifficultyScreen(game));
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(Assets.HTTP_SERVER + "levelManager?userId=" + User.singletonUser().getUserId() + "&level=" + User.singletonUser().getGameLevel());
+        httpGet.setUrl(Assets.HTTP_SERVER + "levelManager?userId=" + User.getSingletonUser().getUserId() + "&level=" + User.getSingletonUser().getGameLevel());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
                 JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                 JsonObject jsonObj = element.getAsJsonObject();
 
-                User.singletonUser().setUserHealth(jsonObj.get("userHealth").getAsInt());
-                User.singletonUser().setGameAppearingZombieAll(jsonObj.get("count").getAsInt());
-                User.singletonUser().setGameAppearingZombieTime(jsonObj.get("durationOn").getAsFloat());
-                User.singletonUser().setGameHidingZombie(jsonObj.get("durationOff").getAsFloat());
-                User.singletonUser().setGameBulletsForLevel(jsonObj.get("bullets").getAsInt());
+                User.getSingletonUser().setUserHealth(jsonObj.get("userHealth").getAsInt());
+                User.getSingletonUser().setGameAppearingZombieAll(jsonObj.get("count").getAsInt());
+                User.getSingletonUser().setGameAppearingZombieTime(jsonObj.get("durationOn").getAsFloat());
+                User.getSingletonUser().setGameHidingZombie(jsonObj.get("durationOff").getAsFloat());
+                User.getSingletonUser().setGameBulletsForLevel(jsonObj.get("bullets").getAsInt());
 
             }
 

@@ -43,7 +43,6 @@ public class GameScreen implements Screen {
     protected static int points;
     protected static int lives;
     public static Stage mainStage;
-    public static Stage BossStage;
     protected Game game;
     protected static Sprite backGroundSprite;
     private SpriteBatch spriteBatch;
@@ -54,6 +53,8 @@ public class GameScreen implements Screen {
     private Sprite spriteBoss;
     private float timerBoss;
     private Image imageBoss;
+    private Image backGroundImage;
+    private SpriteDrawable spriteDrawableBackGround;
 
 
     public GameScreen(Game game) {
@@ -73,6 +74,9 @@ public class GameScreen implements Screen {
         mainStage = new Stage(new ScreenViewport());
         backGroundSprite = new Sprite(Assets.policeBuildingBackground);
         backGroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        spriteDrawableBackGround = new SpriteDrawable(backGroundSprite);
+        backGroundImage = new Image(spriteDrawableBackGround);
+        backGroundImage.setZIndex(2);
         spriteBatch = new SpriteBatch();
 
         zombieArray = new Zombie[5];
@@ -88,6 +92,7 @@ public class GameScreen implements Screen {
         textBitmapFont = loadFont();
 
         Gdx.input.setInputProcessor(mainStage);
+
 
         mainStage.addListener(new ClickListener() { // Adding Shooting sounds to the stage.
             @Override
@@ -116,9 +121,11 @@ public class GameScreen implements Screen {
             newZombie.setPosition(zombiePosition[y], ((y != 2) ? zombiePosition[5] : zombiePosition[6]));
             zombieArray[y] = newZombie;
             zombieArray[y].setVisible(false);
+            newZombie.setZIndex(1);
             mainStage.addActor(newZombie);
 
         }
+        mainStage.addActor(backGroundImage);
     }
 
     public void addZombie() {
@@ -170,11 +177,11 @@ public class GameScreen implements Screen {
         mainStage.act(Gdx.graphics.getDeltaTime());
         mainStage.draw();
         spriteBatch.begin();
-        backGroundSprite.draw(spriteBatch);
         textBitmapFontDraw();
         spriteBatch.end();
         startTimerBoss(Gdx.graphics.getDeltaTime());
         addBossTexture();
+
 
 
 
@@ -224,32 +231,32 @@ public class GameScreen implements Screen {
 
 
     private void addBossTexture(){
-        if( timerBoss <= 3 ){
+        if(timerBoss <= 8 ){
             bossTexture = Assets.bossTexture1;
         }
-        if((timerBoss >= 3 )&&( timerBoss <= 6 )){
+        if((timerBoss >= 8 )&&( timerBoss <= 11 )){
             bossTexture = Assets.bossTexture2;
         }
-        if((timerBoss >= 6 )&&( timerBoss <= 9 )){
-            bossTexture = Assets.bossTexture2;
+        if((timerBoss >= 11 )&&( timerBoss <= 16 )){
+            bossTexture = Assets.bossTexture3;
         }
-        if((timerBoss >= 9 )&&( timerBoss <= 12 )){
-            bossTexture = Assets.bossTexture2;
+        if((timerBoss >= 16 )&&( timerBoss <= 21 )){
+            bossTexture = Assets.bossTexture4;
         }
-        if((timerBoss >= 12 )&&( timerBoss <= 15 )){
-            bossTexture = Assets.bossTexture2;
+        if((timerBoss >= 21 )&&( timerBoss <= 26 )){
+            bossTexture = Assets.bossTexture5;
         }
-        if((timerBoss >= 15 )&&( timerBoss <= 18 )){
-            bossTexture = Assets.bossTexture2;
+        if((timerBoss >= 26 )&&( timerBoss <= 31 )){
+            bossTexture = Assets.bossTexture6;
         }
-        if((timerBoss >= 18 )&&( timerBoss <= 21 )){
-            bossTexture = Assets.bossTexture2;
+        if((timerBoss >= 31 )&&( timerBoss <= 36 )){
+            bossTexture = Assets.bossTexture7;
         }
-        if((timerBoss >= 21 )&&( timerBoss <= 24 )){
-            bossTexture = Assets.bossTexture2;
+        if((timerBoss >= 36 )&&( timerBoss <= 41 )){
+            bossTexture = Assets.bossTexture8;
         }
-        if((timerBoss >= 24)&&( timerBoss <= 27 )){
-            bossTexture = Assets.bossTexture2;
+        if((timerBoss >= 41)&&( timerBoss <= 45 )){
+            bossTexture = Assets.bossTexture9;
         }
 
         spriteBoss=new Sprite(bossTexture);
@@ -264,11 +271,10 @@ public class GameScreen implements Screen {
                 return true;
             }
         });
-
-        if(User.getSingletonUser().getGameAppearingZombieAll() <= 0) {
+        if((User.getSingletonUser().getGameAppearingZombieAll() <= 0) && (timerBoss >= 5)) {
+            imageBoss.setZIndex(3);
             mainStage.addActor(imageBoss);
         }
-
     }
 
     private void startTimerBoss(float delta){

@@ -47,6 +47,9 @@ public class GameScreen implements Screen {
     private float[] zombiePosition;
     private float lastSpawnZombieTimer;
     private BitmapFont textBitmapFont;
+    private Texture[] arrayTextureBoss;
+    private Texture bossTexture;
+
 
     public GameScreen(Game game) {
         this.game = game;
@@ -148,11 +151,7 @@ public class GameScreen implements Screen {
         }
     }
 
-    private void whenToStartTheBoss(){
-        if (User.getSingletonUser().getGameAppearingZombieAll() <= 0){
 
-        }
-    }
 
     @Override
     public void render(float delta) {
@@ -165,6 +164,7 @@ public class GameScreen implements Screen {
         backGroundSprite.draw(spriteBatch);
         textBitmapFontDraw();
         spriteBatch.end();
+
     }
 
     private void textBitmapFontDraw() {
@@ -207,6 +207,20 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
     }
+
+    private void addTexture(){
+        arrayTextureBoss = new Texture[9];
+        arrayTextureBoss[0] = Assets.bossTexture1;
+        arrayTextureBoss[1] = Assets.bossTexture2;
+        arrayTextureBoss[2] = Assets.bossTexture3;
+        arrayTextureBoss[3] = Assets.bossTexture4;
+        arrayTextureBoss[4] = Assets.bossTexture5;
+        arrayTextureBoss[5] = Assets.bossTexture6;
+        arrayTextureBoss[6] = Assets.bossTexture7;
+        arrayTextureBoss[7] = Assets.bossTexture8;
+        arrayTextureBoss[8] = Assets.bossTexture9;
+    }
+
+    private void addBossTextu
 }

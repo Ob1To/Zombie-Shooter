@@ -147,11 +147,15 @@ public class GameScreen implements Screen {
     }
 
     public void zombieSpawner(float timeSinceLast) {
-        this.lastSpawnZombieTimer += timeSinceLast;
-        updateZombieTimeLiving(timeSinceLast);
-        if (this.lastSpawnZombieTimer > User.getSingletonUser().getGameAppearingZombieTime()) {
-            this.lastSpawnZombieTimer = 0.0f;
-            this.addZombie();
+
+            this.lastSpawnZombieTimer += timeSinceLast;
+            updateZombieTimeLiving(timeSinceLast);
+            if (this.lastSpawnZombieTimer > User.getSingletonUser().getGameAppearingZombieTime()) {
+                this.lastSpawnZombieTimer = 0.0f;
+                if(User.getSingletonUser().getGameAppearingZombieAll() >= 0) {
+                    User.getSingletonUser().setGameAppearingZombieAll(User.getSingletonUser().getGameAppearingZombieAll() - 1);
+                this.addZombie();
+            }
         }
     }
 
@@ -167,8 +171,10 @@ public class GameScreen implements Screen {
         spriteBatch.begin();
         backGroundSprite.draw(spriteBatch);
         textBitmapFontDraw();
-        startTimerBoss(Gdx.graphics.getDeltaTime());
         spriteBatch.end();
+        startTimerBoss(Gdx.graphics.getDeltaTime());
+        addBossTexture();
+
 
 
     }
@@ -245,9 +251,11 @@ public class GameScreen implements Screen {
             bossTexture = Assets.bossTexture2;
         }
 
+        spriteBoss=new Sprite(bossTexture);
         spriteBoss.setSize((float)(WIDTH_SCREEN / 2.2), HEIGHT_SCREEN);
         SpriteDrawable spriteDrawableBoss = new SpriteDrawable(spriteBoss);
         imageBoss = new Image(spriteDrawableBoss);
+        imageBoss.setPosition(WIDTH_SCREEN / 2 - imageBoss.getWidth() / 2, HEIGHT_SCREEN / 2 - imageBoss.getHeight() / 2);
         imageBoss.addListener(new ClickListener() { // Adding Shooting sounds to the stage.
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -256,8 +264,9 @@ public class GameScreen implements Screen {
             }
         });
 
-        if(User.getSingletonUser().getGameAppearingZombieAll() <=0) {
+        if(User.getSingletonUser().getGameAppearingZombieAll() <= 0) {
             mainStage.addActor(imageBoss);
+            System.out.println(User.getSingletonUser().toString());
         }
 
     }
@@ -265,6 +274,7 @@ public class GameScreen implements Screen {
     private void startTimerBoss(float delta){
         if(User.getSingletonUser().getGameAppearingZombieAll() <=0){
             timerBoss += delta;
+            System.out.println(timerBoss);
         }
     }
 

@@ -79,7 +79,6 @@ public class Zombie extends Actor {
     @Override
     public void act(float delta) {
         if (isDead) {
-            User.getSingletonUser().setGameAppearingZombieAll(User.getSingletonUser().getGameAppearingZombieAll() - 1);
             this.zombieLevel = initialZombieLevel;
             stateTime += delta;
             this.currentRegion = this.animation.getKeyFrame(stateTime);
@@ -103,15 +102,14 @@ public class Zombie extends Actor {
 
     public void checkTimeLiving() {
         if ((timeLiving <= 0) && (this.isVisible())) {
-            User.getSingletonUser().setGameAppearingZombieAll(User.getSingletonUser().getGameAppearingZombieAll() - 1);
+            currentZombie.setVisible(false);
             Assets.zombieBite.play();
-            dyingZombieBackground();
             this.zombieLevel = initialZombieLevel;
             this.currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
-            currentZombie.setVisible(false);
             GameScreen.lives -= 1;
             this.timeLiving = paragonLevel;
             tapCounter = 0;
+            dyingZombieBackground();
         }
     }
 

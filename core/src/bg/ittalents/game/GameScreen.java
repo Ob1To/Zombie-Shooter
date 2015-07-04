@@ -43,6 +43,7 @@ public class GameScreen implements Screen {
     protected static int points;
     protected static int lives;
     public static Stage mainStage;
+    public static Stage BossStage;
     protected Game game;
     protected static Sprite backGroundSprite;
     private SpriteBatch spriteBatch;
@@ -266,7 +267,6 @@ public class GameScreen implements Screen {
 
         if(User.getSingletonUser().getGameAppearingZombieAll() <= 0) {
             mainStage.addActor(imageBoss);
-            System.out.println(User.getSingletonUser().toString());
         }
 
     }

@@ -33,6 +33,7 @@ public class Assets {
 
     public static final String GAME_PLAY_MUSIC_PATH = "Sounds/GamePlayMusic1.ogg";
     public static final String GAME_MENU_MUSIC_PATH = "Sounds/GameMenuMusic2.ogg";
+    public static final String GAME_WIN_MUSIC_PATH = "Sounds/winningMusic.mp3";
 //    public static final String INTRO_MUSIC_PATH = "Sounds/IntroMusic1.mp3";
 
     public static final String SCARY_ZOMBIE_IMAGE_PATH = "Images/ScaryZombie.jpg";
@@ -80,6 +81,7 @@ public class Assets {
     public static final String SHOP_IMAGE_PATH = "Images/TransperantShopButton.png";
     public static final String ZOMBIE_SHOOTER_TITLE_PATH = "Images/ZombieShooter.png";
     public static final String GAME_OVER_SCREEN = "Images/gameover.png";
+    public static final String GAME_WIN_SCREEN = "Images/winningimage.png";
     public static final String THE_BOSS_1 = "Images/Boss/Niki1.png";
     public static final String THE_BOSS_2 = "Images/Boss/Niki2.png";
     public static final String THE_BOSS_3 = "Images/Boss/Niki3.png";
@@ -108,6 +110,7 @@ public class Assets {
     //    public static Music introMusic;
     public static Music gamePlayMusic;
     public static Music gameMenuMusic;
+    public static Music gameWinMusic;
 
     public static Texture scaryZombieImage;
     public static Texture offlineModeGreenImage;
@@ -154,6 +157,7 @@ public class Assets {
     public static Texture shopImage;
     public static Texture zombieShooterTitle;
     public static Texture gameOverScreen;
+    public static Texture gameWinScreen;
     public static Texture bossTexture1;
     public static Texture bossTexture2;
     public static Texture bossTexture3;
@@ -180,6 +184,7 @@ public class Assets {
 
         manager.load(GAME_PLAY_MUSIC_PATH, Music.class);
         manager.load(GAME_MENU_MUSIC_PATH, Music.class);
+        manager.load(GAME_WIN_MUSIC_PATH, Music.class);
 //        manager.load(INTRO_MUSIC_PATH, Music.class);
 
         manager.load(SCARY_ZOMBIE_IMAGE_PATH, Texture.class);
@@ -227,6 +232,7 @@ public class Assets {
         manager.load(SHOP_IMAGE_PATH, Texture.class);
         manager.load(ZOMBIE_SHOOTER_TITLE_PATH, Texture.class);
         manager.load(GAME_OVER_SCREEN, Texture.class);
+        manager.load(GAME_WIN_SCREEN, Texture.class);
         manager.load(THE_BOSS_1, Texture.class);
         manager.load(THE_BOSS_2, Texture.class);
         manager.load(THE_BOSS_3, Texture.class);
@@ -259,6 +265,7 @@ public class Assets {
 //        introMusic = manager.get(INTRO_MUSIC_PATH, Music.class);
         gamePlayMusic = manager.get(GAME_PLAY_MUSIC_PATH, Music.class);
         gameMenuMusic = manager.get(GAME_MENU_MUSIC_PATH, Music.class);
+        gameWinMusic = manager.get(GAME_WIN_MUSIC_PATH, Music.class);
 
 
         scaryZombieImage = manager.get(SCARY_ZOMBIE_IMAGE_PATH, Texture.class);
@@ -306,6 +313,7 @@ public class Assets {
         shopImage = manager.get(SHOP_IMAGE_PATH, Texture.class);
         zombieShooterTitle = manager.get(ZOMBIE_SHOOTER_TITLE_PATH, Texture.class);
         gameOverScreen = manager.get(GAME_OVER_SCREEN, Texture.class);
+        gameWinScreen = manager.get(GAME_WIN_SCREEN, Texture.class);
         bossTexture1 = manager.get(THE_BOSS_1, Texture.class);
         bossTexture2 = manager.get(THE_BOSS_2, Texture.class);
         bossTexture3 = manager.get(THE_BOSS_3, Texture.class);

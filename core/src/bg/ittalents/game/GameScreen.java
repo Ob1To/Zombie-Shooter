@@ -93,7 +93,6 @@ public class GameScreen implements Screen {
 
         Gdx.input.setInputProcessor(mainStage);
 
-
         mainStage.addListener(new ClickListener() { // Adding Shooting sounds to the stage.
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

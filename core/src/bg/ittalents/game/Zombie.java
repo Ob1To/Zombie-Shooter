@@ -46,7 +46,7 @@ public class Zombie extends Actor {
         enemiesArrayWindow[1] = Assets.enemySingleImageLevel2Window;
         enemiesArrayWindow[2] = Assets.enemySingleImageLevel3Window;
 
-        if(position) {
+        if (position) {
             if (zombieLevel == 3) {
                 this.currentRegion = new TextureRegion(enemiesArray[2]); //red enemy
             } else if (zombieLevel == 2) {
@@ -54,7 +54,7 @@ public class Zombie extends Actor {
             } else {
                 this.currentRegion = new TextureRegion(enemiesArray[0]); //white enemy
             }
-        }else{
+        } else {
             if (zombieLevel == 3) {
                 this.currentRegion = new TextureRegion(enemiesArrayWindow[2]); //red enemy
             } else if (zombieLevel == 2) {
@@ -83,13 +83,12 @@ public class Zombie extends Actor {
                 if (tapCounter >= currentZombie.zombieShootCounter) {
                     currentZombie.isDead = true;
                     return true;
-                }
-                else {
-                    if(position) {
+                } else {
+                    if (position) {
                         currentRegion = new TextureRegion(enemiesArray[((currentZombie.zombieLevel - 1) - 1)]);
                         currentZombie.zombieLevel -= 1;
                         return true;
-                    }else{
+                    } else {
                         currentRegion = new TextureRegion(enemiesArrayWindow[((currentZombie.zombieLevel - 1) - 1)]);
                         currentZombie.zombieLevel -= 1;
                         return true;
@@ -108,7 +107,7 @@ public class Zombie extends Actor {
             if (stateTime >= 1 / 2f) {
                 if (position) {
                     this.currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
-                }else{
+                } else {
                     this.currentRegion = new TextureRegion(enemiesArrayWindow[zombieLevel - 1]);
                 }
                 this.stateTime = 0;
@@ -132,9 +131,9 @@ public class Zombie extends Actor {
             currentZombie.setVisible(false);
             Assets.zombieBite.play();
             this.zombieLevel = initialZombieLevel;
-            if(position) {
+            if (position) {
                 this.currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
-            }else{
+            } else {
                 this.currentRegion = new TextureRegion(enemiesArrayWindow[zombieLevel - 1]);
             }
             GameScreen.lives -= 1;

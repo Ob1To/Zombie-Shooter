@@ -28,6 +28,7 @@ import com.google.gson.JsonPrimitive;
 
 
 public class LoginScreen implements Screen {
+    public static boolean offlineModeSelect;
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
     public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 30;
@@ -67,6 +68,7 @@ public class LoginScreen implements Screen {
     private Label labelMessage;
     private Table tableMessage;
     private String currentColor;
+
 
     public LoginScreen(Game game) {
         zombieShooterGame = game;
@@ -231,13 +233,28 @@ public class LoginScreen implements Screen {
         loginButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 Assets.clickButton.play();
-                if ((loginField.getText().toString().length() > CONSTANT_LENGTH_USERNAME_CHECK)
-                        && (passwordField.getText().toString().matches(PASSWORD_PATTERN))) {
-                    login(loginField.getText(), passwordField.getText(), true);
-                } else {
-                    labelMessage.setText("Invalid username or password.");
+                if (!offlineModeSelect){
+                    if ((loginField.getText().toString().length() > CONSTANT_LENGTH_USERNAME_CHECK)
+                            && (passwordField.getText().toString().matches(PASSWORD_PATTERN))) {
+                        login(loginField.getText(), passwordField.getText(), true);
+                    } else {
+                        labelMessage.setText("Invalid username or password.");
+                    }
+            }else {
+                    //This set resources for the game.
+                    User.getSingletonUser().setWeapon(1);
+                    User.getSingletonUser().setLevel(6);
+                    User.getSingletonUser().setScore(0);
+                    User.getSingletonUser().setWeaponOneUnlock(1);
+                    User.getSingletonUser().setWeaponTwoUnlock(2);
+                    User.getSingletonUser().setWeaponTreeUnlock(3);
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            zombieShooterGame.setScreen(new PlayScreen(zombieShooterGame));
+                        }
+                    })));
                 }
-//                zombieShooterGame.setScreen(new PlayScreen(zombieShooterGame));
             }
         });
 
@@ -252,6 +269,7 @@ public class LoginScreen implements Screen {
                     offlineModeImage = new Image(offlineModeSpriteDrawable);
                     clickListenerHandler();
                     initializationContainer();
+                    offlineModeSelect = true;
                 } else {
                     currentColor = "red";
                     offlineModeSprite = new Sprite(Assets.offlineModeRedImage);
@@ -260,6 +278,7 @@ public class LoginScreen implements Screen {
                     offlineModeImage = new Image(offlineModeSpriteDrawable);
                     clickListenerHandler();
                     initializationContainer();
+                    offlineModeSelect = false;
                 }
             }
         });
@@ -360,7 +379,6 @@ public class LoginScreen implements Screen {
                 Gson gson = new Gson();
                 JsonElement element = gson.fromJson(httpResponse.getResultAsString(), JsonElement.class);
                 JsonObject jsonObj = element.getAsJsonObject();
-
                 User.getSingletonUser().setWeaponOneUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(0).getAsJsonObject().get("type").getAsInt());
                 User.getSingletonUser().setWeaponTwoUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(1).getAsJsonObject().get("type").getAsInt());
                 User.getSingletonUser().setWeaponTreeUnlock(jsonObj.get("unlockedWeapons").getAsJsonArray().get(2).getAsJsonObject().get("type").getAsInt());

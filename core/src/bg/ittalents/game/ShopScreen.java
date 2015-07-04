@@ -249,7 +249,16 @@ public class ShopScreen extends Actor implements Screen {
                 User.getSingletonUser().setWeapon(1);
                 checkWeapons();
                 setButtonPositionAndAddInStage();
-                addWeaponSelectJson();
+                if(!LoginScreen.offlineModeSelect) {
+                    addWeaponSelectJson();
+                }else{
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            game.setScreen(new PlayScreen(game));
+                        }
+                    })));
+                }
             }
         });
 
@@ -259,8 +268,17 @@ public class ShopScreen extends Actor implements Screen {
                     User.getSingletonUser().setWeapon(2);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
-                    addWeaponSelectJson();
-                }
+                    if(!LoginScreen.offlineModeSelect) {
+                        addWeaponSelectJson();
+                    }else{
+                        stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                            @Override
+                            public void run() {
+                                game.setScreen(new PlayScreen(game));
+                            }
+                        })));
+                    }
+                    }
             }
         });
 
@@ -270,7 +288,16 @@ public class ShopScreen extends Actor implements Screen {
                     User.getSingletonUser().setWeapon(3);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
-                    addWeaponSelectJson();
+                    if(!LoginScreen.offlineModeSelect) {
+                        addWeaponSelectJson();
+                    }else{
+                        stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                            @Override
+                            public void run() {
+                                game.setScreen(new PlayScreen(game));
+                            }
+                        })));
+                    }
 
                 }
             }

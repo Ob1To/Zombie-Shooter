@@ -56,6 +56,7 @@ public class GameScreen implements Screen {
     private Image backGroundImage;
     private SpriteDrawable spriteDrawableBackGround;
     private Boolean alreadyPlayed = true;
+    private Zombie newZombie;
 
 
     public GameScreen(Game game) {
@@ -77,7 +78,7 @@ public class GameScreen implements Screen {
         backGroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         spriteDrawableBackGround = new SpriteDrawable(backGroundSprite);
         backGroundImage = new Image(spriteDrawableBackGround);
-        backGroundImage.setZIndex(2);
+        mainStage.addActor(backGroundImage);
         spriteBatch = new SpriteBatch();
 
         zombieArray = new Zombie[5];
@@ -114,16 +115,19 @@ public class GameScreen implements Screen {
         });
 
         for (int y = 0; y < 5; y++) {
-            Zombie newZombie = new Zombie(User.getSingletonUser().getGameDamageZombie(), User.getSingletonUser().getGameHidingZombie());
+            if (y == 2) {
+                newZombie = new Zombie(User.getSingletonUser().getGameDamageZombie(), User.getSingletonUser().getGameHidingZombie(), true);
+            } else {
+                newZombie = new Zombie(User.getSingletonUser().getGameDamageZombie(), User.getSingletonUser().getGameHidingZombie(), false);
+            }
             newZombie.setSize(WIDTH_ZOMBIE, HEIGHT_ZOMBIE);
             newZombie.setPosition(zombiePosition[y], ((y != 2) ? zombiePosition[5] : zombiePosition[6]));
             zombieArray[y] = newZombie;
             zombieArray[y].setVisible(false);
-            newZombie.setZIndex(4);
             mainStage.addActor(newZombie);
 
         }
-        mainStage.addActor(backGroundImage);
+
     }
 
     public void addZombie() {
@@ -284,15 +288,15 @@ public class GameScreen implements Screen {
             alreadyPlayed = true;
             long id = Assets.bossSound2.play();
 //            Assets.bossSound2.setPitch(id, 0.8f);
-        } else if (timerBoss > 15 && timerBoss <= 20 && alreadyPlayed == true){
+        } else if (timerBoss > 15 && timerBoss <= 20 && alreadyPlayed == true) {
             alreadyPlayed = false;
             long id = Assets.bossSound3.play();
 //            Assets.bossSound3.setPitch(id, 0.8f);
-        } else if (timerBoss > 20 && timerBoss <= 25 && alreadyPlayed == false){
+        } else if (timerBoss > 20 && timerBoss <= 25 && alreadyPlayed == false) {
             alreadyPlayed = true;
             long id = Assets.bossSound4.play();
 //            Assets.bossSound4.setPitch(id, 0.8f);
-        } else if (timerBoss >25  && timerBoss <= 30 && alreadyPlayed == true) {
+        } else if (timerBoss > 25 && timerBoss <= 30 && alreadyPlayed == true) {
             long id = Assets.bossSound1.play();
 //            Assets.bossSound1.setPitch(id, 0.8f);
             alreadyPlayed = false;
@@ -300,11 +304,11 @@ public class GameScreen implements Screen {
             long id = Assets.bossSound2.play();
 //            Assets.bossSound2.setPitch(id, 0.8f);
             alreadyPlayed = true;
-        } else if (timerBoss > 35 && timerBoss <= 40 && alreadyPlayed == true){
+        } else if (timerBoss > 35 && timerBoss <= 40 && alreadyPlayed == true) {
             long id = Assets.bossSound3.play();
 //            Assets.bossSound3.setPitch(id, 0.8f);
             alreadyPlayed = false;
-        } else if (timerBoss > 40 && timerBoss <= 45 && alreadyPlayed == false){
+        } else if (timerBoss > 40 && timerBoss <= 45 && alreadyPlayed == false) {
             long id = Assets.bossSound4.play();
 //            Assets.bossSound4.setPitch(id, 0.8f);
             alreadyPlayed = true;

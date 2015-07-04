@@ -79,6 +79,7 @@ public class Assets {
     public static final String PROFILE_IMAGE_PATH = "Images/TransperantProfileButton.png";
     public static final String SHOP_IMAGE_PATH = "Images/TransperantShopButton.png";
     public static final String ZOMBIE_SHOOTER_TITLE_PATH = "Images/ZombieShooter.png";
+    public static final String GAME_OVER_SCREEN = "Images/gameover.png";
 
 
     public static Sound zombieBite;
@@ -142,6 +143,7 @@ public class Assets {
     public static Texture profileImage;
     public static Texture shopImage;
     public static Texture zombieShooterTitle;
+    public static Texture gameOverScreen;
 
     public static void init() {
         manager.load(ZOMBIE_BITE_PATH, Sound.class);
@@ -205,6 +207,7 @@ public class Assets {
         manager.load(PROFILE_IMAGE_PATH, Texture.class);
         manager.load(SHOP_IMAGE_PATH, Texture.class);
         manager.load(ZOMBIE_SHOOTER_TITLE_PATH, Texture.class);
+        manager.load(GAME_OVER_SCREEN, Texture.class);
 
 //        Assets.manager.finishLoading();
 
@@ -274,6 +277,7 @@ public class Assets {
         profileImage = manager.get(PROFILE_IMAGE_PATH, Texture.class);
         shopImage = manager.get(SHOP_IMAGE_PATH, Texture.class);
         zombieShooterTitle = manager.get(ZOMBIE_SHOOTER_TITLE_PATH, Texture.class);
+        gameOverScreen = manager.get(GAME_OVER_SCREEN, Texture.class);
 
     }
 

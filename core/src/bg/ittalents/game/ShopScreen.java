@@ -32,8 +32,8 @@ import com.google.gson.JsonPrimitive;
 public class ShopScreen extends Actor implements Screen {
 
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int CONSTANT_COORDINATES_SCORE_X = WIDTH_SCREEN / 40;
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
+    public static final int CONSTANT_COORDINATES_SCORE_X = WIDTH_SCREEN / 40;
     public static final float CONSTANT_HEIGHT_TITLE = HEIGHT_SCREEN / 3;
     public static final float CONSTANT_WIDTH_TITLE = WIDTH_SCREEN / 3;
     public static final int WIDTH_WEAPON_BUTTON = WIDTH_SCREEN / 4;
@@ -85,8 +85,6 @@ public class ShopScreen extends Actor implements Screen {
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteShop);
         imageTitle = new Image(spriteDrawableTitle);
 
-        stage = new Stage(new ScreenViewport());
-
         imageTitle.setPosition(CONSTANT_WIDTH_TITLE, CONSTANT_HEIGHT_TITLE);
         imageTitle.setPosition(WIDTH_SCREEN / CONSTANT_FOR_POSITION - imageTitle.getWidth() / CONSTANT_FOR_POSITION, HEIGHT_SCREEN / CONSTANT_FOR_POSITION + HEIGHT_SCREEN / CONSTANT_FOR_POSITION_HEIGHT_TITLE);
         stage.addActor(imageTitle);
@@ -109,7 +107,7 @@ public class ShopScreen extends Actor implements Screen {
         labelMessage = new Label("", skin);
         labelMessage.setColor(Color.WHITE);
         labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP); // KAKVO E TOVA VLADO ? EXPANDX() ? KAKVO E TOVA VLADO ? EXPANDX() ? KAKVO E TOVA VLADO ? EXPANDX() ?
+        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
         stage.addActor(tableMessage);
 
     }

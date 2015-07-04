@@ -55,6 +55,7 @@ public class GameScreen implements Screen {
     private Image imageBoss;
     private Image backGroundImage;
     private SpriteDrawable spriteDrawableBackGround;
+    private Boolean alreadyPlayed = true;
 
 
     public GameScreen(Game game) {
@@ -177,6 +178,7 @@ public class GameScreen implements Screen {
         spriteBatch.end();
         startTimerBoss(Gdx.graphics.getDeltaTime());
         addBossTexture();
+        playingBossSounds();
 
 
     }
@@ -268,6 +270,44 @@ public class GameScreen implements Screen {
         if ((User.getSingletonUser().getGameAppearingZombieAll() <= 0) && (timerBoss >= 5)) {
             imageBoss.setZIndex(3);
             mainStage.addActor(imageBoss);
+        }
+    }
+
+    private void playingBossSounds() {
+        Assets.gamePlayMusic.stop();
+        if (timerBoss >= 5 && timerBoss <= 10 && alreadyPlayed == true) {
+            alreadyPlayed = false;
+            Assets.bossSound1.play();
+//            long id = Assets.bossSound1.play();
+//            Assets.bossSound1.setPitch(id, 0.8f);
+        } else if (timerBoss > 10 && timerBoss <= 15 && alreadyPlayed == false) {
+            alreadyPlayed = true;
+            long id = Assets.bossSound2.play();
+//            Assets.bossSound2.setPitch(id, 0.8f);
+        } else if (timerBoss > 15 && timerBoss <= 20 && alreadyPlayed == true){
+            alreadyPlayed = false;
+            long id = Assets.bossSound3.play();
+//            Assets.bossSound3.setPitch(id, 0.8f);
+        } else if (timerBoss > 20 && timerBoss <= 25 && alreadyPlayed == false){
+            alreadyPlayed = true;
+            long id = Assets.bossSound4.play();
+//            Assets.bossSound4.setPitch(id, 0.8f);
+        } else if (timerBoss >25  && timerBoss <= 30 && alreadyPlayed == true) {
+            long id = Assets.bossSound1.play();
+//            Assets.bossSound1.setPitch(id, 0.8f);
+            alreadyPlayed = false;
+        } else if (timerBoss > 30 && timerBoss <= 35 && alreadyPlayed == false) {
+            long id = Assets.bossSound2.play();
+//            Assets.bossSound2.setPitch(id, 0.8f);
+            alreadyPlayed = true;
+        } else if (timerBoss > 35 && timerBoss <= 40 && alreadyPlayed == true){
+            long id = Assets.bossSound3.play();
+//            Assets.bossSound3.setPitch(id, 0.8f);
+            alreadyPlayed = false;
+        } else if (timerBoss > 40 && timerBoss <= 45 && alreadyPlayed == false){
+            long id = Assets.bossSound4.play();
+//            Assets.bossSound4.setPitch(id, 0.8f);
+            alreadyPlayed = true;
         }
     }
 

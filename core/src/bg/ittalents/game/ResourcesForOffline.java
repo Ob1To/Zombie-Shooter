@@ -14,7 +14,7 @@ abstract class ResourcesForOffline {
     public static void levelMapResources(int index){
         switch (index) {
             case 1:
-                count = 40;
+                count = 1;
                 durationOn = 1;
                 durationOff = 2;
                 break;

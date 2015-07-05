@@ -40,6 +40,7 @@ public class Assets {
 //    public static final String INTRO_MUSIC_PATH = "Sounds/IntroMusic1.mp3";
 
     public static final String SCARY_ZOMBIE_IMAGE_PATH = "Images/ScaryZombie.jpg";
+    public static final String PAUSE_BUTTON_PATH = "Images/PauseButton.png";
     public static final String OFFLINE_MODE_GREEN_PATH = "Images/offlinemodeGreen.png";
     public static final String OFFLINE_MODE_RED_PATH = "Images/offlinemodeRed.png";
     public static final String BUY_BUTTON_PATH = "Images/BuyButton.png";
@@ -50,8 +51,6 @@ public class Assets {
     public static final String ENEMY_SINGLE_IMAGE_WINDOW_PATH = "Images/EnemySingleWindow.png";
     public static final String ENEMY_SINGLE_LEVEL2_IMAGE_WINDOW_PATH = "Images/EnemySingleLevel2Window.png";
     public static final String ENEMY_SINGLE_LEVEL3_IMAGE_WINDOW_PATH = "Images/EnemySingleLevel3Window.png";
-
-
     public static final String APPLY_BUTTON_PATH = "Images/ApplyButton.png";
     public static final String BACKGROUND_MENU_PATH = "Images/BackgroundMenu.jpg";
     public static final String BUTTON_FIVE_PATH = "Images/ButtonFive.png";
@@ -124,6 +123,7 @@ public class Assets {
     public static Music gameWinMusic;
 
     public static Texture scaryZombieImage;
+    public static Texture pauseButton;
     public static Texture offlineModeGreenImage;
     public static Texture offlineModeRedImage;
     public static Texture buyButton;
@@ -205,6 +205,7 @@ public class Assets {
 //        manager.load(INTRO_MUSIC_PATH, Music.class);
 
         manager.load(SCARY_ZOMBIE_IMAGE_PATH, Texture.class);
+        manager.load(PAUSE_BUTTON_PATH, Texture.class);
         manager.load(OFFLINE_MODE_GREEN_PATH, Texture.class);
         manager.load(OFFLINE_MODE_RED_PATH, Texture.class);
         manager.load(BUY_BUTTON_PATH, Texture.class);
@@ -293,6 +294,7 @@ public class Assets {
 
 
         scaryZombieImage = manager.get(SCARY_ZOMBIE_IMAGE_PATH, Texture.class);
+        pauseButton = manager.get(PAUSE_BUTTON_PATH, Texture.class);
         offlineModeGreenImage = manager.get(OFFLINE_MODE_GREEN_PATH, Texture.class);
         offlineModeRedImage = manager.get(OFFLINE_MODE_RED_PATH, Texture.class);
         easyLevelButton = manager.get(EASY_BUTTON_PATH, Texture.class);

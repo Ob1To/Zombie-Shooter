@@ -1,4 +1,4 @@
-package bg.ittalents.game;
+package bg.ittalents.game.Resource;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 

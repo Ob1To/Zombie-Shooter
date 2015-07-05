@@ -45,30 +45,30 @@ public class DifficultyScreen implements Screen {
 
         //Suzdavane na backgraunda
         batch = new SpriteBatch();
-        backgroundSprite = new Sprite(Assets.backgroundMenu);
+        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
         backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
         //Dobavqne na zaglavieto na igrata
-        Sprite spriteTitle = new Sprite(Assets.zombieShooterTitle);
-        Assets.spriteDefaultColorSolid(spriteTitle);
+        Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.zombieShooterTitle);
+        bg.ittalents.game.Resource.Assets.spriteDefaultColorSolid(spriteTitle);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
 
-        Sprite spriteEasyButton = new Sprite(Assets.easyLevelButton);
+        Sprite spriteEasyButton = new Sprite(bg.ittalents.game.Resource.Assets.easyLevelButton);
         spriteEasyButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
         SpriteDrawable easySpriteDrawable = new SpriteDrawable(spriteEasyButton);
 
-        Sprite spriteNormalButton = new Sprite(Assets.normalLevelButton);
+        Sprite spriteNormalButton = new Sprite(bg.ittalents.game.Resource.Assets.normalLevelButton);
         spriteNormalButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
         SpriteDrawable normalSpriteDrawable = new SpriteDrawable(spriteNormalButton);
 
-        Sprite spriteHardButton = new Sprite(Assets.hardLevelButton);
+        Sprite spriteHardButton = new Sprite(bg.ittalents.game.Resource.Assets.hardLevelButton);
         spriteHardButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
         SpriteDrawable hardSpriteDrawable = new SpriteDrawable(spriteHardButton);
 
-        Assets.spriteDefaultColor(spriteEasyButton,spriteNormalButton,spriteHardButton);
+        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteEasyButton, spriteNormalButton, spriteHardButton);
 
         easyButton = new ImageButton(easySpriteDrawable);
         normalButton = new ImageButton(normalSpriteDrawable);
@@ -77,7 +77,7 @@ public class DifficultyScreen implements Screen {
 
         easyButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -90,7 +90,7 @@ public class DifficultyScreen implements Screen {
 
         normalButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -103,7 +103,7 @@ public class DifficultyScreen implements Screen {
 
         hardButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {

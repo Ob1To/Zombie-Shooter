@@ -29,7 +29,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 
-public class ShopScreen extends Actor implements Screen,ITextFont {
+public class ShopScreen extends Actor implements Screen, bg.ittalents.game.Resource.ITextFont {
 
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
@@ -78,10 +78,10 @@ public class ShopScreen extends Actor implements Screen,ITextFont {
     public void show() {
 
         batch = new SpriteBatch();
-        backgroundSprite = new Sprite(Assets.backgroundMenu);
+        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
         backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
-        spriteShop = new Sprite(Assets.shopImage);
+        spriteShop = new Sprite(bg.ittalents.game.Resource.Assets.shopImage);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteShop);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -138,30 +138,30 @@ public class ShopScreen extends Actor implements Screen,ITextFont {
 
     private void checkWeapons() {
         if (User.getSingletonUser().getWeapon() == User.getSingletonUser().getWeaponOneUnlock()) {
-            spriteWeaponButton1 = new Sprite(Assets.pistolActive);
+            spriteWeaponButton1 = new Sprite(bg.ittalents.game.Resource.Assets.pistolActive);
         } else {
-            spriteWeaponButton1 = new Sprite(Assets.pistolAvailable);
+            spriteWeaponButton1 = new Sprite(bg.ittalents.game.Resource.Assets.pistolAvailable);
         }
 
 
         if (User.getSingletonUser().getWeapon() == User.getSingletonUser().getWeaponTwoUnlock()) {
-            spriteWeaponButton2 = new Sprite(Assets.railRifleActive);
+            spriteWeaponButton2 = new Sprite(bg.ittalents.game.Resource.Assets.railRifleActive);
 
         } else {
             if (User.getSingletonUser().getWeaponTwoUnlock() != 0) {
-                spriteWeaponButton2 = new Sprite(Assets.railRifleAvailable);
+                spriteWeaponButton2 = new Sprite(bg.ittalents.game.Resource.Assets.railRifleAvailable);
             } else {
-                spriteWeaponButton2 = new Sprite(Assets.railRifleLocked);
+                spriteWeaponButton2 = new Sprite(bg.ittalents.game.Resource.Assets.railRifleLocked);
             }
         }
 
         if (User.getSingletonUser().getWeapon() == User.getSingletonUser().getWeaponTreeUnlock()) {
-            spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunActive);
+            spriteWeaponButton3 = new Sprite(bg.ittalents.game.Resource.Assets.heavyMachineGunActive);
         } else {
             if (User.getSingletonUser().getWeaponTreeUnlock() != 0) {
-                spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunAvailable);
+                spriteWeaponButton3 = new Sprite(bg.ittalents.game.Resource.Assets.heavyMachineGunAvailable);
             } else {
-                spriteWeaponButton3 = new Sprite(Assets.heavyMachineGunLocked);
+                spriteWeaponButton3 = new Sprite(bg.ittalents.game.Resource.Assets.heavyMachineGunLocked);
             }
         }
 
@@ -310,7 +310,7 @@ public class ShopScreen extends Actor implements Screen,ITextFont {
         json.add("weaponType", new JsonPrimitive(User.getSingletonUser().getWeapon()));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(Assets.HTTP_SERVER + "weaponManager");
+        httpRequest.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "weaponManager");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {

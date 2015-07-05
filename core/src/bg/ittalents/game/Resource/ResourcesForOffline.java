@@ -1,4 +1,6 @@
-package bg.ittalents.game;
+package bg.ittalents.game.Resource;
+
+import bg.ittalents.game.User;
 
 /**
  * Created by vlado on 04-Jul-15.

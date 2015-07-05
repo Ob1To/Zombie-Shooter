@@ -80,8 +80,8 @@ public class RegisterScreen extends LoginScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         // Adding the game title to the screen
-        Sprite spriteTitle = new Sprite(Assets.zombieShooterTitle);
-        Assets.spriteDefaultColorSolid(spriteTitle);
+        Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.zombieShooterTitle);
+        bg.ittalents.game.Resource.Assets.spriteDefaultColorSolid(spriteTitle);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -117,7 +117,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
         arrangingTheScreen();
 
         // Creating the background
-        backGroundSprite = new Sprite(Assets.backgroundMenu);
+        backGroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
         backGroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
 
         // Setting the back key on android to true, so it can accept interaction
@@ -137,7 +137,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
         // It calls all the methods which are checking the user input
         registerButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 if ((checkUserField(userField.getText().toString())) && (checkPasswordField(passwordField.getText().toString()))
                         && (checkPasswordAndRePassword(passwordField.getText().toString(), passwordCheckField.getText().toString()))
                         && (checkEmailField(emailField.getText().toString()))) {
@@ -148,8 +148,8 @@ public class RegisterScreen extends LoginScreen implements Screen {
     }
 
     private void creatingRegisterButton() {
-        Sprite spriteRegisterButton = new Sprite(Assets.registerButton);
-        Assets.spriteDefaultColor(spriteRegisterButton);
+        Sprite spriteRegisterButton = new Sprite(bg.ittalents.game.Resource.Assets.registerButton);
+        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteRegisterButton);
         spriteRegisterButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
         SpriteDrawable registerSpriteDrawable = new SpriteDrawable(spriteRegisterButton);
         registerButton = new ImageButton(registerSpriteDrawable);
@@ -210,7 +210,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
         json.add("email", new JsonPrimitive(emailField.getText()));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(Assets.HTTP_SERVER + "registration");
+        httpRequest.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "registration");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {

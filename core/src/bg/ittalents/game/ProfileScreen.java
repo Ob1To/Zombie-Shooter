@@ -68,11 +68,11 @@ public class ProfileScreen implements Screen {
     public void show() {
         //Suzdavane na backgraunda
         batch = new SpriteBatch();
-        sprite = new Sprite(Assets.backgroundMenu);
+        sprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
         sprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
-        Sprite spriteTitle = new Sprite(Assets.profileButton);
+        Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.profileButton);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -108,7 +108,7 @@ public class ProfileScreen implements Screen {
         });
 
 
-        Sprite spriteApplyButton = new Sprite(Assets.applyButton);
+        Sprite spriteApplyButton = new Sprite(bg.ittalents.game.Resource.Assets.applyButton);
         spriteApplyButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH_APPLY_BUTTON), (HEIGHT_SCREEN / CONSTANT_HEIGHT_APPLY_BUTTON));
         SpriteDrawable ApplySpriteDrawable = new SpriteDrawable(spriteApplyButton);
         applyButton = new ImageButton(ApplySpriteDrawable);
@@ -155,7 +155,7 @@ public class ProfileScreen implements Screen {
 
         applyButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 if ((cheakPasswordField(passwordField.getText().toString()))
                         && (checkPasswordAndRePassword(passwordField.getText().toString(), passwordCheckField.getText().toString()))
                         && (cheakEmailField(emailField.getText().toString()))) {
@@ -202,7 +202,7 @@ public class ProfileScreen implements Screen {
         json.add("allowNotification", new JsonPrimitive(true));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(Assets.HTTP_SERVER + "userInfoManager");
+        httpRequest.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "userInfoManager");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {

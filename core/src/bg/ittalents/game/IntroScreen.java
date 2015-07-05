@@ -67,9 +67,9 @@ public class IntroScreen extends ApplicationAdapter implements Screen {
         itTalentsSprite.draw(batch);
         batch.end();
 
-        if (Assets.manager.update()){
+        if (bg.ittalents.game.Resource.Assets.manager.update()){
             if (animationLengthSec <= 0){
-                Assets.createAssets();
+                bg.ittalents.game.Resource.Assets.createAssets();
                 introMusic.stop();
                 zombieShooterGame.setScreen(new LoginScreen(zombieShooterGame));
             }

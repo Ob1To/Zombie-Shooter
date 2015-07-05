@@ -1,4 +1,4 @@
-package bg.ittalents.game;
+package bg.ittalents.game.Resource;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;

@@ -33,12 +33,12 @@ public class GameOverScreen implements Screen{
     @Override
     public void show() {
         batch = new SpriteBatch();
-        backgroundSprite = new Sprite(Assets.gameOverScreen);
+        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.gameOverScreen);
         backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
-        Assets.gamePlayMusic.stop();
-        Assets.gameOver.play();
+        bg.ittalents.game.Resource.Assets.gamePlayMusic.stop();
+        bg.ittalents.game.Resource.Assets.gameOver.play();
 
         Gdx.input.setInputProcessor(stage);
 
@@ -46,9 +46,9 @@ public class GameOverScreen implements Screen{
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (minSeeScreen > CONSTANT_SEE_SCREEN) {
-                    Assets.gameOver.stop();
-                    Assets.gameMenuMusic.play();
-                    Assets.gameMenuMusic.setLooping(true);
+                    bg.ittalents.game.Resource.Assets.gameOver.stop();
+                    bg.ittalents.game.Resource.Assets.gameMenuMusic.play();
+                    bg.ittalents.game.Resource.Assets.gameMenuMusic.setLooping(true);
                     game.setScreen(new PlayScreen(game));
                 }
                 return true;

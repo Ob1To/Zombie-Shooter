@@ -42,12 +42,12 @@ public class GameWinScreen implements Screen{
     @Override
     public void show() {
         batch = new SpriteBatch();
-        backgroundSprite = new Sprite(Assets.gameWinScreen);
+        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.gameWinScreen);
         backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
-        Assets.gamePlayMusic.stop();
-        Assets.gameWinMusic.play();
+        bg.ittalents.game.Resource.Assets.gamePlayMusic.stop();
+        bg.ittalents.game.Resource.Assets.gameWinMusic.play();
 
         Gdx.input.setInputProcessor(stage);
         textBitmapFont = loadFont();
@@ -56,9 +56,9 @@ public class GameWinScreen implements Screen{
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (minSeeScreen > CONSTANT_SEE_SCREEN) {
-                    Assets.gameWinMusic.stop();
-                    Assets.gameMenuMusic.play();
-                    Assets.gameMenuMusic.setLooping(true);
+                    bg.ittalents.game.Resource.Assets.gameWinMusic.stop();
+                    bg.ittalents.game.Resource.Assets.gameMenuMusic.play();
+                    bg.ittalents.game.Resource.Assets.gameMenuMusic.setLooping(true);
                     game.setScreen(new PlayScreen(game));
                 }
                 return true;
@@ -107,7 +107,7 @@ public class GameWinScreen implements Screen{
         json.add("level", new JsonPrimitive(User.getSingletonUser().getGameLevel()));
         json.add("score", new JsonPrimitive(GameScreen.points));
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(Assets.HTTP_SERVER + "levelManager");
+        httpRequest.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "levelManager");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
@@ -147,7 +147,7 @@ public class GameWinScreen implements Screen{
         json.add("userId", new JsonPrimitive(User.getSingletonUser().getUserId()));
         json.add("weaponType", new JsonPrimitive(weapont));
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(Assets.HTTP_SERVER + "weaponsStore");
+        httpRequest.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "weaponsStore");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {

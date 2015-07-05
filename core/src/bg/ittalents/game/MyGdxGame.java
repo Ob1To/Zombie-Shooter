@@ -8,13 +8,13 @@ public class MyGdxGame extends Game {
 
     @Override
     public void create() {
-        Assets.init();
+        bg.ittalents.game.Resource.Assets.init();
         this.setScreen(new IntroScreen(this));
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        Assets.dispose();
+        bg.ittalents.game.Resource.Assets.dispose();
     }
 }

@@ -72,12 +72,12 @@ public class LevelMapScreen implements Screen {
 
 
         batch = new SpriteBatch();
-        backgroundSprite = new Sprite(Assets.backgroundMenu);
+        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
         backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
-        Sprite spriteTitle = new Sprite(Assets.paragonLevelImage);
-        Assets.spriteDefaultColorSolid(spriteTitle);
+        Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.paragonLevelImage);
+        bg.ittalents.game.Resource.Assets.spriteDefaultColorSolid(spriteTitle);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
         stage = new Stage(new ScreenViewport());
@@ -109,7 +109,7 @@ public class LevelMapScreen implements Screen {
 
         addListenerForButton();
 
-        Assets.spriteDefaultColor(spriteButtonOne, spriteTwoButton, spriteThreeButton, spriteFourButton, spriteFiveButton, spriteSixButton);
+        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteButtonOne, spriteTwoButton, spriteThreeButton, spriteFourButton, spriteFiveButton, spriteSixButton);
 
         Gdx.input.setCatchBackKey(true);
 
@@ -129,7 +129,7 @@ public class LevelMapScreen implements Screen {
     private void addListenerForButton() {
         oneButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 User.getSingletonUser().setGameLevel(1);
                 changeTheScreenMethod(1);
             }
@@ -138,7 +138,7 @@ public class LevelMapScreen implements Screen {
         twoButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 2) {
-                    Assets.clickButton.play();
+                    bg.ittalents.game.Resource.Assets.clickButton.play();
                     User.getSingletonUser().setGameLevel(2);
                     changeTheScreenMethod(2);
                 }
@@ -148,7 +148,7 @@ public class LevelMapScreen implements Screen {
         threeButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 3) {
-                    Assets.clickButton.play();
+                    bg.ittalents.game.Resource.Assets.clickButton.play();
                     User.getSingletonUser().setGameLevel(3);
                         changeTheScreenMethod(3);
                 }
@@ -158,7 +158,7 @@ public class LevelMapScreen implements Screen {
         fourButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 4) {
-                    Assets.clickButton.play();
+                    bg.ittalents.game.Resource.Assets.clickButton.play();
                     User.getSingletonUser().setGameLevel(4);
                     changeTheScreenMethod(4);
                 }
@@ -168,7 +168,7 @@ public class LevelMapScreen implements Screen {
         fiveButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 5) {
-                    Assets.clickButton.play();
+                    bg.ittalents.game.Resource.Assets.clickButton.play();
                     User.getSingletonUser().setGameLevel(5);
                     changeTheScreenMethod(5);
                 }
@@ -178,7 +178,7 @@ public class LevelMapScreen implements Screen {
             sixButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 if (User.getSingletonUser().getLevel() >= 6) {
-                    Assets.clickButton.play();
+                    bg.ittalents.game.Resource.Assets.clickButton.play();
                     User.getSingletonUser().setGameLevel(6);
                     changeTheScreenMethod(6);
                 }
@@ -188,7 +188,7 @@ public class LevelMapScreen implements Screen {
 
         private void initializeButton () {
 
-            spriteButtonOne = new Sprite(Assets.buttonOne);
+            spriteButtonOne = new Sprite(bg.ittalents.game.Resource.Assets.buttonOne);
             spriteButtonOne.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
             SpriteDrawable spriteDrawableBuyItButton = new SpriteDrawable(spriteButtonOne);
             oneButton = new ImageButton(spriteDrawableBuyItButton);
@@ -196,11 +196,11 @@ public class LevelMapScreen implements Screen {
             int checkForLevel = User.getSingletonUser().getLevel();
 
             if (checkForLevel >= 2) {
-                spriteTwoButton = new Sprite(Assets.buttonTwo);
-                Assets.spriteDefaultColor(spriteTwoButton);
+                spriteTwoButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonTwo);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteTwoButton);
             } else {
-                spriteTwoButton = new Sprite(Assets.buttonTwo_marked);
-                Assets.spriteDefaultColor(spriteTwoButton);
+                spriteTwoButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonTwo_marked);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteTwoButton);
             }
             spriteTwoButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
             SpriteDrawable spriteDrawableTwoButton = new SpriteDrawable(spriteTwoButton);
@@ -208,22 +208,22 @@ public class LevelMapScreen implements Screen {
 
 
             if (checkForLevel >= 3) {
-                spriteThreeButton = new Sprite(Assets.buttonThree);
-                Assets.spriteDefaultColor(spriteThreeButton);
+                spriteThreeButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonThree);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteThreeButton);
             } else {
-                spriteThreeButton = new Sprite(Assets.buttonThreeMarked);
-                Assets.spriteDefaultColor(spriteThreeButton);
+                spriteThreeButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonThreeMarked);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteThreeButton);
             }
             spriteThreeButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
             SpriteDrawable spriteDrawableThreeButton = new SpriteDrawable(spriteThreeButton);
             threeButton = new ImageButton(spriteDrawableThreeButton);
 
             if (checkForLevel >= 4) {
-                spriteFourButton = new Sprite(Assets.buttonFour);
-                Assets.spriteDefaultColor(spriteFourButton);
+                spriteFourButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonFour);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteFourButton);
             } else {
-                spriteFourButton = new Sprite(Assets.buttonFourMarked);
-                Assets.spriteDefaultColor(spriteFourButton);
+                spriteFourButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonFourMarked);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteFourButton);
             }
             spriteFourButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
             SpriteDrawable spriteDrawableFourButton = new SpriteDrawable(spriteFourButton);
@@ -231,22 +231,22 @@ public class LevelMapScreen implements Screen {
 
 
             if (checkForLevel >= 5) {
-                spriteFiveButton = new Sprite(Assets.buttonFive);
-                Assets.spriteDefaultColor(spriteFiveButton);
+                spriteFiveButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonFive);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteFiveButton);
             } else {
-                spriteFiveButton = new Sprite(Assets.buttonFiveMarked);
-                Assets.spriteDefaultColor(spriteFiveButton);
+                spriteFiveButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonFiveMarked);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteFiveButton);
             }
             spriteFiveButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
             SpriteDrawable spriteDrawableFiveButton = new SpriteDrawable(spriteFiveButton);
             fiveButton = new ImageButton(spriteDrawableFiveButton);
 
             if (checkForLevel >= 6) {
-                spriteSixButton = new Sprite(Assets.buttonSix);
-                Assets.spriteDefaultColor(spriteSixButton);
+                spriteSixButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonSix);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteSixButton);
             } else {
-                spriteSixButton = new Sprite(Assets.buttonSix_marked);
-                Assets.spriteDefaultColor(spriteSixButton);
+                spriteSixButton = new Sprite(bg.ittalents.game.Resource.Assets.buttonSix_marked);
+                bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteSixButton);
             }
             spriteSixButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
             SpriteDrawable spriteDrawableSixButton = new SpriteDrawable(spriteSixButton);
@@ -272,7 +272,7 @@ public class LevelMapScreen implements Screen {
         private void levelInfoJson () {
 
             final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-            httpGet.setUrl(Assets.HTTP_SERVER + "levelManager?userId=" + User.getSingletonUser().getUserId() + "&level=" + User.getSingletonUser().getGameLevel());
+            httpGet.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "levelManager?userId=" + User.getSingletonUser().getUserId() + "&level=" + User.getSingletonUser().getGameLevel());
             Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
                 public void handleHttpResponse(Net.HttpResponse httpResponse) {
                     Gson gson = new Gson();
@@ -342,7 +342,7 @@ public class LevelMapScreen implements Screen {
         if (!LoginScreen.offlineModeSelect) {
             levelInfoJson();
         } else {
-            ResourcesForOffline.levelMapResources(z);
+            bg.ittalents.game.Resource.ResourcesForOffline.levelMapResources(z);
             stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                 @Override
                 public void run() {

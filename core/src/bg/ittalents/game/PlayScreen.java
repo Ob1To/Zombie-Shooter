@@ -71,10 +71,10 @@ public class PlayScreen implements Screen {
         Gdx.input.setCatchBackKey(true);
 
         // Creating and setting the background and game title
-        backgroundSprite = new Sprite(Assets.backgroundMenu);
+        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
         backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        titleSprite = new Sprite(Assets.zombieShooterTitle);
-        Assets.spriteDefaultColorSolid(titleSprite);
+        titleSprite = new Sprite(bg.ittalents.game.Resource.Assets.zombieShooterTitle);
+        bg.ittalents.game.Resource.Assets.spriteDefaultColorSolid(titleSprite);
         spriteDrawableTitle = new SpriteDrawable(titleSprite);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -114,27 +114,27 @@ public class PlayScreen implements Screen {
     }
 
     private void creatingAllTheButtons() {
-        spritePlayButton = new Sprite(Assets.playButton);
+        spritePlayButton = new Sprite(bg.ittalents.game.Resource.Assets.playButton);
         spritePlayButton.setSize((float) (WIDTH_SCREEN / WIDTH_PLAY_BUTTON), (float) (HEIGHT_SCREEN / HEIGHT_PLAY_BUTTON));
         SpriteDrawable spriteDrawablePlayButton = new SpriteDrawable(spritePlayButton);
         playButton = new ImageButton(spriteDrawablePlayButton);
 
-        spriteShopButton = new Sprite(Assets.shopButton);
+        spriteShopButton = new Sprite(bg.ittalents.game.Resource.Assets.shopButton);
         spriteShopButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableShopButton = new SpriteDrawable(spriteShopButton);
         shopButton = new ImageButton(spriteDrawableShopButton);
 
-        spriteHighScoreButton = new Sprite(Assets.highScoreButton);
+        spriteHighScoreButton = new Sprite(bg.ittalents.game.Resource.Assets.highScoreButton);
         spriteHighScoreButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableHighScoreButton = new SpriteDrawable(spriteHighScoreButton);
         highScoreButton = new ImageButton(spriteDrawableHighScoreButton);
 
-        spriteProfileButton = new Sprite(Assets.profileButton);
+        spriteProfileButton = new Sprite(bg.ittalents.game.Resource.Assets.profileButton);
         spriteProfileButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
         SpriteDrawable spriteDrawableProfileButton = new SpriteDrawable(spriteProfileButton);
         profileButton = new ImageButton(spriteDrawableProfileButton);
 
-        Assets.spriteDefaultColor(spritePlayButton, spriteShopButton, spriteHighScoreButton, spriteProfileButton); // Setting the transparency of the buttons
+        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spritePlayButton, spriteShopButton, spriteHighScoreButton, spriteProfileButton); // Setting the transparency of the buttons
     }
 
     private void addingListenersToAllButtons() {
@@ -148,7 +148,7 @@ public class PlayScreen implements Screen {
         playButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 spritePlayButton.setColor(0.545f, 0, 0, 0.7f);
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
@@ -169,7 +169,7 @@ public class PlayScreen implements Screen {
         shopButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 spriteShopButton.setColor(0.545f, 0, 0, 0.7f);
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
@@ -189,7 +189,7 @@ public class PlayScreen implements Screen {
         highScoreButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 spriteHighScoreButton.setColor(0.545f, 0, 0, 0.7f);
                 if (!LoginScreen.offlineModeSelect) {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
@@ -211,7 +211,7 @@ public class PlayScreen implements Screen {
         profileButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Assets.clickButton.play();
+                bg.ittalents.game.Resource.Assets.clickButton.play();
                 spriteProfileButton.setColor(0.545f, 0, 0, 0.7f);
                 if (!LoginScreen.offlineModeSelect) {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
@@ -282,7 +282,7 @@ public class PlayScreen implements Screen {
     }
     private void loadUserInformation() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
+        httpGet.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
@@ -313,7 +313,7 @@ public class PlayScreen implements Screen {
 
     private void weaponsStoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + User.getSingletonUser().getUserId());
+        httpGet.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "weaponsStore?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();

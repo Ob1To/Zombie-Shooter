@@ -21,7 +21,7 @@ import java.util.Random;
 /**
  * Created by Ob1 on 6/28/2015.
  */
-public class GameScreen implements Screen,ITextFont {
+public class GameScreen implements Screen, bg.ittalents.game.Resource.ITextFont {
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final float CONSTANT_X_FOR_LIVES_AND_MONEY = (float) (WIDTH_SCREEN / 2 + WIDTH_SCREEN / 3.7);
     public static final int CONSTANT_X_FOR_SCORE = WIDTH_SCREEN / 50;
@@ -74,16 +74,16 @@ public class GameScreen implements Screen,ITextFont {
     @Override
     public void show() {
 
-        scaryZombieBackground = new Sprite(Assets.scaryZombieImage);
+        scaryZombieBackground = new Sprite(bg.ittalents.game.Resource.Assets.scaryZombieImage);
         scaryZombieBackground.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         spriteDrawableScaryZombieBackground = new SpriteDrawable(scaryZombieBackground);
         scaryZombieBackgroundImage = new Image(spriteDrawableScaryZombieBackground);
-        Assets.gamePlayMusic.play();
+        bg.ittalents.game.Resource.Assets.gamePlayMusic.play();
         LoginScreen.stopMenuMusic();
-        Assets.gamePlayMusic.setLooping(true);
+        bg.ittalents.game.Resource.Assets.gamePlayMusic.setLooping(true);
 
         mainStage = new Stage(new ScreenViewport());
-        backGroundSprite = new Sprite(Assets.policeBuildingBackground);
+        backGroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.policeBuildingBackground);
         backGroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         spriteDrawableBackGround = new SpriteDrawable(backGroundSprite);
         backGroundImage = new Image(spriteDrawableBackGround);
@@ -109,18 +109,18 @@ public class GameScreen implements Screen,ITextFont {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (User.getSingletonUser().getGameBulletsForLevel() <= 0) {
-                    Assets.emptyClip.play();
+                    bg.ittalents.game.Resource.Assets.emptyClip.play();
                 } else {
                     User.getSingletonUser().setGameBulletsForLevel(User.getSingletonUser().getGameBulletsForLevel() - User.getSingletonUser().getWeapon());
                     switch (User.getSingletonUser().getWeapon()) {
                         case 1:
-                            long id = Assets.singleShot.play(0.08f);
+                            long id = bg.ittalents.game.Resource.Assets.singleShot.play(0.08f);
                             break;
                         case 2:
-                            long idDouble = Assets.doubleShot.play(0.08f);
+                            long idDouble = bg.ittalents.game.Resource.Assets.doubleShot.play(0.08f);
                             break;
                         case 3:
-                            long idTriple = Assets.tripleShot.play(0.08f);
+                            long idTriple = bg.ittalents.game.Resource.Assets.tripleShot.play(0.08f);
                             break;
                     }
                 }
@@ -258,39 +258,39 @@ public class GameScreen implements Screen,ITextFont {
     private void addBossTexture() {
         if ((timerBoss <= 5) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            bossTexture = Assets.bossTexture1;
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture1;
         } else if ((timerBoss > 8) && (timerBoss <= 11) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
-            Assets.takingDamage.play();
-            bossTexture = Assets.bossTexture2;
+            bg.ittalents.game.Resource.Assets.takingDamage.play();
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture2;
         } else if ((timerBoss > 11) && (timerBoss <= 14) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            Assets.takingDamage.play();
-            bossTexture = Assets.bossTexture3;
+            bg.ittalents.game.Resource.Assets.takingDamage.play();
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture3;
         } else if ((timerBoss > 14) && (timerBoss <= 17) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
-            Assets.takingDamage.play();
-            bossTexture = Assets.bossTexture4;
+            bg.ittalents.game.Resource.Assets.takingDamage.play();
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture4;
         } else if ((timerBoss > 17) && (timerBoss <= 20) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            Assets.takingDamage.play();
-            bossTexture = Assets.bossTexture5;
+            bg.ittalents.game.Resource.Assets.takingDamage.play();
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture5;
         } else if ((timerBoss > 20) && (timerBoss <= 23) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
-            Assets.takingDamage.play();
-            bossTexture = Assets.bossTexture6;
+            bg.ittalents.game.Resource.Assets.takingDamage.play();
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture6;
         } else if ((timerBoss > 23) && (timerBoss <= 26) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            Assets.takingDamage.play();
-            bossTexture = Assets.bossTexture7;
+            bg.ittalents.game.Resource.Assets.takingDamage.play();
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture7;
         } else if ((timerBoss > 26) && (timerBoss <= 29) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
-            Assets.takingDamage.play();
-            bossTexture = Assets.bossTexture8;
+            bg.ittalents.game.Resource.Assets.takingDamage.play();
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture8;
         } else if ((timerBoss > 29) && (timerBoss <= 32) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            Assets.takingDamage.play();
-            bossTexture = Assets.bossTexture9;
+            bg.ittalents.game.Resource.Assets.takingDamage.play();
+            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture9;
         }
 
         spriteBoss = new Sprite(bossTexture);
@@ -316,35 +316,35 @@ public class GameScreen implements Screen,ITextFont {
 //        Assets.gamePlayMusic.stop();
         if (timerBoss >= 5 && timerBoss <= 8.375 && alreadyPlayed == true) {
             alreadyPlayed = false;
-            Assets.bossSound1.play();
+            bg.ittalents.game.Resource.Assets.bossSound1.play();
 //            long id = Assets.bossSound1.play();
 //            Assets.bossSound1.setPitch(id, 0.8f);
         } else if (timerBoss > 8.375 && timerBoss <= 11.75 && alreadyPlayed == false) {
             alreadyPlayed = true;
-            long id = Assets.bossSound2.play();
+            long id = bg.ittalents.game.Resource.Assets.bossSound2.play();
 //            Assets.bossSound2.setPitch(id, 0.8f);
         } else if (timerBoss > 11.75 && timerBoss <= 15.125 && alreadyPlayed == true) {
             alreadyPlayed = false;
-            long id = Assets.bossSound3.play();
+            long id = bg.ittalents.game.Resource.Assets.bossSound3.play();
 //            Assets.bossSound3.setPitch(id, 0.8f);
         } else if (timerBoss > 15.125 && timerBoss <= 18.5 && alreadyPlayed == false) {
             alreadyPlayed = true;
-            long id = Assets.bossSound4.play();
+            long id = bg.ittalents.game.Resource.Assets.bossSound4.play();
 //            Assets.bossSound4.setPitch(id, 0.8f);
         } else if (timerBoss > 18.5 && timerBoss <= 21.875 && alreadyPlayed == true) {
-            long id = Assets.bossSound1.play();
+            long id = bg.ittalents.game.Resource.Assets.bossSound1.play();
 //            Assets.bossSound1.setPitch(id, 0.8f);
             alreadyPlayed = false;
         } else if (timerBoss > 21.875 && timerBoss <= 25.25 && alreadyPlayed == false) {
-            long id = Assets.bossSound2.play();
+            long id = bg.ittalents.game.Resource.Assets.bossSound2.play();
 //            Assets.bossSound2.setPitch(id, 0.8f);
             alreadyPlayed = true;
         } else if (timerBoss > 25.25 && timerBoss <= 28.625 && alreadyPlayed == true) {
-            long id = Assets.bossSound3.play();
+            long id = bg.ittalents.game.Resource.Assets.bossSound3.play();
 //            Assets.bossSound3.setPitch(id, 0.8f);
             alreadyPlayed = false;
         } else if (timerBoss > 28.625 && timerBoss <= 32 && alreadyPlayed == false) {
-            long id = Assets.bossSound4.play();
+            long id = bg.ittalents.game.Resource.Assets.bossSound4.play();
 //            Assets.bossSound4.setPitch(id, 0.8f);
             alreadyPlayed = true;
         }

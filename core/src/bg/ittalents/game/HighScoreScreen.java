@@ -48,11 +48,11 @@ public class HighScoreScreen implements Screen {
     public void show() {
         //Suzdavane na backgraunda
         batch = new SpriteBatch();
-        sprite = new Sprite(Assets.backgroundMenu);
+        sprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
         sprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
-        Sprite spriteTitle = new Sprite(Assets.highScoreImage);
+        Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.highScoreImage);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -112,7 +112,7 @@ public class HighScoreScreen implements Screen {
     private void highScoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         //        Tuk sled kato napravim klasa User da vzimame ve4e ID koeto imame za konkretniq potrebitel
-        httpGet.setUrl(Assets.HTTP_SERVER + "leaderBoard?userId=" + User.getSingletonUser().getUserId());
+        httpGet.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "leaderBoard?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();

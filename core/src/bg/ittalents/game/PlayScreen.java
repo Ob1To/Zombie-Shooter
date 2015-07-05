@@ -94,6 +94,15 @@ public class PlayScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
+        inizializiraneWarningMessage();
+        if (!LoginScreen.offlineModeSelect) {
+            loadUserInformation();
+            weaponsStoreJson();
+        }
+
+    }
+
+    private void inizializiraneWarningMessage() {
         tableMessage = new Table();
         tableMessage.setFillParent(true);
         tableMessage.top();
@@ -104,11 +113,6 @@ public class PlayScreen implements Screen {
         labelMessage.setAlignment(Align.center);
         tableMessage.add(labelMessage).expandX().padTop(Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
         stage.addActor(tableMessage);
-        if (!LoginScreen.offlineModeSelect) {
-            loadUserInformation();
-            weaponsStoreJson();
-        }
-
     }
 
     @Override

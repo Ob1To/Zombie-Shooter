@@ -68,8 +68,6 @@ public class LevelMapScreen implements Screen {
 
     @Override
     public void show() {
-
-
         batch = new SpriteBatch();
         backgroundSprite = new Sprite(Assets.backgroundMenu);
         backgroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
@@ -86,6 +84,22 @@ public class LevelMapScreen implements Screen {
 
         initializeButton();
 
+        initializeAndAddButtonInContainer();
+
+        Gdx.input.setInputProcessor(stage);
+
+        addListenerForButton();
+
+        Assets.spriteDefaultColor(spriteButtonOne, spriteTwoButton, spriteThreeButton, spriteFourButton, spriteFiveButton, spriteSixButton);
+
+        Gdx.input.setCatchBackKey(true);
+
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+        inizializiraneWarningMessage();
+    }
+
+    private void initializeAndAddButtonInContainer() {
         container.setWidth(stage.getWidth());
         container.align(Align.center | Align.top);
         container.setPosition(0, Gdx.graphics.getHeight());
@@ -103,17 +117,25 @@ public class LevelMapScreen implements Screen {
         container.add(secondRowContainer);
 
         stage.addActor(container);
+    }
 
-        Gdx.input.setInputProcessor(stage);
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        backgroundSprite.draw(batch);
+        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
+        batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            game.setScreen(new PlayScreen(game));
+        }
 
-        addListenerForButton();
+    }
 
-        Assets.spriteDefaultColor(spriteButtonOne, spriteTwoButton, spriteThreeButton, spriteFourButton, spriteFiveButton, spriteSixButton);
-
-        Gdx.input.setCatchBackKey(true);
-
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
-
+    private void inizializiraneWarningMessage() {
         tableMessage = new Table();
         tableMessage.setFillParent(true);
         tableMessage.top();
@@ -252,20 +274,19 @@ public class LevelMapScreen implements Screen {
         sixButton = new ImageButton(spriteDrawableSixButton);
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        backgroundSprite.draw(batch);
-        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-        batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            game.setScreen(new PlayScreen(game));
-        }
+    private void changeTheScreenMethod(int z) {
+        if (!LoginScreen.offlineModeSelect) {
+            levelInfoJson();
+        } else {
+            ResourcesForOffline.levelMapResources(z);
+            stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    game.setScreen(new DifficultyScreen(game));
+                }
+            })));
 
+        }
     }
 
     private void levelInfoJson() {
@@ -335,20 +356,5 @@ public class LevelMapScreen implements Screen {
         stage.dispose();
         batch.dispose();
         skin.dispose();
-    }
-
-    private void changeTheScreenMethod(int z) {
-        if (!LoginScreen.offlineModeSelect) {
-            levelInfoJson();
-        } else {
-            ResourcesForOffline.levelMapResources(z);
-            stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    game.setScreen(new DifficultyScreen(game));
-                }
-            })));
-
-        }
     }
 }

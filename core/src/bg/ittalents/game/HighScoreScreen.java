@@ -62,15 +62,7 @@ public class HighScoreScreen implements Screen {
         Gdx.input.setCatchBackKey(true);
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        tableMessage = new Table();
-        tableMessage.setFillParent(true);
-        tableMessage.top();
-
-        labelMessage = new Label("", skin);
-        labelMessage.setColor(Color.WHITE);
-        labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
-        stage.addActor(tableMessage);
+        inizializiraneWarningMessage();
 
 
         scrollTable = new Table();
@@ -92,6 +84,18 @@ public class HighScoreScreen implements Screen {
 
         this.stage.addActor(table);
 
+    }
+
+    private void inizializiraneWarningMessage() {
+        tableMessage = new Table();
+        tableMessage.setFillParent(true);
+        tableMessage.top();
+
+        labelMessage = new Label("", skin);
+        labelMessage.setColor(Color.WHITE);
+        labelMessage.setAlignment(Align.center);
+        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        stage.addActor(tableMessage);
     }
 
     @Override

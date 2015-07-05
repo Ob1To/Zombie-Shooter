@@ -24,15 +24,15 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
 import bg.ittalents.game.Resource.Assets;
 import bg.ittalents.game.Resource.Constant;
 
 
 public class RegisterScreen extends LoginScreen implements Screen {
-    public static final float CONSTANT_PAD_BOTTOM = Constant.HEIGHT_SCREEN / 12;
-    public static final String RE_PASSWORD = "RE-PASSWORD";
-    public static final String EMAIL = "EMAIL";
-
+    private static final float CONSTANT_PAD_BOTTOM = Constant.HEIGHT_SCREEN / 12;
+    private static final String RE_PASSWORD = "RE-PASSWORD";
+    private static final String EMAIL = "EMAIL";
 
     private Game game;
     private Skin skin;
@@ -51,11 +51,10 @@ public class RegisterScreen extends LoginScreen implements Screen {
     private Label labelMessage;
     private Table tableMessage;
 
-    public RegisterScreen(Game game) {
+    protected RegisterScreen(Game game) {
         super(game);
         this.game = game;
     }
-
 
     @Override
     public void show() {
@@ -110,15 +109,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
         // Setting the back key on android to true, so it can accept interaction
         Gdx.input.setCatchBackKey(true);
 
-        tableMessage = new Table();
-        tableMessage.setFillParent(true);
-        tableMessage.top();
-
-        labelMessage = new Label("", skin);
-        labelMessage.setColor(Color.WHITE);
-        labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
-        stage.addActor(tableMessage);
+        inizializiraneWarningMessage();
 
         // When clicking on the register button we start the validation process.
         // It calls all the methods which are checking the user input
@@ -132,6 +123,35 @@ public class RegisterScreen extends LoginScreen implements Screen {
                 }
             }
         });
+    }
+
+    private void inizializiraneWarningMessage() {
+        tableMessage = new Table();
+        tableMessage.setFillParent(true);
+        tableMessage.top();
+
+        labelMessage = new Label("", skin);
+        labelMessage.setColor(Color.WHITE);
+        labelMessage.setAlignment(Align.center);
+        tableMessage.add(labelMessage).expandX().padTop(Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        stage.addActor(tableMessage);
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+        backGroundSprite.draw(batch);
+        batch.draw(backGroundSprite, backGroundSprite.getX(), backGroundSprite.getY(), backGroundSprite.getWidth(), backGroundSprite.getHeight());
+        batch.end();
+
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            game.setScreen(new LoginScreen(game));
+        }
     }
 
     private void creatingRegisterButton() {
@@ -236,23 +256,6 @@ public class RegisterScreen extends LoginScreen implements Screen {
                 });
             }
         });
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-        backGroundSprite.draw(batch);
-        batch.draw(backGroundSprite, backGroundSprite.getX(), backGroundSprite.getY(), backGroundSprite.getWidth(), backGroundSprite.getHeight());
-        batch.end();
-
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            game.setScreen(new LoginScreen(game));
-        }
     }
 
     private void arrangingTheScreen() {

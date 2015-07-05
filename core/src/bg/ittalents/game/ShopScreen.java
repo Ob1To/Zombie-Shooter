@@ -100,6 +100,11 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
 
+        inizializiraneWarningMessage();
+
+    }
+
+    private void inizializiraneWarningMessage() {
         tableMessage = new Table();
         tableMessage.setFillParent(true);
         tableMessage.top();
@@ -109,7 +114,6 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
         labelMessage.setAlignment(Align.center);
         tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
         stage.addActor(tableMessage);
-
     }
 
     @Override

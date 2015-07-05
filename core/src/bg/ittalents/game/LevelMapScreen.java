@@ -310,7 +310,7 @@ public class LevelMapScreen implements Screen {
                         game.setScreen(new DifficultyScreen(game));
                     }
                 })));
-
+                System.out.println(User.getSingletonUser().getGameBulletsForLevel());
 
 
             }

@@ -5,7 +5,7 @@ import bg.ittalents.game.User;
 /**
  * Created by vlado on 04-Jul-15.
  */
-abstract class ResourcesForOffline {
+public abstract class ResourcesForOffline {
     public static final int USER_HEALTH = 3;
     private static final float BULLETS_COEFFICIENT = 1.2f;
     private static int count;

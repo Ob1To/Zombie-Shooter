@@ -24,7 +24,7 @@ public class Assets {
     public static final String SINGLE_SHOT_PATH = "Sounds/SingleShot.wav";
     public static final String DOUBLE_SHOT_PATH = "Sounds/DoubleShot.wav";
     public static final String TRIPLE_SHOT_PATH = "Sounds/TripleShot.ogg";
-    public static final String GAME_OVER_SOUND_PATH = "Sounds/GameOverAlt.ogg";
+    public static final String GAME_OVER_SOUND_PATH = "Sounds/GameOverAlt.wav";
     public static final String PUSH_BUTTON_SOUND_PATH = "Sounds/ClickButton.wav";
     public static final String BOSS_SOUND_1 = "Sounds/Boss/maikati1.wav";
     public static final String BOSS_SOUND_2 = "Sounds/Boss/maikati2.wav";

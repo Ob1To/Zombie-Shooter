@@ -86,18 +86,6 @@ public class HighScoreScreen implements Screen {
 
     }
 
-    private void inizializiraneWarningMessage() {
-        tableMessage = new Table();
-        tableMessage.setFillParent(true);
-        tableMessage.top();
-
-        labelMessage = new Label("", skin);
-        labelMessage.setColor(Color.WHITE);
-        labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
-        stage.addActor(tableMessage);
-    }
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -111,6 +99,18 @@ public class HighScoreScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             game.setScreen(new PlayScreen(game));
         }
+    }
+
+    private void inizializiraneWarningMessage() {
+        tableMessage = new Table();
+        tableMessage.setFillParent(true);
+        tableMessage.top();
+
+        labelMessage = new Label("", skin);
+        labelMessage.setColor(Color.WHITE);
+        labelMessage.setAlignment(Align.center);
+        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        stage.addActor(tableMessage);
     }
 
     private void addUserInTable(String position, String name, String score) {

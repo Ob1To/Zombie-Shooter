@@ -101,7 +101,7 @@ public class LoginScreen implements Screen {
         backgroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
 
 
-        inizializiraneWarningMessage();
+        initializationWarningMessage();
     }
 
     @Override
@@ -163,7 +163,7 @@ public class LoginScreen implements Screen {
         stage.addActor(container);
     }
 
-    private void inizializiraneWarningMessage() {
+    private void initializationWarningMessage() {
         tableMessage = new Table();
         tableMessage.setFillParent(true);
         tableMessage.top();

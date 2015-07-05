@@ -249,7 +249,6 @@ public class GameScreen implements Screen, ITextFont {
 
     @Override
     public void hide() {
-        dispose();
     }
 
 

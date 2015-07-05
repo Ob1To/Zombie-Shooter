@@ -225,7 +225,6 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
 
     @Override
     public void hide() {
-        dispose();
     }
 
     @Override

@@ -285,7 +285,7 @@ public class ProfileScreen implements Screen {
     public void dispose() {
         stage.dispose();
         game.dispose();
-        batch.dispose();
         skin.dispose();
+        batch.dispose();
     }
 }

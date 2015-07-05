@@ -335,6 +335,7 @@ public class LevelMapScreen implements Screen {
         game.dispose();
         stage.dispose();
         batch.dispose();
+        skin.dispose();
     }
 
     private void changeTheScreenMethod(int z) {

@@ -407,6 +407,7 @@ public class LoginScreen implements Screen {
     public void dispose() {
         skin.dispose();
         stage.dispose();
+        batch.dispose();
         zombieShooterGame.dispose();
     }
 

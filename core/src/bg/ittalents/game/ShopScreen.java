@@ -51,6 +51,7 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
     public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
 
 
+
     private Game game;
     private SpriteBatch batch;
     private Sprite backgroundSprite;
@@ -230,6 +231,10 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
     @Override
     public void dispose() {
         stage.dispose();
+        game.dispose();
+        textBitmapFont.dispose();
+        skin.dispose();
+        batch.dispose();
     }
 
     public BitmapFont loadFont() {
@@ -251,9 +256,9 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
                 User.getSingletonUser().setWeapon(1);
                 checkWeapons();
                 setButtonPositionAndAddInStage();
-                if(!LoginScreen.offlineModeSelect) {
+                if (!LoginScreen.offlineModeSelect) {
                     addWeaponSelectJson();
-                }else{
+                } else {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                         @Override
                         public void run() {
@@ -270,9 +275,9 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
                     User.getSingletonUser().setWeapon(2);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
-                    if(!LoginScreen.offlineModeSelect) {
+                    if (!LoginScreen.offlineModeSelect) {
                         addWeaponSelectJson();
-                    }else{
+                    } else {
                         stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                             @Override
                             public void run() {
@@ -280,7 +285,7 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
                             }
                         })));
                     }
-                    }
+                }
             }
         });
 
@@ -290,9 +295,9 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
                     User.getSingletonUser().setWeapon(3);
                     checkWeapons();
                     setButtonPositionAndAddInStage();
-                    if(!LoginScreen.offlineModeSelect) {
+                    if (!LoginScreen.offlineModeSelect) {
                         addWeaponSelectJson();
-                    }else{
+                    } else {
                         stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                             @Override
                             public void run() {

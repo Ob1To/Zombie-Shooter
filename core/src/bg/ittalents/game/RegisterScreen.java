@@ -340,10 +340,11 @@ public class RegisterScreen extends LoginScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
         game.dispose();
         skin.dispose();
-        stage.dispose();
         batch.dispose();
+
     }
 
 }

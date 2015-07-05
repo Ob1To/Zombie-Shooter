@@ -83,7 +83,7 @@ public class GameWinScreen implements Screen{
         batch.begin();
         backgroundSprite.draw(batch);
         batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-        textBitmapFont.draw(batch, "You Win !" , X_FOR_YOU_WIN, Y_FOR_YOU_WIN);
+        textBitmapFont.draw(batch, "You Win !", X_FOR_YOU_WIN, Y_FOR_YOU_WIN);
         textBitmapFont.draw(batch, "You Saved The Camp !", X_FOR_SAVE_TEXT, Y_FOR_SAVE_TEXT);
         textBitmapFont.draw(batch, "SCORE  " + GameScreen.points, X_FOR_SCORE, Gdx.graphics.getHeight() / CONSTANT_FOR_Y_SCORE - textBitmapFont.getLineHeight() / CONSTANT_FOR_Y_SCORE);
         batch.end();
@@ -122,10 +122,10 @@ public class GameWinScreen implements Screen{
             public void handleHttpResponse(final Net.HttpResponse httpResponse) {
                 if (httpResponse.getStatus().getStatusCode() == 200) {
                     System.out.println(httpResponse.getResultAsString());
-                    if (((User.getSingletonUser().getScore() + GameScreen.points)  > CONSTANT_UNLOCKED_WEAPON_2) &&(User.getSingletonUser().getWeaponTwoUnlock() == 0)){
+                    if (((User.getSingletonUser().getScore() + GameScreen.points) > CONSTANT_UNLOCKED_WEAPON_2) && (User.getSingletonUser().getWeaponTwoUnlock() == 0)) {
                         postJsonWeapons(2);
-                }
-                    if (((User.getSingletonUser().getScore() + GameScreen.points)  > CONSTANT_UNLOCKED_WEAPON_3) &&(User.getSingletonUser().getWeaponTreeUnlock() == 0)){
+                    }
+                    if (((User.getSingletonUser().getScore() + GameScreen.points) > CONSTANT_UNLOCKED_WEAPON_3) && (User.getSingletonUser().getWeaponTreeUnlock() == 0)) {
                         postJsonWeapons(3);
                     }
                 }
@@ -203,6 +203,9 @@ public class GameWinScreen implements Screen{
 
     @Override
     public void dispose() {
-
+        game.dispose();
+        batch.dispose();
+        stage.dispose();
+        textBitmapFont.dispose();
     }
 }

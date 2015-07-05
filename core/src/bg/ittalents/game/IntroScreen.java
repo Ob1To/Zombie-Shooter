@@ -36,6 +36,7 @@ public class IntroScreen extends ApplicationAdapter implements Screen {
     }
 
 
+
     @Override
     public void show() {
         introMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/IntroMusic1.mp3"));
@@ -82,6 +83,7 @@ public class IntroScreen extends ApplicationAdapter implements Screen {
     public void dispose() { // AssetManager takes care of the dispose of all resources
         batch.dispose();
         zombieShooterGame.dispose();
+        introMusic.dispose();
     }
 
     @Override

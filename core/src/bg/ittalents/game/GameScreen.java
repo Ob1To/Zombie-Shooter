@@ -252,9 +252,7 @@ public class GameScreen implements Screen, ITextFont {
 
     }
 
-    @Override
-    public void dispose() {
-    }
+
 
 
     private void addBossTexture() {
@@ -370,5 +368,11 @@ public class GameScreen implements Screen, ITextFont {
         }
 
     }
-
+    @Override
+    public void dispose() {
+        textBitmapFont.dispose();
+        spriteBatch.dispose();
+        game.dispose();
+        mainStage.dispose();
+    }
 }

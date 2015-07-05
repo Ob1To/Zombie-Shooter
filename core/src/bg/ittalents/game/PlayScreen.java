@@ -276,6 +276,7 @@ public class PlayScreen implements Screen {
     public void dispose() {
         batch.dispose();
         stage.dispose();
+        skin.dispose();
         game.dispose();
     }
 

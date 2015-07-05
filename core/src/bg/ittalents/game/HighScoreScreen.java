@@ -62,7 +62,7 @@ public class HighScoreScreen implements Screen {
         Gdx.input.setCatchBackKey(true);
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        inizializiraneWarningMessage();
+        initializationWarningMessage();
 
 
         scrollTable = new Table();
@@ -101,7 +101,7 @@ public class HighScoreScreen implements Screen {
         }
     }
 
-    private void inizializiraneWarningMessage() {
+    private void initializationWarningMessage() {
         tableMessage = new Table();
         tableMessage.setFillParent(true);
         tableMessage.top();

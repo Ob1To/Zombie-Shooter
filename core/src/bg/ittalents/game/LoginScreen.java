@@ -30,11 +30,10 @@ import bg.ittalents.game.Resource.Assets;
 import bg.ittalents.game.Resource.Constant;
 
 public class LoginScreen implements Screen {
-    public static boolean offlineModeSelect;
-    public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 30;
-
-
+    protected static boolean offlineModeSelect;
+    private static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 30;
     private static boolean counterForStartMusicOneTime;
+
     private Skin skin;
     private Stage stage;
     private Game zombieShooterGame;
@@ -56,12 +55,12 @@ public class LoginScreen implements Screen {
     private SpriteDrawable offlineModeSpriteDrawable;
     private Image imageTitle;
     private Image offlineModeImage;
-    public static Label labelMessage;
+    protected static Label labelMessage;
     private Table tableMessage;
     private String currentColor;
 
 
-    public LoginScreen(Game game) {
+    protected LoginScreen(Game game) {
         zombieShooterGame = game;
     }
 
@@ -253,7 +252,16 @@ public class LoginScreen implements Screen {
         });
     }
 
-    public void login(String user, String password, final boolean loginScreenStart) {
+    protected static void stopMenuMusic() {
+        Assets.gameMenuMusic.stop();
+    }
+
+    private static void gameMenuMusic() {
+        Assets.gameMenuMusic.play();
+        Assets.gameMenuMusic.setLooping(true);
+    }
+
+    protected void login(String user, String password, final boolean loginScreenStart) {
         JsonObject json = new JsonObject();
         json.add("username", new JsonPrimitive(user));
         json.add("password", new JsonPrimitive(password));
@@ -372,15 +380,6 @@ public class LoginScreen implements Screen {
                 });
             }
         });
-    }
-
-    public static void stopMenuMusic() {
-        Assets.gameMenuMusic.stop();
-    }
-
-    private static void gameMenuMusic() {
-        Assets.gameMenuMusic.play();
-        Assets.gameMenuMusic.setLooping(true);
     }
 
     @Override

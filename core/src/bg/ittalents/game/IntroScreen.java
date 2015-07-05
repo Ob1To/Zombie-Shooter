@@ -18,8 +18,9 @@ import bg.ittalents.game.Resource.Assets;
 
 
 public class IntroScreen extends ApplicationAdapter implements Screen {
-    public static final float DEGREES_PER_SECOND = 10f;
-    final float SHAKE_AMPLITUDE_IN_DEGREES = 5.0f;
+    private static final float DEGREES_PER_SECOND = 10f;
+    private final float SHAKE_AMPLITUDE_IN_DEGREES = 5.0f;
+
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Sprite itTalentsSprite;
@@ -31,7 +32,7 @@ public class IntroScreen extends ApplicationAdapter implements Screen {
     private Music introMusic;
     private Texture itTaletntsLogo;
 
-    public IntroScreen(Game game) {
+    protected IntroScreen(Game game) {
         zombieShooterGame = game;
     }
 

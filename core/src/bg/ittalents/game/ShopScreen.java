@@ -33,24 +33,22 @@ import bg.ittalents.game.Resource.Assets;
 
 public class ShopScreen extends Actor implements Screen, ITextFont {
 
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final int CONSTANT_COORDINATES_SCORE_X = WIDTH_SCREEN / 40;
-    public static final float CONSTANT_HEIGHT_TITLE = HEIGHT_SCREEN / 3;
-    public static final float CONSTANT_WIDTH_TITLE = WIDTH_SCREEN / 3;
-    public static final int WIDTH_WEAPON_BUTTON = WIDTH_SCREEN / 4;
-    public static final int HEIGHT_WEAPON_BUTTON = HEIGHT_SCREEN / 3;
-    public static final int CONSTANT_COORDINATES_TEXT_ROW_FIRST = HEIGHT_SCREEN - HEIGHT_SCREEN / 21;
-    public static final int CONSTANT_COORDINATES_TEXT_ROW_SECOND = HEIGHT_SCREEN - HEIGHT_SCREEN / 8;
-    public static final int CONSTANT_FOR_POSITION = 2;
-    public static final int CONSTANT_FOR_POSITION_HEIGHT_WEAPON = HEIGHT_WEAPON_BUTTON / 2;
-    public static final int CONSTANT_FOR_POSITION_HEIGHT_TITLE = 15;
-    public static final int CONSTANT_FOR_POSITION_WEAPON_3 = WIDTH_SCREEN / 5;
-    public static final double CONSTANT_FOR_POSITION_WEAPON_2 = 2.7;
-    public static final int CONSTANT_FOR_POSITION_WEAPON_1 = 25;
-    public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
-
-
+    private static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
+    private static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
+    private static final int CONSTANT_COORDINATES_SCORE_X = WIDTH_SCREEN / 40;
+    private static final float CONSTANT_HEIGHT_TITLE = HEIGHT_SCREEN / 3;
+    private static final float CONSTANT_WIDTH_TITLE = WIDTH_SCREEN / 3;
+    private static final int WIDTH_WEAPON_BUTTON = WIDTH_SCREEN / 4;
+    private static final int HEIGHT_WEAPON_BUTTON = HEIGHT_SCREEN / 3;
+    private static final int CONSTANT_COORDINATES_TEXT_ROW_FIRST = HEIGHT_SCREEN - HEIGHT_SCREEN / 21;
+    private static final int CONSTANT_COORDINATES_TEXT_ROW_SECOND = HEIGHT_SCREEN - HEIGHT_SCREEN / 8;
+    private static final int CONSTANT_FOR_POSITION = 2;
+    private static final int CONSTANT_FOR_POSITION_HEIGHT_WEAPON = HEIGHT_WEAPON_BUTTON / 2;
+    private static final int CONSTANT_FOR_POSITION_HEIGHT_TITLE = 15;
+    private static final int CONSTANT_FOR_POSITION_WEAPON_3 = WIDTH_SCREEN / 5;
+    private static final double CONSTANT_FOR_POSITION_WEAPON_2 = 2.7;
+    private static final int CONSTANT_FOR_POSITION_WEAPON_1 = 25;
+    private static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
 
     private Game game;
     private SpriteBatch batch;
@@ -59,7 +57,6 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
     private Image imageTitle;
     private Stage stage;
     private BitmapFont textBitmapFont;
-
 
     private Sprite spriteWeaponButton1;
     private Sprite spriteWeaponButton2;
@@ -112,6 +109,26 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
         labelMessage.setAlignment(Align.center);
         tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
         stage.addActor(tableMessage);
+
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+        backgroundSprite.draw(batch);
+        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
+        textBitmapFontDraw();
+        batch.end();
+
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            game.setScreen(new PlayScreen(game));
+        }
 
     }
 
@@ -171,7 +188,6 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
         System.out.println(User.getSingletonUser().toString());
     }
 
-
     public void draw(Batch batch) {
         batch.draw(spriteWeaponButton1, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(),
                 getScaleX(), getScaleY(), getRotation());
@@ -181,59 +197,9 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
                 getScaleX(), getScaleY(), getRotation());
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-        backgroundSprite.draw(batch);
-        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-        textBitmapFontDraw();
-        batch.end();
-
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            game.setScreen(new PlayScreen(game));
-        }
-
-    }
-
-
     private void textBitmapFontDraw() {
         textBitmapFont.draw(batch, "SCORE", CONSTANT_COORDINATES_SCORE_X, CONSTANT_COORDINATES_TEXT_ROW_FIRST);
         textBitmapFont.draw(batch, "" + User.getSingletonUser().getScore(), CONSTANT_COORDINATES_SCORE_X, CONSTANT_COORDINATES_TEXT_ROW_SECOND);
-    }
-
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-        game.dispose();
-        textBitmapFont.dispose();
-        skin.dispose();
-        batch.dispose();
     }
 
     public BitmapFont loadFont() {
@@ -352,5 +318,33 @@ public class ShopScreen extends Actor implements Screen, ITextFont {
                 });
             }
         });
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+        game.dispose();
+        textBitmapFont.dispose();
+        skin.dispose();
+        batch.dispose();
     }
 }

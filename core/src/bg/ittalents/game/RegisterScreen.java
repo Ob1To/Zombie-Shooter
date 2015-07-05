@@ -31,9 +31,6 @@ import bg.ittalents.game.Resource.Constant;
 
 public class RegisterScreen extends LoginScreen implements Screen {
     public static final float CONSTANT_PAD_BOTTOM = Constant.HEIGHT_SCREEN / 12;
-    private static final String EMAIL_PATTERN =
-            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     public static final String RE_PASSWORD = "RE-PASSWORD";
     public static final String EMAIL = "EMAIL";
 
@@ -310,7 +307,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
     }
 
     private boolean checkEmailField(String emailField) {
-        if (emailField.matches(EMAIL_PATTERN)) {
+        if (emailField.matches(Constant.EMAIL_PATTERN)) {
             return true;
         } else {
             labelMessage.setText("Invalid email");

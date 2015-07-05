@@ -30,11 +30,11 @@ import bg.ittalents.game.Resource.Constant;
 
 public class PlayScreen implements Screen {
 
-    public static final float CONSTANT_PAD_BOTTOM_AND_TOP = Constant.HEIGHT_SCREEN / 20;
-    public static final float WIDTH_BUTTONS = (float) (Constant.WIDTH_SCREEN / 3.5);
-    public static final float HEIGHT_BUTTONS = Constant.HEIGHT_SCREEN / 6;
-    public static final float WIDTH_PLAY_BUTTON = Constant.WIDTH_SCREEN / 2;
-    public static final float HEIGHT_PLAY_BUTTON = Constant.HEIGHT_SCREEN / 3;
+    private static final float CONSTANT_PAD_BOTTOM_AND_TOP = Constant.HEIGHT_SCREEN / 20;
+    private static final float WIDTH_BUTTONS = (float) (Constant.WIDTH_SCREEN / 3.5);
+    private static final float HEIGHT_BUTTONS = Constant.HEIGHT_SCREEN / 6;
+    private static final float WIDTH_PLAY_BUTTON = Constant.WIDTH_SCREEN / 2;
+    private static final float HEIGHT_PLAY_BUTTON = Constant.HEIGHT_SCREEN / 3;
 
     private Game game;
     private SpriteBatch batch;
@@ -53,11 +53,11 @@ public class PlayScreen implements Screen {
     private ImageButton highScoreButton;
     private ImageButton profileButton;
     private SpriteDrawable spriteDrawableTitle;
-    public static Label labelMessage;
+    private static Label labelMessage;
     private Table tableMessage;
     private Skin skin;
 
-    public PlayScreen(Game game) {
+    protected PlayScreen(Game game) {
         this.game = game;
     }
 
@@ -107,6 +107,22 @@ public class PlayScreen implements Screen {
         if (!LoginScreen.offlineModeSelect) {
             loadUserInformation();
             weaponsStoreJson();
+        }
+
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        backgroundSprite.draw(batch);
+        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
+        batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            game.setScreen(new LoginScreen(game));
         }
 
     }
@@ -235,50 +251,6 @@ public class PlayScreen implements Screen {
         container.add(buttonsContainer).padTop(CONSTANT_PAD_BOTTOM_AND_TOP);
     }
 
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        backgroundSprite.draw(batch);
-        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-        batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            game.setScreen(new LoginScreen(game));
-        }
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        batch.dispose();
-        stage.dispose();
-        skin.dispose();
-        game.dispose();
-    }
-
     private void loadUserInformation() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
@@ -342,6 +314,33 @@ public class PlayScreen implements Screen {
                 });
             }
         });
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        stage.dispose();
+        skin.dispose();
+        game.dispose();
     }
 
 }

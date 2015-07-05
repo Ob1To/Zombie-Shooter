@@ -25,27 +25,22 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
-public class ProfileScreen implements Screen {
+import bg.ittalents.game.Resource.Assets;
+import bg.ittalents.game.Resource.Constant;
 
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final float CONSTANT_HEIGHT_TITLE = 3;
-    public static final float CONSTANT_WIDTH_TITLE = 2;
-    public static final float CONSTANT_PAD_BOTTOM_AND_TOP = Gdx.graphics.getHeight() / 25;
-    public static final int CONSTANT_HEIGHT_APPLY_BUTTON = 6;
-    private static final float CONSTANT_WIDTH_APPLY_BUTTON = 3;
-    private static final float CONSTANT_TEXT_WIDTH = 3;
-    private static final float CONSTANT_TEXT_HEIGHT = 10;
+
+public class ProfileScreen implements Screen {
+    private static final float CONSTANT_HEIGHT_TITLE = Constant.HEIGHT_SCREEN / 3;
+    private static final float CONSTANT_WIDTH_TITLE = Constant.WIDTH_SCREEN / 2;
+    private static final float CONSTANT_PAD_BOTTOM_AND_TOP = Gdx.graphics.getHeight() / 25;
+    private static final int CONSTANT_HEIGHT_APPLY_BUTTON = Constant.HEIGHT_SCREEN / 6;
+    private static final float CONSTANT_WIDTH_APPLY_BUTTON = Constant.WIDTH_SCREEN / 3;
+    private static final float CONSTANT_TEXT_WIDTH = Constant.WIDTH_SCREEN / 3;
+    private static final float CONSTANT_TEXT_HEIGHT = Constant.HEIGHT_SCREEN / 10;
+    private static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = Constant.HEIGHT_SCREEN / 3.45f;
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    public static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{5,10}";
-    public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.45f;
-
-    //Trite promenlivi da se prehvurlqt
-    private Label labelMessage;
-    private Table tableMessage;
-
 
     private Stage stage;
     private Game game;
@@ -58,21 +53,22 @@ public class ProfileScreen implements Screen {
     private TextField emailField;
     private Skin skin;
     private ImageButton applyButton;
+    private Label labelMessage;
+    private Table tableMessage;
 
 
-    public ProfileScreen(Game game) {
+    protected ProfileScreen(Game game) {
         this.game = game;
     }
 
     @Override
     public void show() {
-        //Suzdavane na backgraunda
         batch = new SpriteBatch();
-        sprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
-        sprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        sprite = new Sprite(Assets.backgroundMenu);
+        sprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
-        Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.profileButton);
+        Sprite spriteTitle = new Sprite(Assets.profileButton);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -84,7 +80,88 @@ public class ProfileScreen implements Screen {
         passwordField.setAlignment(Align.center);
         passwordCheckField.setAlignment(Align.center);
         emailField.setAlignment(Align.center);
+        addListenerField();
 
+        Sprite spriteApplyButton = new Sprite(Assets.applyButton);
+        spriteApplyButton.setSize(CONSTANT_WIDTH_APPLY_BUTTON, CONSTANT_HEIGHT_APPLY_BUTTON);
+        SpriteDrawable ApplySpriteDrawable = new SpriteDrawable(spriteApplyButton);
+        applyButton = new ImageButton(ApplySpriteDrawable);
+
+        stage = new Stage(new ScreenViewport());
+        container = new Table();
+        initializingContainer();
+
+        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
+
+        warningInitializingTable();
+        addListenerButton();
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        sprite.draw(batch);
+        batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+        batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            game.setScreen(new PlayScreen(game));
+        }
+
+    }
+
+    private void addListenerButton() {
+        applyButton.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                Assets.clickButton.play();
+                if ((cheakPasswordField(passwordField.getText().toString()))
+                        && (checkPasswordAndRePassword(passwordField.getText().toString(), passwordCheckField.getText().toString()))
+                        && (cheakEmailField(emailField.getText().toString()))) {
+                    userInfoManagerJson();
+                }
+            }
+        });
+    }
+
+    private void warningInitializingTable() {
+        tableMessage = new Table();
+        tableMessage.setFillParent(true);
+        tableMessage.top();
+
+        labelMessage = new Label("", skin);
+        labelMessage.setColor(Color.WHITE);
+        labelMessage.setAlignment(Align.center);
+        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        stage.addActor(tableMessage);
+    }
+
+    private void initializingContainer() {
+        container.setWidth(stage.getWidth());
+        container.align(Align.center | Align.top);
+        container.setPosition(0, Gdx.graphics.getHeight());
+
+        container.add(imageTitle).width(CONSTANT_WIDTH_TITLE).height(CONSTANT_HEIGHT_TITLE)
+                .padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
+        container.row();
+        container.add(passwordField).width(CONSTANT_TEXT_WIDTH).height(CONSTANT_TEXT_HEIGHT)
+                .padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
+        container.row();
+        container.add(passwordCheckField).width(CONSTANT_TEXT_WIDTH).height(CONSTANT_TEXT_HEIGHT)
+                .padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
+        container.row();
+        container.add(emailField).width(CONSTANT_TEXT_WIDTH).height(CONSTANT_TEXT_HEIGHT)
+                .padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
+        container.row();
+        container.add(applyButton);
+
+        stage.addActor(container);
+    }
+
+    private void addListenerField() {
         passwordField.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 passwordField.setText("");
@@ -106,67 +183,10 @@ public class ProfileScreen implements Screen {
                 emailField.setText("");
             }
         });
-
-
-        Sprite spriteApplyButton = new Sprite(bg.ittalents.game.Resource.Assets.applyButton);
-        spriteApplyButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH_APPLY_BUTTON), (HEIGHT_SCREEN / CONSTANT_HEIGHT_APPLY_BUTTON));
-        SpriteDrawable ApplySpriteDrawable = new SpriteDrawable(spriteApplyButton);
-        applyButton = new ImageButton(ApplySpriteDrawable);
-
-
-        stage = new Stage(new ScreenViewport());
-        container = new Table();
-
-        container.setWidth(stage.getWidth());
-        container.align(Align.center | Align.top);
-        container.setPosition(0, Gdx.graphics.getHeight());
-
-        container.add(imageTitle).width(WIDTH_SCREEN / CONSTANT_WIDTH_TITLE)
-                .height((HEIGHT_SCREEN / CONSTANT_HEIGHT_TITLE)).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
-        container.row();
-        container.add(passwordField).width(WIDTH_SCREEN / CONSTANT_TEXT_WIDTH)
-                .height(HEIGHT_SCREEN / CONSTANT_TEXT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
-        container.row();
-        container.add(passwordCheckField).width(WIDTH_SCREEN / CONSTANT_TEXT_WIDTH)
-                .height(HEIGHT_SCREEN / CONSTANT_TEXT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
-        container.row();
-        container.add(emailField).width(WIDTH_SCREEN / CONSTANT_TEXT_WIDTH)
-                .height(HEIGHT_SCREEN / CONSTANT_TEXT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
-        container.row();
-        container.add(applyButton);
-
-        stage.addActor(container);
-
-        Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchBackKey(true);
-
-
-        //        TOVA DA SE PREMESTI V DRUGIQ KOD
-        tableMessage = new Table();
-        tableMessage.setFillParent(true);
-        tableMessage.top();
-
-        labelMessage = new Label("", skin);
-        labelMessage.setColor(Color.WHITE);
-        labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
-        stage.addActor(tableMessage);
-
-
-        applyButton.addListener(new ClickListener() {
-            public void clicked(InputEvent e, float x, float y) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
-                if ((cheakPasswordField(passwordField.getText().toString()))
-                        && (checkPasswordAndRePassword(passwordField.getText().toString(), passwordCheckField.getText().toString()))
-                        && (cheakEmailField(emailField.getText().toString()))) {
-                    userInfoManagerJson();
-                }
-            }
-        });
     }
 
     private boolean cheakPasswordField(String passwordText) {
-        if (passwordText.matches(PASSWORD_PATTERN)) {
+        if (passwordText.matches(Constant.PASSWORD_PATTERN)) {
             return true;
         } else {
             labelMessage.setText("Password must contain a capital letter, \n one lowercase letter, one number and be 5-10 characters");
@@ -195,14 +215,13 @@ public class ProfileScreen implements Screen {
 
     private void userInfoManagerJson() {
         JsonObject json = new JsonObject();
-//        Tuk sled kato napravim klasa User da vzimame ve4e ID koeto imame za konkretniq potrebitel
-        json.add("userId", new JsonPrimitive(204));
+        json.add("userId", new JsonPrimitive(User.getSingletonUser().getUserId()));
         json.add("password", new JsonPrimitive(passwordField.getText()));
         json.add("email", new JsonPrimitive(emailField.getText()));
         json.add("allowNotification", new JsonPrimitive(true));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "userInfoManager");
+        httpRequest.setUrl(Assets.HTTP_SERVER + "userInfoManager");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
@@ -242,24 +261,7 @@ public class ProfileScreen implements Screen {
         });
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    DO TUK DA SE DOBAVI
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        sprite.draw(batch);
-        batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
-        batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            game.setScreen(new PlayScreen(game));
-        }
-
-    }
 
     @Override
     public void resize(int width, int height) {

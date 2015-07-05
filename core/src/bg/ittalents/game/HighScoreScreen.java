@@ -22,13 +22,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
+import bg.ittalents.game.Resource.Constant;
+
 
 public class HighScoreScreen implements Screen {
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
-    public static final float CONSTANT_HEIGHT_TITLE = 3;
-    public static final float CONSTANT_WIDTH_TITLE = 2;
+    private static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = Constant.HEIGHT_SCREEN / 3.2f;
+    private static final float CONSTANT_HEIGHT_TITLE = Constant.HEIGHT_SCREEN / 3;
+    private static final float CONSTANT_WIDTH_TITLE = Constant.WIDTH_SCREEN / 2;
 
     private Stage stage;
     private Game game;
@@ -40,7 +40,7 @@ public class HighScoreScreen implements Screen {
     private Skin skin;
     private Table scrollTable;
 
-    public HighScoreScreen(Game game) {
+    protected HighScoreScreen(Game game) {
         this.game = game;
     }
 
@@ -49,7 +49,7 @@ public class HighScoreScreen implements Screen {
         //Suzdavane na backgraunda
         batch = new SpriteBatch();
         sprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
-        sprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        sprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
         Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.highScoreImage);
@@ -78,8 +78,8 @@ public class HighScoreScreen implements Screen {
         scrollTable.align(Align.left | Align.top);
         scrollTable.setPosition(0, Gdx.graphics.getHeight());
 
-        scrollTable.add(imageTitle).width(WIDTH_SCREEN / CONSTANT_WIDTH_TITLE)
-                .height((HEIGHT_SCREEN / CONSTANT_HEIGHT_TITLE));
+        scrollTable.add(imageTitle).width(CONSTANT_WIDTH_TITLE)
+                .height(CONSTANT_HEIGHT_TITLE);
         scrollTable.row();
 
         highScoreJson();
@@ -107,6 +107,17 @@ public class HighScoreScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             game.setScreen(new PlayScreen(game));
         }
+    }
+
+    private void addUserInTable(String position, String name, String score) {
+        Label rowLabel = new Label("", skin);
+        rowLabel.setColor(Color.WHITE);
+        rowLabel.setAlignment(Align.left);
+        rowLabel.setText(position + "  " + name + " - " + score);
+        rowLabel.setFontScale(5, 2);
+        scrollTable.add(rowLabel).left();
+        scrollTable.row();
+
     }
 
     private void highScoreJson() {
@@ -168,17 +179,5 @@ public class HighScoreScreen implements Screen {
         stage.dispose();
         batch.dispose();
         skin.dispose();
-    }
-
-
-    private void addUserInTable(String position, String name, String score) {
-        Label rowLabel = new Label("", skin);
-        rowLabel.setColor(Color.WHITE);
-        rowLabel.setAlignment(Align.left);
-        rowLabel.setText(position + "  " + name + " - " + score);
-        rowLabel.setFontScale(5, 2);
-        scrollTable.add(rowLabel).left();
-        scrollTable.row();
-
     }
 }

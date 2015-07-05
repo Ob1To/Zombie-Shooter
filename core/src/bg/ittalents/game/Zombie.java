@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.Random;
 
+import bg.ittalents.game.Resource.Assets;
+
 /**
  * Created by Ob1 on 6/28/2015.
  */
@@ -37,14 +39,14 @@ public class Zombie extends Actor {
     public Zombie(int zombieLevel, float paragonLevel, final boolean position) {
         this.position = position;
         enemiesArray = new Texture[3];
-        enemiesArray[0] = bg.ittalents.game.Resource.Assets.enemySingleImage;
-        enemiesArray[1] = bg.ittalents.game.Resource.Assets.enemySingleImageLevel2;
-        enemiesArray[2] = bg.ittalents.game.Resource.Assets.enemySingleImageLevel3;
+        enemiesArray[0] = Assets.enemySingleImage;
+        enemiesArray[1] = Assets.enemySingleImageLevel2;
+        enemiesArray[2] = Assets.enemySingleImageLevel3;
 
         enemiesArrayWindow = new Texture[3];
-        enemiesArrayWindow[0] = bg.ittalents.game.Resource.Assets.enemySingleImageWindow;
-        enemiesArrayWindow[1] = bg.ittalents.game.Resource.Assets.enemySingleImageLevel2Window;
-        enemiesArrayWindow[2] = bg.ittalents.game.Resource.Assets.enemySingleImageLevel3Window;
+        enemiesArrayWindow[0] = Assets.enemySingleImageWindow;
+        enemiesArrayWindow[1] = Assets.enemySingleImageLevel2Window;
+        enemiesArrayWindow[2] = Assets.enemySingleImageLevel3Window;
 
         if (position) {
             if (zombieLevel == 3) {
@@ -132,7 +134,7 @@ public class Zombie extends Actor {
     public void checkTimeLiving() {
         if ((timeLiving <= 0) && (this.isVisible())) {
             currentZombie.setVisible(false);
-            bg.ittalents.game.Resource.Assets.zombieBite.play();
+            Assets.zombieBite.play();
             this.zombieLevel = initialZombieLevel;
             if (position) {
                 this.currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
@@ -156,9 +158,9 @@ public class Zombie extends Actor {
         Random rand = new Random();
         int dyingSound = rand.nextInt(2);
         if (dyingSound == 0) {
-            bg.ittalents.game.Resource.Assets.dyingZombie2.play();
+            Assets.dyingZombie2.play();
         } else {
-            bg.ittalents.game.Resource.Assets.dyingZombie1.play();
+            Assets.dyingZombie1.play();
         }
     }
 

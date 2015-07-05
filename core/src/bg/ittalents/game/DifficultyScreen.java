@@ -18,14 +18,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class DifficultyScreen implements Screen {
+import bg.ittalents.game.Resource.Constant;
 
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 12;
-    public static final float CONSTANT_HEIGHT_TITLE = 3;
-    public static final int CONSTANT_HEIGHT_REGISTER_BUTTON = 8;
-    private static final float CONSTANT_WIDTH = 3.5f;
+public class DifficultyScreen implements Screen {
+    public static final float CONSTANT_PAD_BOTTOM = Constant.HEIGHT_SCREEN / 12;
+    private static final int CONSTANT_HEIGHT_REGISTER_BUTTON =  Constant.HEIGHT_SCREEN /  8;
+    private static final float CONSTANT_WIDTH = Constant.WIDTH_SCREEN / 3.5f;
     private Game game;
     private Stage stage;
     private SpriteBatch batch;
@@ -46,7 +44,7 @@ public class DifficultyScreen implements Screen {
         //Suzdavane na backgraunda
         batch = new SpriteBatch();
         backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
-        backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        backgroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
         //Dobavqne na zaglavieto na igrata
@@ -57,15 +55,15 @@ public class DifficultyScreen implements Screen {
 
 
         Sprite spriteEasyButton = new Sprite(bg.ittalents.game.Resource.Assets.easyLevelButton);
-        spriteEasyButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
+        spriteEasyButton.setSize(CONSTANT_WIDTH,CONSTANT_HEIGHT_REGISTER_BUTTON);
         SpriteDrawable easySpriteDrawable = new SpriteDrawable(spriteEasyButton);
 
         Sprite spriteNormalButton = new Sprite(bg.ittalents.game.Resource.Assets.normalLevelButton);
-        spriteNormalButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
+        spriteNormalButton.setSize(CONSTANT_WIDTH, CONSTANT_HEIGHT_REGISTER_BUTTON);
         SpriteDrawable normalSpriteDrawable = new SpriteDrawable(spriteNormalButton);
 
         Sprite spriteHardButton = new Sprite(bg.ittalents.game.Resource.Assets.hardLevelButton);
-        spriteHardButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
+        spriteHardButton.setSize(CONSTANT_WIDTH, CONSTANT_HEIGHT_REGISTER_BUTTON);
         SpriteDrawable hardSpriteDrawable = new SpriteDrawable(spriteHardButton);
 
         bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteEasyButton, spriteNormalButton, spriteHardButton);
@@ -118,10 +116,10 @@ public class DifficultyScreen implements Screen {
         container = new Table();
         container.setWidth(stage.getWidth());
         container.align(Align.center | Align.top);
-        container.setPosition(0, HEIGHT_SCREEN);
+        container.setPosition(0, Constant.HEIGHT_SCREEN);
 
-        container.add(imageTitle).width(WIDTH_SCREEN)
-                .height((HEIGHT_SCREEN / CONSTANT_HEIGHT_TITLE)).padBottom(CONSTANT_PAD_BOTTOM);
+        container.add(imageTitle).width(Constant.WIDTH_SCREEN)
+                .height(Constant.CONSTANT_HEIGHT_TITLE).padBottom(CONSTANT_PAD_BOTTOM);
         container.row();
         container.add(easyButton).padBottom(CONSTANT_PAD_BOTTOM);
         container.row();

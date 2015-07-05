@@ -21,28 +21,28 @@ import java.util.Random;
 /**
  * Created by Ob1 on 6/28/2015.
  */
-public class GameScreen implements Screen, bg.ittalents.game.Resource.ITextFont {
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final float CONSTANT_X_FOR_LIVES_AND_MONEY = (float) (WIDTH_SCREEN / 2 + WIDTH_SCREEN / 3.7);
-    public static final int CONSTANT_X_FOR_SCORE = WIDTH_SCREEN / 50;
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final float CONSTANT_Y_FOR_MONEY = (float) (HEIGHT_SCREEN / 2 + HEIGHT_SCREEN / 2.2);
-    public static final int CONSTANT_Y_FOR_LIVES = HEIGHT_SCREEN;
-    public static final float CONSTANT_Y_FOR_SCORE = (float) (HEIGHT_SCREEN / 2 + HEIGHT_SCREEN / 2.1);
-    public static final int CONSTANT_TEXT_SIZE = HEIGHT_SCREEN / 20;
-    public static final float WIDTH_ZOMBIE = (float) (Gdx.graphics.getWidth() / 8.3);
-    public static final float HEIGHT_ZOMBIE = (float) (Gdx.graphics.getHeight() / 3.5);
-    public static final float POSITION_ONE_ZOMBIE_X = WIDTH_SCREEN / 13;
-    public static final float POSITION_SECOND_ZOMBIE_X = (float) (WIDTH_SCREEN / 4.4);
-    public static final float POSITION_THREE_ZOMBIE_X = (float) (WIDTH_SCREEN / 2.2);
-    public static final float POSITION_FOUR_ZOMBIE_X = (float) ((WIDTH_SCREEN / 2) + (WIDTH_SCREEN / 5.5));
-    public static final float POSITION_FIVE_ZOMBIE_X = (float) ((WIDTH_SCREEN / 2) + (WIDTH_SCREEN / 3.1));
-    public static final float POSITION_WINDOWS_ZOMBIE_Y = (float) (HEIGHT_SCREEN / 4.8);
-    public static final float POSITION_DOOR_ZOMBIE_Y = (float) (HEIGHT_SCREEN / 8);
+public class GameScreen implements Screen, ITextFont {
+    private static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
+    private static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
+    private static final float CONSTANT_X_FOR_LIVES_AND_MONEY = (float) (WIDTH_SCREEN / 2 + WIDTH_SCREEN / 3.7);
+    private static final int CONSTANT_X_FOR_SCORE = WIDTH_SCREEN / 50;
+    private static final float CONSTANT_Y_FOR_MONEY = (float) (HEIGHT_SCREEN / 2 + HEIGHT_SCREEN / 2.2);
+    private static final int CONSTANT_Y_FOR_LIVES = HEIGHT_SCREEN;
+    private static final float CONSTANT_Y_FOR_SCORE = (float) (HEIGHT_SCREEN / 2 + HEIGHT_SCREEN / 2.1);
+    private static final int CONSTANT_TEXT_SIZE = HEIGHT_SCREEN / 20;
+    private static final float WIDTH_ZOMBIE = (float) (Gdx.graphics.getWidth() / 8.3);
+    private static final float HEIGHT_ZOMBIE = (float) (Gdx.graphics.getHeight() / 3.5);
+    private static final float POSITION_ONE_ZOMBIE_X = WIDTH_SCREEN / 13;
+    private static final float POSITION_SECOND_ZOMBIE_X = (float) (WIDTH_SCREEN / 4.4);
+    private static final float POSITION_THREE_ZOMBIE_X = (float) (WIDTH_SCREEN / 2.2);
+    private static final float POSITION_FOUR_ZOMBIE_X = (float) ((WIDTH_SCREEN / 2) + (WIDTH_SCREEN / 5.5));
+    private static final float POSITION_FIVE_ZOMBIE_X = (float) ((WIDTH_SCREEN / 2) + (WIDTH_SCREEN / 3.1));
+    private static final float POSITION_WINDOWS_ZOMBIE_Y = (float) (HEIGHT_SCREEN / 4.8);
+    private static final float POSITION_DOOR_ZOMBIE_Y = (float) (HEIGHT_SCREEN / 8);
     protected static Zombie[] zombieArray;
     protected static int points;
     protected static int lives;
-    public static Stage mainStage;
+    protected static Stage mainStage;
     protected Game game;
     protected static Sprite backGroundSprite;
     protected static Sprite scaryZombieBackground;

@@ -15,4 +15,9 @@ public abstract class Constant {
     public static final String PASSWORD = "PASSWORD";
     public static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{5,10}";
     public static final String USER_PATTERN = "(?=.*[a-z]).{3,10}";
+    public static final float CONSTANT_WIDTH_FIELD_AND_BUTTON = Constant.WIDTH_SCREEN /3;
+    public static final float CONSTANT_HEIGHT_FIELD_AND_BUTTON = Constant.HEIGHT_SCREEN / 10;
+    public static final float CONSTANT_HEIGHT_TITLE = Constant.HEIGHT_SCREEN / 3;
+    public static final int CONSTANCE_HEIGHT_BUTTONS = Constant.HEIGHT_SCREEN / 5;
+    public static final float CONSTANT_PAD_LEFT_AND_RIGHT = Gdx.graphics.getWidth() / 30;
 }

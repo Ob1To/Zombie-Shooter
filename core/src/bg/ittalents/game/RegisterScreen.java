@@ -25,25 +25,15 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import bg.ittalents.game.Resource.Assets;
+import bg.ittalents.game.Resource.Constant;
+
 
 public class RegisterScreen extends LoginScreen implements Screen {
-
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    private static final float CONSTANT_WIDTH = 3;
-    private static final float CONSTANT_HEIGHT = 10;
     public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 12;
-    public static final float CONSTANT_PAD_LEFT_AND_RIGHT = Gdx.graphics.getWidth() / 30;
-    public static final float CONSTANT_HEIGHT_TITLE = 3;
-    public static final int CONSTANT_HEIGHT_REGISTER_BUTTON = 5;
-    public static final String USER_PATTERN = "(?=.*[a-z]).{3,10}";
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    public static final String PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{5,10}";
-    public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
-    public static final String USER_NAME = "USER NAME";
-    public static final String PASSWORD = "PASSWORD";
     public static final String RE_PASSWORD = "RE-PASSWORD";
     public static final String EMAIL = "EMAIL";
 
@@ -80,8 +70,8 @@ public class RegisterScreen extends LoginScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         // Adding the game title to the screen
-        Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.zombieShooterTitle);
-        bg.ittalents.game.Resource.Assets.spriteDefaultColorSolid(spriteTitle);
+        Sprite spriteTitle = new Sprite(Assets.zombieShooterTitle);
+        Assets.spriteDefaultColorSolid(spriteTitle);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -89,17 +79,17 @@ public class RegisterScreen extends LoginScreen implements Screen {
         container = new Table();
         container.setWidth(stage.getWidth());
         container.align(Align.center | Align.top);
-        container.setPosition(0, HEIGHT_SCREEN);
+        container.setPosition(0, Constant.HEIGHT_SCREEN);
 
         containerFirstRow = new Table();
         containerFirstRow.setWidth(stage.getWidth());
         containerFirstRow.align(Align.center | Align.top);
-        containerFirstRow.setPosition(0, HEIGHT_SCREEN);
+        containerFirstRow.setPosition(0, Constant.HEIGHT_SCREEN);
 
         containerSecondRow = new Table();
         containerSecondRow.setWidth(stage.getWidth());
         containerSecondRow.align(Align.center | Align.top);
-        containerSecondRow.setPosition(0, HEIGHT_SCREEN);
+        containerSecondRow.setPosition(0, Constant.HEIGHT_SCREEN);
 
         creatingRegisterButton();
 
@@ -117,8 +107,8 @@ public class RegisterScreen extends LoginScreen implements Screen {
         arrangingTheScreen();
 
         // Creating the background
-        backGroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
-        backGroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        backGroundSprite = new Sprite(Assets.backgroundMenu);
+        backGroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
 
         // Setting the back key on android to true, so it can accept interaction
         Gdx.input.setCatchBackKey(true);
@@ -130,14 +120,14 @@ public class RegisterScreen extends LoginScreen implements Screen {
         labelMessage = new Label("", skin);
         labelMessage.setColor(Color.WHITE);
         labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        tableMessage.add(labelMessage).expandX().padTop(Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
         stage.addActor(tableMessage);
 
         // When clicking on the register button we start the validation process.
         // It calls all the methods which are checking the user input
         registerButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 if ((checkUserField(userField.getText().toString())) && (checkPasswordField(passwordField.getText().toString()))
                         && (checkPasswordAndRePassword(passwordField.getText().toString(), passwordCheckField.getText().toString()))
                         && (checkEmailField(emailField.getText().toString()))) {
@@ -148,17 +138,18 @@ public class RegisterScreen extends LoginScreen implements Screen {
     }
 
     private void creatingRegisterButton() {
-        Sprite spriteRegisterButton = new Sprite(bg.ittalents.game.Resource.Assets.registerButton);
-        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteRegisterButton);
-        spriteRegisterButton.setSize((WIDTH_SCREEN / CONSTANT_WIDTH), (HEIGHT_SCREEN / CONSTANT_HEIGHT_REGISTER_BUTTON));
+        Sprite spriteRegisterButton = new Sprite(
+                Assets.registerButton);
+        Assets.spriteDefaultColor(spriteRegisterButton);
+        spriteRegisterButton.setSize((Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON), (Constant.CONSTANCE_HEIGHT_BUTTONS));
         SpriteDrawable registerSpriteDrawable = new SpriteDrawable(spriteRegisterButton);
         registerButton = new ImageButton(registerSpriteDrawable);
     }
 
     private void creatingTheTextFields() {
-        userField = new TextField(USER_NAME, skin);
+        userField = new TextField(Constant.USER_NAME, skin);
         userField.setColor(1,0,0,0.5f);
-        passwordField = new TextField(PASSWORD, skin);
+        passwordField = new TextField(Constant.PASSWORD, skin);
         passwordField.setColor(1,0,0,0.5f);
         passwordCheckField = new TextField(RE_PASSWORD, skin);
         passwordCheckField.setColor(1,0,0,0.5f);
@@ -210,7 +201,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
         json.add("email", new JsonPrimitive(emailField.getText()));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "registration");
+        httpRequest.setUrl(Assets.HTTP_SERVER + "registration");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
@@ -268,23 +259,23 @@ public class RegisterScreen extends LoginScreen implements Screen {
     }
 
     private void arrangingTheScreen() {
-        container.add(imageTitle).width(WIDTH_SCREEN)
-                .height((HEIGHT_SCREEN / CONSTANT_HEIGHT_TITLE)).padBottom(CONSTANT_PAD_BOTTOM);
+        container.add(imageTitle).width(Constant.WIDTH_SCREEN)
+                .height((Constant.CONSTANT_HEIGHT_TITLE)).padBottom(CONSTANT_PAD_BOTTOM);
         container.row();
-        containerFirstRow.add(userField).width(WIDTH_SCREEN / CONSTANT_WIDTH)
-                .height(HEIGHT_SCREEN / CONSTANT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM)
-                .padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
-        containerFirstRow.add(passwordField).width(WIDTH_SCREEN / CONSTANT_WIDTH)
-                .height(HEIGHT_SCREEN / CONSTANT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM)
-                .padLeft(CONSTANT_PAD_LEFT_AND_RIGHT);
+        containerFirstRow.add(userField).width(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON)
+                .height(Constant.CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM)
+                .padRight(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
+        containerFirstRow.add(passwordField).width(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON)
+                .height(Constant.CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM)
+                .padLeft(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
         container.add(containerFirstRow);
         container.row();
-        containerSecondRow.add(emailField).width(WIDTH_SCREEN / CONSTANT_WIDTH)
-                .height(HEIGHT_SCREEN / CONSTANT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM)
-                .padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
-        containerSecondRow.add(passwordCheckField).width(WIDTH_SCREEN / CONSTANT_WIDTH)
-                .height(HEIGHT_SCREEN / CONSTANT_HEIGHT).padBottom(CONSTANT_PAD_BOTTOM)
-                .padLeft(CONSTANT_PAD_LEFT_AND_RIGHT);
+        containerSecondRow.add(emailField).width(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON)
+                .height(Constant.CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM)
+                .padRight(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
+        containerSecondRow.add(passwordCheckField).width(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON)
+                .height(Constant.CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM)
+                .padLeft(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
         container.add(containerSecondRow);
         container.row();
         container.add(registerButton);
@@ -293,7 +284,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
     }
 
     private boolean checkUserField(String logField) {
-        if (logField.matches(USER_PATTERN)) {
+        if (logField.matches(Constant.USER_PATTERN)) {
             return true;
         }
         labelMessage.setText("Username must contain at least one letter and be 3-10 characters.");
@@ -301,7 +292,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
     }
 
     private boolean checkPasswordField(String passwordText) {
-        if (passwordText.matches(PASSWORD_PATTERN)) {
+        if (passwordText.matches(Constant.PASSWORD_PATTERN)) {
             return true;
         } else {
             labelMessage.setText("Password must contain a capital letter, \n one lowercase letter, one number and be 5-10 characters");

@@ -26,15 +26,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import bg.ittalents.game.Resource.Assets;
+import bg.ittalents.game.Resource.Constant;
 
 public class LoginScreen implements Screen {
     public static boolean offlineModeSelect;
     public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 30;
-    public static final float CONSTANT_PAD_LEFT_AND_RIGHT = Gdx.graphics.getWidth() / 30;
-    public static final float CONSTANT_HEIGHT_TITLE = bg.ittalents.game.Resource.Constant.HEIGHT_SCREEN / 3;
-    public static final int CONSTANCE_HEIGHT_BUTTONS = bg.ittalents.game.Resource.Constant.HEIGHT_SCREEN / 5;
-    private static final float CONSTANT_WIDTH_FIELD_AND_BUTTON = bg.ittalents.game.Resource.Constant.WIDTH_SCREEN /3;
-    private static final float CONSTANT_HEIGHT_FIELD_AND_BUTTON = bg.ittalents.game.Resource.Constant.HEIGHT_SCREEN / 10;
+
+
+
     private static boolean counterForStartMusicOneTime;
     private Skin skin;
     private Stage stage;
@@ -81,8 +81,8 @@ public class LoginScreen implements Screen {
         buttonsContainer = new Table();
 
 
-        loginField = new TextField(bg.ittalents.game.Resource.Constant.USER_NAME, skin);
-        passwordField = new TextField(bg.ittalents.game.Resource.Constant.PASSWORD, skin);
+        loginField = new TextField(Constant.USER_NAME, skin);
+        passwordField = new TextField(Constant.PASSWORD, skin);
         loginField.setAlignment(Align.center);
         passwordField.setAlignment(Align.center);
         loginField.setColor(1, 0, 0, 0.5f);
@@ -99,8 +99,8 @@ public class LoginScreen implements Screen {
         Gdx.input.setInputProcessor(stage); // This is needed to set up the stage so it can receive inputs from our users.
 
         batch = new SpriteBatch();
-        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
-        backgroundSprite.setSize(bg.ittalents.game.Resource.Constant.WIDTH_SCREEN, bg.ittalents.game.Resource.Constant.HEIGHT_SCREEN);
+        backgroundSprite = new Sprite(Assets.backgroundMenu);
+        backgroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
 
 
         tableMessage = new Table();
@@ -110,7 +110,7 @@ public class LoginScreen implements Screen {
         labelMessage = new Label("", skin);
         labelMessage.setColor(Color.WHITE);
         labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(bg.ittalents.game.Resource.Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        tableMessage.add(labelMessage).expandX().padTop(Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
         stage.addActor(tableMessage);
     }
 
@@ -130,23 +130,23 @@ public class LoginScreen implements Screen {
     }
 
     private void spriteDrawableCreator() { // Creating the image title, register and login buttons
-        zombieShooterSpriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.zombieShooterTitle);
-        bg.ittalents.game.Resource.Assets.spriteDefaultColorSolid(zombieShooterSpriteTitle);
+        zombieShooterSpriteTitle = new Sprite(Assets.zombieShooterTitle);
+        Assets.spriteDefaultColorSolid(zombieShooterSpriteTitle);
         zombieShooterSpriteDrawable = new SpriteDrawable(zombieShooterSpriteTitle);
         imageTitle = new Image(zombieShooterSpriteDrawable);
 
-        spriteRegisterButton = new Sprite(bg.ittalents.game.Resource.Assets.loginButton);
-        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteRegisterButton);
-        spriteRegisterButton.setSize(CONSTANT_WIDTH_FIELD_AND_BUTTON, CONSTANCE_HEIGHT_BUTTONS);
+        spriteRegisterButton = new Sprite(Assets.loginButton);
+        Assets.spriteDefaultColor(spriteRegisterButton);
+        spriteRegisterButton.setSize(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON, Constant.CONSTANCE_HEIGHT_BUTTONS);
         spriteDrawableRegisterButton = new SpriteDrawable(spriteRegisterButton);
 
-        spriteLoginButton = new Sprite(bg.ittalents.game.Resource.Assets.registerButton);
-        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteLoginButton);
-        spriteLoginButton.setSize(CONSTANT_WIDTH_FIELD_AND_BUTTON, CONSTANCE_HEIGHT_BUTTONS);
+        spriteLoginButton = new Sprite(Assets.registerButton);
+        Assets.spriteDefaultColor(spriteLoginButton);
+        spriteLoginButton.setSize(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON, Constant.CONSTANCE_HEIGHT_BUTTONS);
         spriteDrawableLoginButton = new SpriteDrawable(spriteLoginButton);
 
-        offlineModeSprite = new Sprite(bg.ittalents.game.Resource.Assets.offlineModeRedImage);
-        bg.ittalents.game.Resource.Assets.spriteDefaultColor(offlineModeSprite);
+        offlineModeSprite = new Sprite(Assets.offlineModeRedImage);
+        Assets.spriteDefaultColor(offlineModeSprite);
         offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
         offlineModeImage = new Image(offlineModeSpriteDrawable);
 
@@ -157,18 +157,18 @@ public class LoginScreen implements Screen {
         container.clear();
         container.setWidth(stage.getWidth());
         container.align(Align.center | Align.top);
-        container.setPosition(0, bg.ittalents.game.Resource.Constant.HEIGHT_SCREEN);
+        container.setPosition(0, Constant.HEIGHT_SCREEN);
 
-        container.add(imageTitle).width(bg.ittalents.game.Resource.Constant.WIDTH_SCREEN).height(CONSTANT_HEIGHT_TITLE).padBottom(CONSTANT_PAD_BOTTOM);
+        container.add(imageTitle).width(Constant.WIDTH_SCREEN).height(Constant.CONSTANT_HEIGHT_TITLE).padBottom(CONSTANT_PAD_BOTTOM);
         container.row();
-        container.add(loginField).width(CONSTANT_WIDTH_FIELD_AND_BUTTON).height(CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM);
+        container.add(loginField).width(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON).height(Constant.CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM);
         container.row();
-        container.add(passwordField).width(CONSTANT_WIDTH_FIELD_AND_BUTTON).height(CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM);
+        container.add(passwordField).width(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON).height(Constant.CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM);
         container.row();
-        container.add(offlineModeImage).width(CONSTANT_WIDTH_FIELD_AND_BUTTON).height(CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM);
+        container.add(offlineModeImage).width(Constant.CONSTANT_WIDTH_FIELD_AND_BUTTON).height(Constant.CONSTANT_HEIGHT_FIELD_AND_BUTTON).padBottom(CONSTANT_PAD_BOTTOM);
         container.row();
-        buttonsContainer.add(loginButton).padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
-        buttonsContainer.add(registerButton).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT);
+        buttonsContainer.add(loginButton).padRight(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
+        buttonsContainer.add(registerButton).padLeft(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
         container.add(buttonsContainer);
         stage.addActor(container);
     }
@@ -190,7 +190,7 @@ public class LoginScreen implements Screen {
 
         registerButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
@@ -202,15 +202,15 @@ public class LoginScreen implements Screen {
 
         loginButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
-                if (!offlineModeSelect){
-                    if ((loginField.getText().toString().matches(bg.ittalents.game.Resource.Constant.USER_PATTERN))
-                            && (passwordField.getText().toString().matches(bg.ittalents.game.Resource.Constant.PASSWORD_PATTERN))) {
+                Assets.clickButton.play();
+                if (!offlineModeSelect) {
+                    if ((loginField.getText().toString().matches(Constant.USER_PATTERN))
+                            && (passwordField.getText().toString().matches(Constant.PASSWORD_PATTERN))) {
                         login(loginField.getText(), passwordField.getText(), true);
                     } else {
                         labelMessage.setText("Invalid username or password.");
                     }
-            }else {
+                } else {
                     //This set resources for the game.
                     User.getSingletonUser().setWeapon(1);
                     User.getSingletonUser().setLevel(6);
@@ -230,10 +230,10 @@ public class LoginScreen implements Screen {
 
         offlineModeImage.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 if (currentColor.equals("red")) {
                     currentColor = "green";
-                    offlineModeSprite = new Sprite(bg.ittalents.game.Resource.Assets.offlineModeGreenImage);
+                    offlineModeSprite = new Sprite(Assets.offlineModeGreenImage);
                     offlineModeSprite.setColor(0, 1, 0, 0.7f);
                     offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
                     offlineModeImage = new Image(offlineModeSpriteDrawable);
@@ -242,8 +242,8 @@ public class LoginScreen implements Screen {
                     offlineModeSelect = true;
                 } else {
                     currentColor = "red";
-                    offlineModeSprite = new Sprite(bg.ittalents.game.Resource.Assets.offlineModeRedImage);
-                    bg.ittalents.game.Resource.Assets.spriteDefaultColor(offlineModeSprite);
+                    offlineModeSprite = new Sprite(Assets.offlineModeRedImage);
+                    Assets.spriteDefaultColor(offlineModeSprite);
                     offlineModeSpriteDrawable = new SpriteDrawable(offlineModeSprite);
                     offlineModeImage = new Image(offlineModeSpriteDrawable);
                     clickListenerHandler();
@@ -260,7 +260,7 @@ public class LoginScreen implements Screen {
         json.add("password", new JsonPrimitive(password));
 
         final Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpRequest.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "login");
+        httpRequest.setUrl(Assets.HTTP_SERVER + "login");
         httpRequest.setHeader("Content-Type", "application/json");
         httpRequest.setContent(json.toString());
         Gdx.net.sendHttpRequest(httpRequest, new Net.HttpResponseListener() {
@@ -313,7 +313,7 @@ public class LoginScreen implements Screen {
 
     private void loadUserInformation() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
@@ -343,7 +343,7 @@ public class LoginScreen implements Screen {
 
     private void weaponsStoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "weaponsStore?userId=" + User.getSingletonUser().getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
@@ -376,12 +376,12 @@ public class LoginScreen implements Screen {
     }
 
     public static void stopMenuMusic() {
-        bg.ittalents.game.Resource.Assets.gameMenuMusic.stop();
+        Assets.gameMenuMusic.stop();
     }
 
     private static void gameMenuMusic() {
-        bg.ittalents.game.Resource.Assets.gameMenuMusic.play();
-        bg.ittalents.game.Resource.Assets.gameMenuMusic.setLooping(true);
+        Assets.gameMenuMusic.play();
+        Assets.gameMenuMusic.setLooping(true);
     }
 
     @Override

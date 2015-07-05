@@ -11,13 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import bg.ittalents.game.Resource.Assets;
+import bg.ittalents.game.Resource.Constant;
+
 /**
  * Created by vlado on 04-Jul-15.
  */
 public class GameOverScreen implements Screen{
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final int CONSTANT_SEE_SCREEN = 3;
+    private static final int CONSTANT_SEE_SCREEN = 3;
 
     private Game game;
     private SpriteBatch batch;
@@ -33,12 +34,12 @@ public class GameOverScreen implements Screen{
     @Override
     public void show() {
         batch = new SpriteBatch();
-        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.gameOverScreen);
-        backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        backgroundSprite = new Sprite(Assets.gameOverScreen);
+        backgroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
-        bg.ittalents.game.Resource.Assets.gamePlayMusic.stop();
-        bg.ittalents.game.Resource.Assets.gameOver.play();
+        Assets.gamePlayMusic.stop();
+        Assets.gameOver.play();
 
         Gdx.input.setInputProcessor(stage);
 
@@ -46,9 +47,9 @@ public class GameOverScreen implements Screen{
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (minSeeScreen > CONSTANT_SEE_SCREEN) {
-                    bg.ittalents.game.Resource.Assets.gameOver.stop();
-                    bg.ittalents.game.Resource.Assets.gameMenuMusic.play();
-                    bg.ittalents.game.Resource.Assets.gameMenuMusic.setLooping(true);
+                    Assets.gameOver.stop();
+                    Assets.gameMenuMusic.play();
+                    Assets.gameMenuMusic.setLooping(true);
                     game.setScreen(new PlayScreen(game));
                 }
                 return true;

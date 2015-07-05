@@ -187,6 +187,8 @@ public class GameScreen implements Screen {
     private void settingOutOfAmmo() {
         if (User.getSingletonUser().getGameBulletsForLevel() <= 0) {
             outOfAmmo = true;
+        }else{
+            outOfAmmo = false;
         }
     }
 

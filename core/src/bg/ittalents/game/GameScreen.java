@@ -63,6 +63,10 @@ public class GameScreen implements Screen, ITextFont {
     private Zombie newZombie;
     private boolean checkForAddTextureBoss;
     protected static boolean outOfAmmo;
+    private Sprite preBossSprite;
+    private SpriteDrawable preBossSpriteDrawable;
+    private Image preBossImage;
+    private boolean alreadyStartedBackgroundMusic;
 
 
     public GameScreen(Game game) {
@@ -79,6 +83,13 @@ public class GameScreen implements Screen, ITextFont {
         scaryZombieBackground.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         spriteDrawableScaryZombieBackground = new SpriteDrawable(scaryZombieBackground);
         scaryZombieBackgroundImage = new Image(spriteDrawableScaryZombieBackground);
+
+        preBossSprite = new Sprite(Assets.preBossBackground);
+        preBossSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        preBossSpriteDrawable = new SpriteDrawable(preBossSprite);
+        preBossImage = new Image(preBossSpriteDrawable);
+
+
         Assets.gamePlayMusic.play();
         LoginScreen.stopMenuMusic();
         Assets.gamePlayMusic.setLooping(true);
@@ -144,6 +155,8 @@ public class GameScreen implements Screen, ITextFont {
         }
         mainStage.addActor(scaryZombieBackgroundImage);
         scaryZombieBackgroundImage.setVisible(false);
+        mainStage.addActor(preBossImage);
+        preBossImage.setVisible(false);
     }
 
     public void addZombie() {
@@ -199,17 +212,21 @@ public class GameScreen implements Screen, ITextFont {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         zombieSpawner(Gdx.graphics.getDeltaTime());
+
         mainStage.act(Gdx.graphics.getDeltaTime());
         mainStage.draw();
+
         spriteBatch.begin();
         textBitmapFontDraw();
         spriteBatch.end();
+
         startTimerBoss(Gdx.graphics.getDeltaTime());
         addBossTexture();
         playingBossSounds();
         checkForGameOver();
         checkWinScreen();
         settingOutOfAmmo();
+        preBossImageManager();
 
     }
 
@@ -253,38 +270,38 @@ public class GameScreen implements Screen, ITextFont {
 
 
     private void addBossTexture() {
-        if ((timerBoss <= 5) && (checkForAddTextureBoss == false)) {
+        if ((timerBoss <= 12.22) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             bossTexture = Assets.bossTexture1;
-        } else if ((timerBoss > 8) && (timerBoss <= 11) && (checkForAddTextureBoss == true)) {
+        } else if ((timerBoss > 15.22) && (timerBoss <= 18.22) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
             Assets.takingDamage.play();
             bossTexture = Assets.bossTexture2;
-        } else if ((timerBoss > 11) && (timerBoss <= 14) && (checkForAddTextureBoss == false)) {
+        } else if ((timerBoss > 18.22) && (timerBoss <= 21.22) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             Assets.takingDamage.play();
             bossTexture = Assets.bossTexture3;
-        } else if ((timerBoss > 14) && (timerBoss <= 17) && (checkForAddTextureBoss == true)) {
+        } else if ((timerBoss > 21.22) && (timerBoss <= 24.22) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
             Assets.takingDamage.play();
             bossTexture = Assets.bossTexture4;
-        } else if ((timerBoss > 17) && (timerBoss <= 20) && (checkForAddTextureBoss == false)) {
+        } else if ((timerBoss > 24.22) && (timerBoss <= 27.22) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             Assets.takingDamage.play();
             bossTexture = Assets.bossTexture5;
-        } else if ((timerBoss > 20) && (timerBoss <= 23) && (checkForAddTextureBoss == true)) {
+        } else if ((timerBoss > 27.22) && (timerBoss <= 30.22) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
             Assets.takingDamage.play();
             bossTexture = Assets.bossTexture6;
-        } else if ((timerBoss > 23) && (timerBoss <= 26) && (checkForAddTextureBoss == false)) {
+        } else if ((timerBoss > 30.22) && (timerBoss <= 33.22) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             Assets.takingDamage.play();
             bossTexture = Assets.bossTexture7;
-        } else if ((timerBoss > 26) && (timerBoss <= 29) && (checkForAddTextureBoss == true)) {
+        } else if ((timerBoss > 33.22) && (timerBoss <= 36.22) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
             Assets.takingDamage.play();
             bossTexture = Assets.bossTexture8;
-        } else if ((timerBoss > 29) && (timerBoss <= 32) && (checkForAddTextureBoss == false)) {
+        } else if ((timerBoss > 36.22) && (timerBoss <= 39.22) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
             Assets.takingDamage.play();
             bossTexture = Assets.bossTexture9;
@@ -303,7 +320,7 @@ public class GameScreen implements Screen, ITextFont {
                 return true;
             }
         });
-        if ((User.getSingletonUser().getGameAppearingZombieAll() <= 0) && (timerBoss >= 5)) { // ASASSASASSSSSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        if ((User.getSingletonUser().getGameAppearingZombieAll() <= 0) && (timerBoss >=  12.22)) { // ASASSASASSSSSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
             imageBoss.remove();
             mainStage.addActor(imageBoss);
         }
@@ -311,44 +328,62 @@ public class GameScreen implements Screen, ITextFont {
 
     private void playingBossSounds() {
 //        Assets.gamePlayMusic.stop();
-        if (timerBoss >= 5 && timerBoss <= 8.375 && alreadyPlayed == true) {
+        if (timerBoss >= 12.22 && timerBoss <= 16.22 && alreadyPlayed == true) {
+            preBossImage.setVisible(false);
             alreadyPlayed = false;
             Assets.bossSound1.play();
 //            long id = Assets.bossSound1.play();
 //            Assets.bossSound1.setPitch(id, 0.8f);
-        } else if (timerBoss > 8.375 && timerBoss <= 11.75 && alreadyPlayed == false) {
+        } else if (timerBoss > 16.22 && timerBoss <= 20.22 && alreadyPlayed == false) {
             alreadyPlayed = true;
             long id = Assets.bossSound2.play();
 //            Assets.bossSound2.setPitch(id, 0.8f);
-        } else if (timerBoss > 11.75 && timerBoss <= 15.125 && alreadyPlayed == true) {
+        } else if (timerBoss > 20.22 && timerBoss <= 24.22 && alreadyPlayed == true) {
             alreadyPlayed = false;
             long id = Assets.bossSound3.play();
 //            Assets.bossSound3.setPitch(id, 0.8f);
-        } else if (timerBoss > 15.125 && timerBoss <= 18.5 && alreadyPlayed == false) {
+        } else if (timerBoss > 24.22 && timerBoss <= 28.22 && alreadyPlayed == false) {
             alreadyPlayed = true;
             long id = Assets.bossSound4.play();
 //            Assets.bossSound4.setPitch(id, 0.8f);
-        } else if (timerBoss > 18.5 && timerBoss <= 21.875 && alreadyPlayed == true) {
+        } else if (timerBoss > 28.22 && timerBoss <= 32.22 && alreadyPlayed == true) {
             long id = Assets.bossSound1.play();
 //            Assets.bossSound1.setPitch(id, 0.8f);
             alreadyPlayed = false;
-        } else if (timerBoss > 21.875 && timerBoss <= 25.25 && alreadyPlayed == false) {
+        } else if (timerBoss > 32.22 && timerBoss <= 36.22 && alreadyPlayed == false) {
             long id = Assets.bossSound2.play();
 //            Assets.bossSound2.setPitch(id, 0.8f);
             alreadyPlayed = true;
-        } else if (timerBoss > 25.25 && timerBoss <= 28.625 && alreadyPlayed == true) {
+        } else if (timerBoss > 36.22 && timerBoss <= 40.22 && alreadyPlayed == true) {
             long id = Assets.bossSound3.play();
 //            Assets.bossSound3.setPitch(id, 0.8f);
             alreadyPlayed = false;
-        } else if (timerBoss > 28.625 && timerBoss <= 32 && alreadyPlayed == false) {
+        } else if (timerBoss > 40.22 && timerBoss <= 44.22 && alreadyPlayed == false) {
             long id = Assets.bossSound4.play();
 //            Assets.bossSound4.setPitch(id, 0.8f);
             alreadyPlayed = true;
         }
     }
 
+    private void preBossImageManager(){
+
+        if (timerBoss > 3 && timerBoss <= 12.22f && alreadyStartedBackgroundMusic == false){
+            alreadyStartedBackgroundMusic = true;
+            preBossImage.setVisible(true);
+            Assets.gamePlayMusic.stop();
+            Assets.bossIntro.play();
+        }
+        else if (timerBoss > 12.22f){
+            preBossImage.setVisible(false);
+            Assets.bossIntro.stop();
+            Assets.gamePlayMusic.play();
+        }
+    }
+
     private void startTimerBoss(float delta) {
         if (User.getSingletonUser().getGameAppearingZombieAll() <= 0) {
+//            Assets.gamePlayMusic.stop();
+//            Assets.bossIntro.play();
             timerBoss += delta;
         }
     }
@@ -360,7 +395,7 @@ public class GameScreen implements Screen, ITextFont {
     }
 
     private void checkWinScreen() {
-        if ((lives > 0) && (timerBoss > 32)) {
+        if ((lives > 0) && (timerBoss > 39.22)) {
             game.setScreen(new GameWinScreen(game));
         }
 

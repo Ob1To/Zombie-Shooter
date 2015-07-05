@@ -53,7 +53,7 @@ public class IntroScreen extends ApplicationAdapter implements Screen {
         itTalentsSprite.setSize(0.9f, 0.9f * itTalentsSprite.getHeight() / itTalentsSprite.getWidth());
         itTalentsSprite.setOrigin(itTalentsSprite.getWidth() / 2, itTalentsSprite.getHeight() / 2);
         itTalentsSprite.setPosition(-itTalentsSprite.getWidth() / 2, -itTalentsSprite.getHeight() / 2);
-        this.animationLengthSec = 1f;
+        this.animationLengthSec = 7f;
     }
 
     @Override

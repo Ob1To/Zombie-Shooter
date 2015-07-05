@@ -128,7 +128,6 @@ public class PlayScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             game.setScreen(new LoginScreen(game));
         }
-
     }
 
     private void creatingAllTheButtons() {

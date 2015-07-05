@@ -65,7 +65,7 @@ public class ProfileScreen implements Screen {
         sprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
-        Sprite spriteTitle = new Sprite(Assets.profileButton);
+        Sprite spriteTitle = new Sprite(Assets.profileImage); //TUKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -73,9 +73,11 @@ public class ProfileScreen implements Screen {
         passwordField = new TextField("NEW PASSWORD", skin);
         passwordCheckField = new TextField("RE-PASSWORD", skin);
         emailField = new TextField("EMAIL", skin);
-
+        passwordField.setColor(1, 0, 0, 0.5f);
         passwordField.setAlignment(Align.center);
+        passwordCheckField.setColor(1, 0, 0, 0.5f);
         passwordCheckField.setAlignment(Align.center);
+        emailField.setColor(1, 0, 0, 0.5f);
         emailField.setAlignment(Align.center);
         addListenerField();
 
@@ -93,6 +95,9 @@ public class ProfileScreen implements Screen {
 
         warningInitializingTable();
         addListenerButton();
+
+        Assets.spriteDefaultColor(spriteTitle);
+        Assets.spriteDefaultColor(spriteApplyButton);
     }
 
     @Override

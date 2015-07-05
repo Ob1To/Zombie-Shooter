@@ -113,7 +113,7 @@ public class Assets {
     public static Sound bossSound2;
     public static Sound bossSound3;
     public static Sound bossSound4;
-    public static Sound bossIntro;
+    public static Music bossIntro;
     public static Sound takingDamage;
     public static Sound emptyClip;
 
@@ -196,7 +196,7 @@ public class Assets {
         manager.load(BOSS_SOUND_2, Sound.class);
         manager.load(BOSS_SOUND_3, Sound.class);
         manager.load(BOSS_SOUND_4, Sound.class);
-        manager.load(BOSS_INTRO, Sound.class);
+        manager.load(BOSS_INTRO, Music.class);
         manager.load(TAKING_DAMAGE, Sound.class);
         manager.load(EMPTY_CLIP, Sound.class);
 
@@ -284,7 +284,7 @@ public class Assets {
         bossSound2 = manager.get(BOSS_SOUND_2, Sound.class);
         bossSound3 = manager.get(BOSS_SOUND_3, Sound.class);
         bossSound4 = manager.get(BOSS_SOUND_4, Sound.class);
-        bossIntro = manager.get(BOSS_INTRO, Sound.class);
+        bossIntro = manager.get(BOSS_INTRO, Music.class);
         takingDamage = manager.get(TAKING_DAMAGE, Sound.class);
         emptyClip = manager.get(EMPTY_CLIP, Sound.class);
 

@@ -296,7 +296,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
         if (logField.matches(USER_PATTERN)) {
             return true;
         }
-        labelMessage.setText("Username must be at least 3 characters long and one letter.");
+        labelMessage.setText("Username must contain at least one letter and be 3-10 characters.");
         return false;
     }
 

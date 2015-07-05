@@ -278,7 +278,7 @@ public class ProfileScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override

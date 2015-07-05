@@ -88,6 +88,6 @@ public class IntroScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 }

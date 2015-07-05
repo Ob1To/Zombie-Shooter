@@ -335,7 +335,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override

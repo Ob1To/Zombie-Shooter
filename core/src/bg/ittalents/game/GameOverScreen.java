@@ -48,6 +48,8 @@ public class GameOverScreen implements Screen{
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (minSeeScreen > CONSTANT_SEE_SCREEN) {
                     Assets.gameOver.stop();
+                    Assets.gameMenuMusic.play();
+                    Assets.gameMenuMusic.setLooping(true);
                     game.setScreen(new PlayScreen(game));
                 }
                 return true;

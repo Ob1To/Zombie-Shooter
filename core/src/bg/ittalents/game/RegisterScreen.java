@@ -24,7 +24,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-
 import bg.ittalents.game.Resource.Assets;
 import bg.ittalents.game.Resource.Constant;
 
@@ -33,6 +32,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
     public static final float CONSTANT_PAD_BOTTOM = Constant.HEIGHT_SCREEN / 12;
     public static final String RE_PASSWORD = "RE-PASSWORD";
     public static final String EMAIL = "EMAIL";
+
 
     private Game game;
     private Skin skin;

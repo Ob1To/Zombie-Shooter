@@ -15,7 +15,7 @@ public abstract class ResourcesForOffline {
     public static void levelMapResources(int index) {
         switch (index) {
             case 1:
-                count = 10;
+                count = 40;
                 durationOn = 1;
                 durationOff = 2;
                 break;
@@ -59,9 +59,9 @@ public abstract class ResourcesForOffline {
 
     public static void setBullets(){
         if(User.getSingletonUser().getWeapon() >= User.getSingletonUser().getGameDamageZombie()) {
-            User.getSingletonUser().setGameBulletsForLevel((int) ((count * User.getSingletonUser().getWeapon()) * BULLETS_COEFFICIENT));
+            User.getSingletonUser().setGameBulletsForLevel((int) ((count * BULLETS_COEFFICIENT) * User.getSingletonUser().getWeapon()));
         }else{
-            User.getSingletonUser().setGameBulletsForLevel((int) ((count * User.getSingletonUser().getGameDamageZombie()) * BULLETS_COEFFICIENT));
+            User.getSingletonUser().setGameBulletsForLevel((int) ((count * BULLETS_COEFFICIENT) * User.getSingletonUser().getGameDamageZombie()));
         }
     }
 }

@@ -78,7 +78,6 @@ public class GameScreen implements Screen, ITextFont {
 
     @Override
     public void show() {
-
         scaryZombieBackground = new Sprite(Assets.scaryZombieImage);
         scaryZombieBackground.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         spriteDrawableScaryZombieBackground = new SpriteDrawable(scaryZombieBackground);

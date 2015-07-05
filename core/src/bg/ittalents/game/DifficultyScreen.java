@@ -107,7 +107,9 @@ public class DifficultyScreen implements Screen {
                     @Override
                     public void run() {
                         User.getSingletonUser().setGameDamageZombie(1);
-                        ResourcesForOffline.setBullets();
+                        if (LoginScreen.offlineModeSelect){
+                            ResourcesForOffline.setBullets();
+                    }
                         game.setScreen(new GameScreen(game));
                     }
                 })));
@@ -121,7 +123,9 @@ public class DifficultyScreen implements Screen {
                     @Override
                     public void run() {
                         User.getSingletonUser().setGameDamageZombie(2);
-                        ResourcesForOffline.setBullets();
+                        if (LoginScreen.offlineModeSelect) {
+                            ResourcesForOffline.setBullets();
+                        }
                         game.setScreen(new GameScreen(game));
                     }
                 })));
@@ -135,7 +139,9 @@ public class DifficultyScreen implements Screen {
                     @Override
                     public void run() {
                         User.getSingletonUser().setGameDamageZombie(3);
-                        ResourcesForOffline.setBullets();
+                        if (LoginScreen.offlineModeSelect) {
+                            ResourcesForOffline.setBullets();
+                        }
                         game.setScreen(new GameScreen(game));
                     }
                 })));

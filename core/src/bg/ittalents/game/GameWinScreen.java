@@ -51,7 +51,6 @@ public class GameWinScreen implements Screen{
 
         Gdx.input.setInputProcessor(stage);
         textBitmapFont = loadFont();
-
         stage.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -78,7 +77,9 @@ public class GameWinScreen implements Screen{
         batch.begin();
         backgroundSprite.draw(batch);
         batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-        textBitmapFont.draw(batch, "SCORE  " + GameScreen.points, Gdx.graphics.getWidth() / 3, Gdx.graphics.getHeight() / 2 - textBitmapFont.getLineHeight() / 2);
+        textBitmapFont.draw(batch, "You Win !" , Gdx.graphics.getWidth() / 3.1f, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3);
+        textBitmapFont.draw(batch, "You Saved The Camp !", Gdx.graphics.getWidth() / 7.5f, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 7);
+        textBitmapFont.draw(batch, "SCORE  " + GameScreen.points, Gdx.graphics.getWidth() / 3.15f, Gdx.graphics.getHeight() / 2 - textBitmapFont.getLineHeight() / 2);
         batch.end();
         setTimeSeeScreen(Gdx.graphics.getDeltaTime());
         stage.act(Gdx.graphics.getDeltaTime());

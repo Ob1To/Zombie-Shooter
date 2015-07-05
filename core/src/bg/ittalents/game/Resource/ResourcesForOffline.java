@@ -55,10 +55,13 @@ public abstract class ResourcesForOffline {
         User.getSingletonUser().setGameAppearingZombieAll(count);
         User.getSingletonUser().setGameAppearingZombieTime(durationOn);
         User.getSingletonUser().setGameHidingZombie(durationOff);
-        if(User.getSingletonUser().getWeapon() > User.getSingletonUser().getGameHidingZombie()) {
-            User.getSingletonUser().setGameBulletsForLevel((int) ((count * BULLETS_COEFFICIENT) * (User.getSingletonUser().getWeapon())));
+    }
+
+    public static void setBullets(){
+        if(User.getSingletonUser().getWeapon() >= User.getSingletonUser().getGameDamageZombie()) {
+            User.getSingletonUser().setGameBulletsForLevel((int) ((count * User.getSingletonUser().getWeapon()) * BULLETS_COEFFICIENT));
         }else{
-            User.getSingletonUser().setGameBulletsForLevel((int) ((count * BULLETS_COEFFICIENT) * (User.getSingletonUser().getGameHidingZombie())));
+            User.getSingletonUser().setGameBulletsForLevel((int) ((count * User.getSingletonUser().getGameDamageZombie()) * BULLETS_COEFFICIENT));
         }
     }
 }

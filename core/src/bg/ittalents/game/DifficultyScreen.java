@@ -18,7 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import bg.ittalents.game.Resource.Assets;
 import bg.ittalents.game.Resource.Constant;
+import bg.ittalents.game.Resource.ResourcesForOffline;
 
 public class DifficultyScreen implements Screen {
     public static final float CONSTANT_PAD_BOTTOM = Constant.HEIGHT_SCREEN / 12;
@@ -43,30 +45,30 @@ public class DifficultyScreen implements Screen {
 
         //Suzdavane na backgraunda
         batch = new SpriteBatch();
-        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
+        backgroundSprite = new Sprite(Assets.backgroundMenu);
         backgroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
         //Dobavqne na zaglavieto na igrata
-        Sprite spriteTitle = new Sprite(bg.ittalents.game.Resource.Assets.zombieShooterTitle);
-        bg.ittalents.game.Resource.Assets.spriteDefaultColorSolid(spriteTitle);
+        Sprite spriteTitle = new Sprite(Assets.zombieShooterTitle);
+        Assets.spriteDefaultColorSolid(spriteTitle);
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
 
-        Sprite spriteEasyButton = new Sprite(bg.ittalents.game.Resource.Assets.easyLevelButton);
+        Sprite spriteEasyButton = new Sprite(Assets.easyLevelButton);
         spriteEasyButton.setSize(CONSTANT_WIDTH,CONSTANT_HEIGHT_REGISTER_BUTTON);
         SpriteDrawable easySpriteDrawable = new SpriteDrawable(spriteEasyButton);
 
-        Sprite spriteNormalButton = new Sprite(bg.ittalents.game.Resource.Assets.normalLevelButton);
+        Sprite spriteNormalButton = new Sprite(Assets.normalLevelButton);
         spriteNormalButton.setSize(CONSTANT_WIDTH, CONSTANT_HEIGHT_REGISTER_BUTTON);
         SpriteDrawable normalSpriteDrawable = new SpriteDrawable(spriteNormalButton);
 
-        Sprite spriteHardButton = new Sprite(bg.ittalents.game.Resource.Assets.hardLevelButton);
+        Sprite spriteHardButton = new Sprite(Assets.hardLevelButton);
         spriteHardButton.setSize(CONSTANT_WIDTH, CONSTANT_HEIGHT_REGISTER_BUTTON);
         SpriteDrawable hardSpriteDrawable = new SpriteDrawable(spriteHardButton);
 
-        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spriteEasyButton, spriteNormalButton, spriteHardButton);
+        Assets.spriteDefaultColor(spriteEasyButton, spriteNormalButton, spriteHardButton);
 
         easyButton = new ImageButton(easySpriteDrawable);
         normalButton = new ImageButton(normalSpriteDrawable);
@@ -75,11 +77,12 @@ public class DifficultyScreen implements Screen {
 
         easyButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
                         User.getSingletonUser().setGameDamageZombie(1);
+                        ResourcesForOffline.setBullets();
                         game.setScreen(new GameScreen(game));
                     }
                 })));
@@ -88,11 +91,12 @@ public class DifficultyScreen implements Screen {
 
         normalButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
                         User.getSingletonUser().setGameDamageZombie(2);
+                        ResourcesForOffline.setBullets();
                         game.setScreen(new GameScreen(game));
                     }
                 })));
@@ -101,11 +105,12 @@ public class DifficultyScreen implements Screen {
 
         hardButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
                         User.getSingletonUser().setGameDamageZombie(3);
+                        ResourcesForOffline.setBullets();
                         game.setScreen(new GameScreen(game));
                     }
                 })));

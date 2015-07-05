@@ -15,23 +15,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
 import java.util.Random;
+import bg.ittalents.game.Resource.Assets;
+import bg.ittalents.game.Resource.Constant;
 
 /**
  * Created by Ob1 on 6/28/2015.
  */
 public class GameScreen implements Screen, ITextFont {
-    private static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    private static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
+    private static final int WIDTH_SCREEN = Constant.WIDTH_SCREEN;
+    private static final int HEIGHT_SCREEN = Constant.HEIGHT_SCREEN;
     private static final float CONSTANT_X_FOR_LIVES_AND_MONEY = (float) (WIDTH_SCREEN / 2 + WIDTH_SCREEN / 3.7);
     private static final int CONSTANT_X_FOR_SCORE = WIDTH_SCREEN / 50;
     private static final float CONSTANT_Y_FOR_MONEY = (float) (HEIGHT_SCREEN / 2 + HEIGHT_SCREEN / 2.2);
     private static final int CONSTANT_Y_FOR_LIVES = HEIGHT_SCREEN;
     private static final float CONSTANT_Y_FOR_SCORE = (float) (HEIGHT_SCREEN / 2 + HEIGHT_SCREEN / 2.1);
     private static final int CONSTANT_TEXT_SIZE = HEIGHT_SCREEN / 20;
-    private static final float WIDTH_ZOMBIE = (float) (Gdx.graphics.getWidth() / 8.3);
-    private static final float HEIGHT_ZOMBIE = (float) (Gdx.graphics.getHeight() / 3.5);
+    private static final float WIDTH_ZOMBIE = (float) (WIDTH_SCREEN / 8.3);
+    private static final float HEIGHT_ZOMBIE = (float) (HEIGHT_SCREEN / 3.5);
     private static final float POSITION_ONE_ZOMBIE_X = WIDTH_SCREEN / 13;
     private static final float POSITION_SECOND_ZOMBIE_X = (float) (WIDTH_SCREEN / 4.4);
     private static final float POSITION_THREE_ZOMBIE_X = (float) (WIDTH_SCREEN / 2.2);
@@ -74,16 +75,16 @@ public class GameScreen implements Screen, ITextFont {
     @Override
     public void show() {
 
-        scaryZombieBackground = new Sprite(bg.ittalents.game.Resource.Assets.scaryZombieImage);
+        scaryZombieBackground = new Sprite(Assets.scaryZombieImage);
         scaryZombieBackground.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         spriteDrawableScaryZombieBackground = new SpriteDrawable(scaryZombieBackground);
         scaryZombieBackgroundImage = new Image(spriteDrawableScaryZombieBackground);
-        bg.ittalents.game.Resource.Assets.gamePlayMusic.play();
+        Assets.gamePlayMusic.play();
         LoginScreen.stopMenuMusic();
-        bg.ittalents.game.Resource.Assets.gamePlayMusic.setLooping(true);
+        Assets.gamePlayMusic.setLooping(true);
 
         mainStage = new Stage(new ScreenViewport());
-        backGroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.policeBuildingBackground);
+        backGroundSprite = new Sprite(Assets.policeBuildingBackground);
         backGroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
         spriteDrawableBackGround = new SpriteDrawable(backGroundSprite);
         backGroundImage = new Image(spriteDrawableBackGround);
@@ -109,18 +110,18 @@ public class GameScreen implements Screen, ITextFont {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (User.getSingletonUser().getGameBulletsForLevel() <= 0) {
-                    bg.ittalents.game.Resource.Assets.emptyClip.play();
+                    Assets.emptyClip.play();
                 } else {
                     User.getSingletonUser().setGameBulletsForLevel(User.getSingletonUser().getGameBulletsForLevel() - User.getSingletonUser().getWeapon());
                     switch (User.getSingletonUser().getWeapon()) {
                         case 1:
-                            long id = bg.ittalents.game.Resource.Assets.singleShot.play(0.08f);
+                            long id = Assets.singleShot.play(0.08f);
                             break;
                         case 2:
-                            long idDouble = bg.ittalents.game.Resource.Assets.doubleShot.play(0.08f);
+                            long idDouble = Assets.doubleShot.play(0.08f);
                             break;
                         case 3:
-                            long idTriple = bg.ittalents.game.Resource.Assets.tripleShot.play(0.08f);
+                            long idTriple = Assets.tripleShot.play(0.08f);
                             break;
                     }
                 }
@@ -146,17 +147,17 @@ public class GameScreen implements Screen, ITextFont {
     }
 
     public void addZombie() {
-        Random random = new Random();
-        int x = random.nextInt(5);
+        Random zombiePositionGenerator = new Random();
+        int tempPosition = zombiePositionGenerator.nextInt(5);
         for (int y = 0; y < 7; y++) {
-            if (!zombieArray[x].isVisible()) {
-                zombieArray[x].setVisible(true);
+            if (!zombieArray[tempPosition].isVisible()) {
+                zombieArray[tempPosition].setVisible(true);
                 return;
             } else {
-                if (x < zombieArray.length - 1) {
-                    x++;
+                if (tempPosition < zombieArray.length - 1) {
+                    tempPosition++;
                 } else {
-                    x = 0;
+                    tempPosition = 0;
                 }
             }
         }
@@ -213,7 +214,8 @@ public class GameScreen implements Screen, ITextFont {
     }
 
     private void textBitmapFontDraw() {
-        textBitmapFont.draw(spriteBatch, "SCORE  " + points, CONSTANT_X_FOR_SCORE, CONSTANT_Y_FOR_SCORE);
+        textBitmapFont.draw(spriteBatch, "SCORE  " + points, CONSTANT_X_FOR_SCORE, CONSTANT_Y_FOR_LIVES);
+        textBitmapFont.draw(spriteBatch, "Zombie  " + User.getSingletonUser().getGameAppearingZombieAll(), CONSTANT_X_FOR_SCORE, CONSTANT_Y_FOR_MONEY);
         textBitmapFont.draw(spriteBatch, "LIVES  " + lives, CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_LIVES);
         textBitmapFont.draw(spriteBatch, "BULLETS  " + User.getSingletonUser().getGameBulletsForLevel(), CONSTANT_X_FOR_LIVES_AND_MONEY, CONSTANT_Y_FOR_MONEY);
     }
@@ -258,39 +260,39 @@ public class GameScreen implements Screen, ITextFont {
     private void addBossTexture() {
         if ((timerBoss <= 5) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture1;
+            bossTexture = Assets.bossTexture1;
         } else if ((timerBoss > 8) && (timerBoss <= 11) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
-            bg.ittalents.game.Resource.Assets.takingDamage.play();
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture2;
+            Assets.takingDamage.play();
+            bossTexture = Assets.bossTexture2;
         } else if ((timerBoss > 11) && (timerBoss <= 14) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            bg.ittalents.game.Resource.Assets.takingDamage.play();
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture3;
+            Assets.takingDamage.play();
+            bossTexture = Assets.bossTexture3;
         } else if ((timerBoss > 14) && (timerBoss <= 17) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
-            bg.ittalents.game.Resource.Assets.takingDamage.play();
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture4;
+            Assets.takingDamage.play();
+            bossTexture = Assets.bossTexture4;
         } else if ((timerBoss > 17) && (timerBoss <= 20) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            bg.ittalents.game.Resource.Assets.takingDamage.play();
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture5;
+            Assets.takingDamage.play();
+            bossTexture = Assets.bossTexture5;
         } else if ((timerBoss > 20) && (timerBoss <= 23) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
-            bg.ittalents.game.Resource.Assets.takingDamage.play();
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture6;
+            Assets.takingDamage.play();
+            bossTexture = Assets.bossTexture6;
         } else if ((timerBoss > 23) && (timerBoss <= 26) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            bg.ittalents.game.Resource.Assets.takingDamage.play();
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture7;
+            Assets.takingDamage.play();
+            bossTexture = Assets.bossTexture7;
         } else if ((timerBoss > 26) && (timerBoss <= 29) && (checkForAddTextureBoss == true)) {
             checkForAddTextureBoss = false;
-            bg.ittalents.game.Resource.Assets.takingDamage.play();
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture8;
+            Assets.takingDamage.play();
+            bossTexture = Assets.bossTexture8;
         } else if ((timerBoss > 29) && (timerBoss <= 32) && (checkForAddTextureBoss == false)) {
             checkForAddTextureBoss = true;
-            bg.ittalents.game.Resource.Assets.takingDamage.play();
-            bossTexture = bg.ittalents.game.Resource.Assets.bossTexture9;
+            Assets.takingDamage.play();
+            bossTexture = Assets.bossTexture9;
         }
 
         spriteBoss = new Sprite(bossTexture);
@@ -316,35 +318,35 @@ public class GameScreen implements Screen, ITextFont {
 //        Assets.gamePlayMusic.stop();
         if (timerBoss >= 5 && timerBoss <= 8.375 && alreadyPlayed == true) {
             alreadyPlayed = false;
-            bg.ittalents.game.Resource.Assets.bossSound1.play();
+            Assets.bossSound1.play();
 //            long id = Assets.bossSound1.play();
 //            Assets.bossSound1.setPitch(id, 0.8f);
         } else if (timerBoss > 8.375 && timerBoss <= 11.75 && alreadyPlayed == false) {
             alreadyPlayed = true;
-            long id = bg.ittalents.game.Resource.Assets.bossSound2.play();
+            long id = Assets.bossSound2.play();
 //            Assets.bossSound2.setPitch(id, 0.8f);
         } else if (timerBoss > 11.75 && timerBoss <= 15.125 && alreadyPlayed == true) {
             alreadyPlayed = false;
-            long id = bg.ittalents.game.Resource.Assets.bossSound3.play();
+            long id = Assets.bossSound3.play();
 //            Assets.bossSound3.setPitch(id, 0.8f);
         } else if (timerBoss > 15.125 && timerBoss <= 18.5 && alreadyPlayed == false) {
             alreadyPlayed = true;
-            long id = bg.ittalents.game.Resource.Assets.bossSound4.play();
+            long id = Assets.bossSound4.play();
 //            Assets.bossSound4.setPitch(id, 0.8f);
         } else if (timerBoss > 18.5 && timerBoss <= 21.875 && alreadyPlayed == true) {
-            long id = bg.ittalents.game.Resource.Assets.bossSound1.play();
+            long id = Assets.bossSound1.play();
 //            Assets.bossSound1.setPitch(id, 0.8f);
             alreadyPlayed = false;
         } else if (timerBoss > 21.875 && timerBoss <= 25.25 && alreadyPlayed == false) {
-            long id = bg.ittalents.game.Resource.Assets.bossSound2.play();
+            long id = Assets.bossSound2.play();
 //            Assets.bossSound2.setPitch(id, 0.8f);
             alreadyPlayed = true;
         } else if (timerBoss > 25.25 && timerBoss <= 28.625 && alreadyPlayed == true) {
-            long id = bg.ittalents.game.Resource.Assets.bossSound3.play();
+            long id = Assets.bossSound3.play();
 //            Assets.bossSound3.setPitch(id, 0.8f);
             alreadyPlayed = false;
         } else if (timerBoss > 28.625 && timerBoss <= 32 && alreadyPlayed == false) {
-            long id = bg.ittalents.game.Resource.Assets.bossSound4.play();
+            long id = Assets.bossSound4.play();
 //            Assets.bossSound4.setPitch(id, 0.8f);
             alreadyPlayed = true;
         }

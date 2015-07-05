@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 
+import bg.ittalents.game.Resource.Assets;
+
 
 public class IntroScreen extends ApplicationAdapter implements Screen {
     public static final float DEGREES_PER_SECOND = 10f;
@@ -67,9 +69,9 @@ public class IntroScreen extends ApplicationAdapter implements Screen {
         itTalentsSprite.draw(batch);
         batch.end();
 
-        if (bg.ittalents.game.Resource.Assets.manager.update()){
+        if (Assets.manager.update()){
             if (animationLengthSec <= 0){
-                bg.ittalents.game.Resource.Assets.createAssets();
+                Assets.createAssets();
                 introMusic.stop();
                 zombieShooterGame.setScreen(new LoginScreen(zombieShooterGame));
             }

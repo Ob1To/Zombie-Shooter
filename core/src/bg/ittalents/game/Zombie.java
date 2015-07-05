@@ -20,6 +20,7 @@ import bg.ittalents.game.Resource.Assets;
  * Created by Ob1 on 6/28/2015.
  */
 public class Zombie extends Actor {
+    public static final int POINTS_GIVING = 10;
     private Animation animation;
     private TextureRegion currentRegion;
     private int tapCounter;
@@ -83,7 +84,6 @@ public class Zombie extends Actor {
                 } else {
                     dyingZombieSound();
                     tapCounter += User.getSingletonUser().getWeapon();
-//                currentRegion = new TextureRegion(enemiesArray[zombieLevel - 1]);
                     if (tapCounter >= currentZombie.zombieShootCounter) {
                         currentZombie.isDead = true;
                         return true;
@@ -120,7 +120,7 @@ public class Zombie extends Actor {
                 this.timeLiving = paragonLevel;
                 currentZombie.setVisible(false);
                 currentZombie.isDead = false;
-                GameScreen.points += 10 * zombieLevel;
+                GameScreen.points += POINTS_GIVING * zombieLevel;
             }
         }
     }
@@ -175,7 +175,6 @@ public class Zombie extends Actor {
                     @Override
                     public void run() {
                         GameScreen.scaryZombieBackgroundImage.setVisible(true);
-//                        GameScreen.backGroundSprite.setTexture(Assets.scaryZombieImage);
                     }
                 }),
                 Actions.delay(0.17f),
@@ -183,7 +182,6 @@ public class Zombie extends Actor {
                     @Override
                     public void run() {
                         GameScreen.scaryZombieBackgroundImage.setVisible(false);
-//                        GameScreen.backGroundSprite.setTexture(Assets.policeBuildingBackground);
                     }
                 }),
                 Actions.delay(1.8f),
@@ -194,33 +192,5 @@ public class Zombie extends Actor {
                     }
                 })));
     }
-//     This hit() instead of checking against a bounding box, checks a bounding circle.
-//    @Override
-//    public Actor hit(float x, float y, boolean touchable) {
-//        // If this Actor is hidden or untouchable, it cant be hit
-//        if (!this.isVisible() || this.getTouchable() == Touchable.disabled)
-//            return null;
-//
-//        // Get centerpoint of bounding circle, also known as the center of the rect
-//        float centerX = getWidth() / 2;
-//        float centerY = getHeight() / 2;
-//
-//        // Square roots are bad m'kay. In "real" code, simply square both sides for much speedy fastness
-//        // This however is the proper, unoptimized and easiest to grok equation for a hit within a circle
-//        // You could of course use LibGDX's Circle class instead.
-//
-//        // Calculate radius of circle
-//        float radius = (float) Math.sqrt(centerX * centerX +
-//                centerY * centerY);
-//
-//        // And distance of point from the center of the circle
-//        float distance = (float) Math.sqrt(((centerX - x) * (centerX - x))
-//                + ((centerY - y) * (centerY - y)));
-//
-//        // If the distance is less than the circle radius, it's a hit
-//        if (distance <= radius) return this;
-//
-//        // Otherwise, it isnt
-//        return null;
-//    }
+
 }

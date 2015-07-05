@@ -96,7 +96,23 @@ public class LevelMapScreen implements Screen {
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
 
-        inizializiraneWarningMessage();
+        initializeWarningMessage();
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        backgroundSprite.draw(batch);
+        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
+        batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            game.setScreen(new PlayScreen(game));
+        }
+
     }
 
     private void initializeAndAddButtonInContainer() {
@@ -119,23 +135,7 @@ public class LevelMapScreen implements Screen {
         stage.addActor(container);
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        backgroundSprite.draw(batch);
-        batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-        batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            game.setScreen(new PlayScreen(game));
-        }
-
-    }
-
-    private void inizializiraneWarningMessage() {
+    private void initializeWarningMessage() {
         tableMessage = new Table();
         tableMessage.setFillParent(true);
         tableMessage.top();

@@ -26,6 +26,12 @@ public class GameWinScreen implements Screen{
     public static final int CONSTANT_SEE_SCREEN = 3;
     public static final int CONSTANT_UNLOCKED_WEAPON_2 = 25000;
     public static final int CONSTANT_UNLOCKED_WEAPON_3 = 35000;
+    public static final float X_FOR_YOU_WIN = Gdx.graphics.getWidth() / 3.1f;
+    public static final int Y_FOR_YOU_WIN = Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3;
+    public static final float X_FOR_SAVE_TEXT = Gdx.graphics.getWidth() / 7.5f;
+    public static final int Y_FOR_SAVE_TEXT = Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 7;
+    public static final float X_FOR_SCORE = Gdx.graphics.getWidth() / 3.15f;
+    public static final int CONSTANT_FOR_Y_SCORE = 2;
 
     private Game game;
     private SpriteBatch batch;
@@ -77,9 +83,9 @@ public class GameWinScreen implements Screen{
         batch.begin();
         backgroundSprite.draw(batch);
         batch.draw(backgroundSprite, backgroundSprite.getX(), backgroundSprite.getY(), backgroundSprite.getWidth(), backgroundSprite.getHeight());
-        textBitmapFont.draw(batch, "You Win !" , Gdx.graphics.getWidth() / 3.1f, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3);
-        textBitmapFont.draw(batch, "You Saved The Camp !", Gdx.graphics.getWidth() / 7.5f, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 7);
-        textBitmapFont.draw(batch, "SCORE  " + GameScreen.points, Gdx.graphics.getWidth() / 3.15f, Gdx.graphics.getHeight() / 2 - textBitmapFont.getLineHeight() / 2);
+        textBitmapFont.draw(batch, "You Win !" , X_FOR_YOU_WIN, Y_FOR_YOU_WIN);
+        textBitmapFont.draw(batch, "You Saved The Camp !", X_FOR_SAVE_TEXT, Y_FOR_SAVE_TEXT);
+        textBitmapFont.draw(batch, "SCORE  " + GameScreen.points, X_FOR_SCORE, Gdx.graphics.getHeight() / CONSTANT_FOR_Y_SCORE - textBitmapFont.getLineHeight() / CONSTANT_FOR_Y_SCORE);
         batch.end();
         setTimeSeeScreen(Gdx.graphics.getDeltaTime());
         stage.act(Gdx.graphics.getDeltaTime());

@@ -25,18 +25,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import bg.ittalents.game.Resource.Assets;
+import bg.ittalents.game.Resource.Constant;
+
 public class PlayScreen implements Screen {
 
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final float CONSTANT_PAD_BOTTOM_AND_TOP = Gdx.graphics.getHeight() / 20;
-    public static final float CONSTANT_PAD_LEFT_AND_RIGHT = Gdx.graphics.getWidth() / 30;
-    public static final float CONSTANT_HEIGHT_TITLE = 3;
-    public static final double WIDTH_BUTTONS = 3.5;
-    public static final int HEIGHT_BUTTONS = 6;
-    public static final int WIDTH_PLAY_BUTTON = 2;
-    public static final int HEIGHT_PLAY_BUTTON = 3;
-    public static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = HEIGHT_SCREEN / 3.2f;
+    public static final float CONSTANT_PAD_BOTTOM_AND_TOP = Constant.HEIGHT_SCREEN / 20;
+    public static final float WIDTH_BUTTONS = (float) (Constant.WIDTH_SCREEN / 3.5);
+    public static final float HEIGHT_BUTTONS = Constant.HEIGHT_SCREEN / 6;
+    public static final float WIDTH_PLAY_BUTTON = Constant.WIDTH_SCREEN / 2;
+    public static final float HEIGHT_PLAY_BUTTON = Constant.HEIGHT_SCREEN / 3;
 
     private Game game;
     private SpriteBatch batch;
@@ -71,10 +69,10 @@ public class PlayScreen implements Screen {
         Gdx.input.setCatchBackKey(true);
 
         // Creating and setting the background and game title
-        backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.backgroundMenu);
+        backgroundSprite = new Sprite(Assets.backgroundMenu);
         backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        titleSprite = new Sprite(bg.ittalents.game.Resource.Assets.zombieShooterTitle);
-        bg.ittalents.game.Resource.Assets.spriteDefaultColorSolid(titleSprite);
+        titleSprite = new Sprite(Assets.zombieShooterTitle);
+        Assets.spriteDefaultColorSolid(titleSprite);
         spriteDrawableTitle = new SpriteDrawable(titleSprite);
         imageTitle = new Image(spriteDrawableTitle);
 
@@ -104,9 +102,9 @@ public class PlayScreen implements Screen {
         labelMessage = new Label("", skin);
         labelMessage.setColor(Color.WHITE);
         labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        tableMessage.add(labelMessage).expandX().padTop(Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
         stage.addActor(tableMessage);
-        if(!LoginScreen.offlineModeSelect) {
+        if (!LoginScreen.offlineModeSelect) {
             loadUserInformation();
             weaponsStoreJson();
         }
@@ -114,27 +112,27 @@ public class PlayScreen implements Screen {
     }
 
     private void creatingAllTheButtons() {
-        spritePlayButton = new Sprite(bg.ittalents.game.Resource.Assets.playButton);
-        spritePlayButton.setSize((float) (WIDTH_SCREEN / WIDTH_PLAY_BUTTON), (float) (HEIGHT_SCREEN / HEIGHT_PLAY_BUTTON));
+        spritePlayButton = new Sprite(Assets.playButton);
+        spritePlayButton.setSize(WIDTH_PLAY_BUTTON, HEIGHT_PLAY_BUTTON);
         SpriteDrawable spriteDrawablePlayButton = new SpriteDrawable(spritePlayButton);
         playButton = new ImageButton(spriteDrawablePlayButton);
 
-        spriteShopButton = new Sprite(bg.ittalents.game.Resource.Assets.shopButton);
-        spriteShopButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        spriteShopButton = new Sprite(Assets.shopButton);
+        spriteShopButton.setSize(WIDTH_BUTTONS, HEIGHT_BUTTONS);
         SpriteDrawable spriteDrawableShopButton = new SpriteDrawable(spriteShopButton);
         shopButton = new ImageButton(spriteDrawableShopButton);
 
-        spriteHighScoreButton = new Sprite(bg.ittalents.game.Resource.Assets.highScoreButton);
-        spriteHighScoreButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        spriteHighScoreButton = new Sprite(Assets.highScoreButton);
+        spriteHighScoreButton.setSize(WIDTH_BUTTONS, HEIGHT_BUTTONS);
         SpriteDrawable spriteDrawableHighScoreButton = new SpriteDrawable(spriteHighScoreButton);
         highScoreButton = new ImageButton(spriteDrawableHighScoreButton);
 
-        spriteProfileButton = new Sprite(bg.ittalents.game.Resource.Assets.profileButton);
-        spriteProfileButton.setSize((float) (WIDTH_SCREEN / WIDTH_BUTTONS), (float) (HEIGHT_SCREEN / HEIGHT_BUTTONS));
+        spriteProfileButton = new Sprite(Assets.profileButton);
+        spriteProfileButton.setSize(WIDTH_BUTTONS, HEIGHT_BUTTONS);
         SpriteDrawable spriteDrawableProfileButton = new SpriteDrawable(spriteProfileButton);
         profileButton = new ImageButton(spriteDrawableProfileButton);
 
-        bg.ittalents.game.Resource.Assets.spriteDefaultColor(spritePlayButton, spriteShopButton, spriteHighScoreButton, spriteProfileButton); // Setting the transparency of the buttons
+        Assets.spriteDefaultColor(spritePlayButton, spriteShopButton, spriteHighScoreButton, spriteProfileButton); // Setting the transparency of the buttons
     }
 
     private void addingListenersToAllButtons() {
@@ -148,7 +146,7 @@ public class PlayScreen implements Screen {
         playButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 spritePlayButton.setColor(0.545f, 0, 0, 0.7f);
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
@@ -169,7 +167,7 @@ public class PlayScreen implements Screen {
         shopButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 spriteShopButton.setColor(0.545f, 0, 0, 0.7f);
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
@@ -189,7 +187,7 @@ public class PlayScreen implements Screen {
         highScoreButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 spriteHighScoreButton.setColor(0.545f, 0, 0, 0.7f);
                 if (!LoginScreen.offlineModeSelect) {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
@@ -211,7 +209,7 @@ public class PlayScreen implements Screen {
         profileButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                bg.ittalents.game.Resource.Assets.clickButton.play();
+                Assets.clickButton.play();
                 spriteProfileButton.setColor(0.545f, 0, 0, 0.7f);
                 if (!LoginScreen.offlineModeSelect) {
                     stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
@@ -226,14 +224,14 @@ public class PlayScreen implements Screen {
     }
 
     private void addingButtonsToContainer() {
-        container.add(imageTitle).width(WIDTH_SCREEN)
-                .height((HEIGHT_SCREEN / CONSTANT_HEIGHT_TITLE)).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
+        container.add(imageTitle).width(Constant.WIDTH_SCREEN)
+                .height(Constant.CONSTANT_HEIGHT_TITLE).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
         container.row();
         container.add(playButton).padBottom(CONSTANT_PAD_BOTTOM_AND_TOP);
         container.row();
-        buttonsContainer.add(shopButton).padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
-        buttonsContainer.add(highScoreButton).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT).padRight(CONSTANT_PAD_LEFT_AND_RIGHT);
-        buttonsContainer.add(profileButton).padLeft(CONSTANT_PAD_LEFT_AND_RIGHT);
+        buttonsContainer.add(shopButton).padRight(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
+        buttonsContainer.add(highScoreButton).padLeft(Constant.CONSTANT_PAD_LEFT_AND_RIGHT).padRight(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
+        buttonsContainer.add(profileButton).padLeft(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
         container.add(buttonsContainer).padTop(CONSTANT_PAD_BOTTOM_AND_TOP);
     }
 
@@ -280,9 +278,10 @@ public class PlayScreen implements Screen {
         stage.dispose();
         game.dispose();
     }
+
     private void loadUserInformation() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "userInfoManager?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();
@@ -313,7 +312,7 @@ public class PlayScreen implements Screen {
 
     private void weaponsStoreJson() {
         final Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl(bg.ittalents.game.Resource.Assets.HTTP_SERVER + "weaponsStore?userId=" + User.getSingletonUser().getUserId());
+        httpGet.setUrl(Assets.HTTP_SERVER + "weaponsStore?userId=" + User.getSingletonUser().getUserId());
         Gdx.net.sendHttpRequest(httpGet, new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 Gson gson = new Gson();

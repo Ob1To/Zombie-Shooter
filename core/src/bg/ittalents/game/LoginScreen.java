@@ -34,7 +34,6 @@ public class LoginScreen implements Screen {
     public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 30;
 
 
-
     private static boolean counterForStartMusicOneTime;
     private Skin skin;
     private Stage stage;

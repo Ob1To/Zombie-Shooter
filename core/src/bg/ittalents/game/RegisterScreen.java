@@ -30,7 +30,7 @@ import bg.ittalents.game.Resource.Constant;
 
 
 public class RegisterScreen extends LoginScreen implements Screen {
-    public static final float CONSTANT_PAD_BOTTOM = Gdx.graphics.getHeight() / 12;
+    public static final float CONSTANT_PAD_BOTTOM = Constant.HEIGHT_SCREEN / 12;
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -148,13 +148,13 @@ public class RegisterScreen extends LoginScreen implements Screen {
 
     private void creatingTheTextFields() {
         userField = new TextField(Constant.USER_NAME, skin);
-        userField.setColor(1,0,0,0.5f);
+        userField.setColor(1, 0, 0, 0.5f);
         passwordField = new TextField(Constant.PASSWORD, skin);
-        passwordField.setColor(1,0,0,0.5f);
+        passwordField.setColor(1, 0, 0, 0.5f);
         passwordCheckField = new TextField(RE_PASSWORD, skin);
-        passwordCheckField.setColor(1,0,0,0.5f);
+        passwordCheckField.setColor(1, 0, 0, 0.5f);
         emailField = new TextField(EMAIL, skin);
-        emailField.setColor(1,0,0,0.5f);
+        emailField.setColor(1, 0, 0, 0.5f);
     }
 
     private void settingTextFieldsTextToCenter() {
@@ -215,7 +215,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
                             stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                                 @Override
                                 public void run() {
-                                    login(userField.getText().toString(),passwordField.getText().toString(),false);
+                                    login(userField.getText().toString(), passwordField.getText().toString(), false);
                                     game.setScreen(new PlayScreen(game));
                                 }
                             })));
@@ -337,6 +337,7 @@ public class RegisterScreen extends LoginScreen implements Screen {
     public void hide() {
 
     }
+
     @Override
     public void dispose() {
         game.dispose();

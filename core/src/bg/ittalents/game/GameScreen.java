@@ -21,7 +21,7 @@ import java.util.Random;
 /**
  * Created by Ob1 on 6/28/2015.
  */
-public class GameScreen implements Screen {
+public class GameScreen implements Screen,ITextFont {
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final float CONSTANT_X_FOR_LIVES_AND_MONEY = (float) (WIDTH_SCREEN / 2 + WIDTH_SCREEN / 3.7);
     public static final int CONSTANT_X_FOR_SCORE = WIDTH_SCREEN / 50;

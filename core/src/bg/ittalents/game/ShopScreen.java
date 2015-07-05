@@ -29,7 +29,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 
-public class ShopScreen extends Actor implements Screen {
+public class ShopScreen extends Actor implements Screen,ITextFont {
 
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();

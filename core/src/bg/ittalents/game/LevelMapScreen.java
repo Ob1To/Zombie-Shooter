@@ -342,13 +342,14 @@ public class LevelMapScreen implements Screen {
         if (!LoginScreen.offlineModeSelect) {
             levelInfoJson();
         } else {
+            ResourcesForOffline.levelMapResources(z);
             stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                 @Override
                 public void run() {
                     game.setScreen(new DifficultyScreen(game));
                 }
             })));
-            ResourcesForOffline.levelMapResources(z);
+
         }
     }
     }

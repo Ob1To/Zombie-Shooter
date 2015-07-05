@@ -17,21 +17,21 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import bg.ittalents.game.Resource.Constant;
+
 /**
  * Created by Ob1 on 7/4/2015.
  */
 public class GameWinScreen implements Screen{
-    public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
-    public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
-    public static final int CONSTANT_SEE_SCREEN = 3;
-    public static final int CONSTANT_UNLOCKED_WEAPON_2 = 25000;
-    public static final int CONSTANT_UNLOCKED_WEAPON_3 = 35000;
-    public static final float X_FOR_YOU_WIN = Gdx.graphics.getWidth() / 3.1f;
-    public static final int Y_FOR_YOU_WIN = Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3;
-    public static final float X_FOR_SAVE_TEXT = Gdx.graphics.getWidth() / 7.5f;
-    public static final int Y_FOR_SAVE_TEXT = Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 7;
-    public static final float X_FOR_SCORE = Gdx.graphics.getWidth() / 3.15f;
-    public static final int CONSTANT_FOR_Y_SCORE = 2;
+    private static final int CONSTANT_SEE_SCREEN = 3;
+    private static final int CONSTANT_UNLOCKED_WEAPON_2 = 25000;
+    private static final int CONSTANT_UNLOCKED_WEAPON_3 = 35000;
+    private static final float X_FOR_YOU_WIN = Constant.WIDTH_SCREEN / 3.1f;
+    private static final int Y_FOR_YOU_WIN = Constant.HEIGHT_SCREEN / 2 + Gdx.graphics.getHeight() / 3;
+    private static final float X_FOR_SAVE_TEXT = Constant.WIDTH_SCREEN / 7.5f;
+    private static final int Y_FOR_SAVE_TEXT = Constant.HEIGHT_SCREEN / 2 + Gdx.graphics.getHeight() / 7;
+    private static final float X_FOR_SCORE = Constant.WIDTH_SCREEN / 3.15f;
+    private static final int CONSTANT_FOR_Y_SCORE = 2;
 
     private Game game;
     private SpriteBatch batch;
@@ -41,7 +41,7 @@ public class GameWinScreen implements Screen{
     private BitmapFont textBitmapFont;
 
 
-    public GameWinScreen(Game game){
+    protected GameWinScreen(Game game){
         this.game = game;
     }
 
@@ -49,7 +49,7 @@ public class GameWinScreen implements Screen{
     public void show() {
         batch = new SpriteBatch();
         backgroundSprite = new Sprite(bg.ittalents.game.Resource.Assets.gameWinScreen);
-        backgroundSprite.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        backgroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
         stage = new Stage(new ScreenViewport());
 
         bg.ittalents.game.Resource.Assets.gamePlayMusic.stop();

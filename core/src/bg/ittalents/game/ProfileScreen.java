@@ -38,9 +38,6 @@ public class ProfileScreen implements Screen {
     private static final float CONSTANT_TEXT_WIDTH = Constant.WIDTH_SCREEN / 3;
     private static final float CONSTANT_TEXT_HEIGHT = Constant.HEIGHT_SCREEN / 10;
     private static final float CONSTANT_TABLE_MESSAGE_PAD_TOP = Constant.HEIGHT_SCREEN / 3.45f;
-    private static final String EMAIL_PATTERN =
-            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     private Stage stage;
     private Game game;
@@ -204,7 +201,7 @@ public class ProfileScreen implements Screen {
     }
 
     private boolean cheakEmailField(String emailField) {
-        if (emailField.matches(EMAIL_PATTERN)) {
+        if (emailField.matches(Constant.EMAIL_PATTERN)) {
             return true;
         } else {
             labelMessage.setText("Invalid email");

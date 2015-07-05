@@ -101,15 +101,7 @@ public class LoginScreen implements Screen {
         backgroundSprite.setSize(Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
 
 
-        tableMessage = new Table();
-        tableMessage.setFillParent(true);
-        tableMessage.top();
-
-        labelMessage = new Label("", skin);
-        labelMessage.setColor(Color.WHITE);
-        labelMessage.setAlignment(Align.center);
-        tableMessage.add(labelMessage).expandX().padTop(Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
-        stage.addActor(tableMessage);
+        initializationWarningMessage();
     }
 
     @Override
@@ -169,6 +161,18 @@ public class LoginScreen implements Screen {
         buttonsContainer.add(registerButton).padLeft(Constant.CONSTANT_PAD_LEFT_AND_RIGHT);
         container.add(buttonsContainer);
         stage.addActor(container);
+    }
+
+    private void initializationWarningMessage() {
+        tableMessage = new Table();
+        tableMessage.setFillParent(true);
+        tableMessage.top();
+
+        labelMessage = new Label("", skin);
+        labelMessage.setColor(Color.WHITE);
+        labelMessage.setAlignment(Align.center);
+        tableMessage.add(labelMessage).expandX().padTop(Constant.CONSTANT_TABLE_MESSAGE_PAD_TOP);
+        stage.addActor(tableMessage);
     }
 
     private void clickListenerHandler() {

@@ -42,7 +42,6 @@ public class DifficultyScreen implements Screen {
 
     @Override
     public void show() {
-
         //Suzdavane na backgraunda
         batch = new SpriteBatch();
         backgroundSprite = new Sprite(Assets.backgroundMenu);
@@ -55,26 +54,52 @@ public class DifficultyScreen implements Screen {
         SpriteDrawable spriteDrawableTitle = new SpriteDrawable(spriteTitle);
         imageTitle = new Image(spriteDrawableTitle);
 
+        generateButton();
 
-        Sprite spriteEasyButton = new Sprite(Assets.easyLevelButton);
-        spriteEasyButton.setSize(CONSTANT_WIDTH,CONSTANT_HEIGHT_REGISTER_BUTTON);
-        SpriteDrawable easySpriteDrawable = new SpriteDrawable(spriteEasyButton);
+        addListenerButton();
 
-        Sprite spriteNormalButton = new Sprite(Assets.normalLevelButton);
-        spriteNormalButton.setSize(CONSTANT_WIDTH, CONSTANT_HEIGHT_REGISTER_BUTTON);
-        SpriteDrawable normalSpriteDrawable = new SpriteDrawable(spriteNormalButton);
+        generateAndAddInContainer();
 
-        Sprite spriteHardButton = new Sprite(Assets.hardLevelButton);
-        spriteHardButton.setSize(CONSTANT_WIDTH, CONSTANT_HEIGHT_REGISTER_BUTTON);
-        SpriteDrawable hardSpriteDrawable = new SpriteDrawable(spriteHardButton);
+        Gdx.input.setInputProcessor(stage);
 
-        Assets.spriteDefaultColor(spriteEasyButton, spriteNormalButton, spriteHardButton);
+        Gdx.input.setCatchBackKey(true);
 
-        easyButton = new ImageButton(easySpriteDrawable);
-        normalButton = new ImageButton(normalSpriteDrawable);
-        hardButton = new ImageButton(hardSpriteDrawable);
+    }
 
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        backgroundSprite.draw(batch);
+        batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            game.setScreen(new LevelMapScreen(game));
+        }
+    }
 
+    private void generateAndAddInContainer() {
+        container = new Table();
+        container.setWidth(stage.getWidth());
+        container.align(Align.center | Align.top);
+        container.setPosition(0, Constant.HEIGHT_SCREEN);
+
+        container.add(imageTitle).width(Constant.WIDTH_SCREEN)
+                .height(Constant.CONSTANT_HEIGHT_TITLE).padBottom(CONSTANT_PAD_BOTTOM);
+        container.row();
+        container.add(easyButton).padBottom(CONSTANT_PAD_BOTTOM);
+        container.row();
+        container.add(normalButton).padBottom(CONSTANT_PAD_BOTTOM);
+        container.row();
+        container.add(hardButton).padBottom(CONSTANT_PAD_BOTTOM);
+        container.row();
+
+        stage.addActor(container);
+    }
+
+    private void addListenerButton() {
         easyButton.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 Assets.clickButton.play();
@@ -116,43 +141,26 @@ public class DifficultyScreen implements Screen {
                 })));
             }
         });
-
-
-        container = new Table();
-        container.setWidth(stage.getWidth());
-        container.align(Align.center | Align.top);
-        container.setPosition(0, Constant.HEIGHT_SCREEN);
-
-        container.add(imageTitle).width(Constant.WIDTH_SCREEN)
-                .height(Constant.CONSTANT_HEIGHT_TITLE).padBottom(CONSTANT_PAD_BOTTOM);
-        container.row();
-        container.add(easyButton).padBottom(CONSTANT_PAD_BOTTOM);
-        container.row();
-        container.add(normalButton).padBottom(CONSTANT_PAD_BOTTOM);
-        container.row();
-        container.add(hardButton).padBottom(CONSTANT_PAD_BOTTOM);
-        container.row();
-
-        stage.addActor(container);
-
-        Gdx.input.setInputProcessor(stage);
-
-        Gdx.input.setCatchBackKey(true);
-
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        backgroundSprite.draw(batch);
-        batch.end();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            game.setScreen(new LevelMapScreen(game));
-        }
+    private void generateButton() {
+        Sprite spriteEasyButton = new Sprite(Assets.easyLevelButton);
+        spriteEasyButton.setSize(CONSTANT_WIDTH,CONSTANT_HEIGHT_REGISTER_BUTTON);
+        SpriteDrawable easySpriteDrawable = new SpriteDrawable(spriteEasyButton);
+
+        Sprite spriteNormalButton = new Sprite(Assets.normalLevelButton);
+        spriteNormalButton.setSize(CONSTANT_WIDTH, CONSTANT_HEIGHT_REGISTER_BUTTON);
+        SpriteDrawable normalSpriteDrawable = new SpriteDrawable(spriteNormalButton);
+
+        Sprite spriteHardButton = new Sprite(Assets.hardLevelButton);
+        spriteHardButton.setSize(CONSTANT_WIDTH, CONSTANT_HEIGHT_REGISTER_BUTTON);
+        SpriteDrawable hardSpriteDrawable = new SpriteDrawable(spriteHardButton);
+
+        Assets.spriteDefaultColor(spriteEasyButton, spriteNormalButton, spriteHardButton);
+
+        easyButton = new ImageButton(easySpriteDrawable);
+        normalButton = new ImageButton(normalSpriteDrawable);
+        hardButton = new ImageButton(hardSpriteDrawable);
     }
 
     @Override

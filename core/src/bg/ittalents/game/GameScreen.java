@@ -307,6 +307,7 @@ public class GameScreen implements Screen, ITextFont {
             bossTexture = Assets.bossTexture9;
         }
 
+
         spriteBoss = new Sprite(bossTexture);
         spriteBoss.setSize((float) (WIDTH_SCREEN / 2.2), HEIGHT_SCREEN);
         SpriteDrawable spriteDrawableBoss = new SpriteDrawable(spriteBoss);

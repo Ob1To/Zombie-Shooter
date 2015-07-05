@@ -303,14 +303,14 @@ public class LevelMapScreen implements Screen {
                 User.getSingletonUser().setGameAppearingZombieAll(jsonObj.get("count").getAsInt());
                 User.getSingletonUser().setGameAppearingZombieTime(jsonObj.get("durationOn").getAsFloat());
                 User.getSingletonUser().setGameHidingZombie(jsonObj.get("durationOff").getAsFloat());
-                User.getSingletonUser().setGameBulletsForLevel(jsonObj.get("bullets").getAsInt());
+                User.getSingletonUser().setGameBulletsForLevel(jsonObj.get("bullets").getAsInt() * User.getSingletonUser().getWeapon());
                 stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
                         game.setScreen(new DifficultyScreen(game));
                     }
                 })));
-
+                System.out.println(User.getSingletonUser().getGameBulletsForLevel());
 
 
             }

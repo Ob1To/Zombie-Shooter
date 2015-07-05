@@ -10,8 +10,7 @@ abstract class ResourcesForOffline {
     private static float durationOn;
     private static float durationOff;
 
-
-    public static void levelMapResources(int index){
+    public static void levelMapResources(int index) {
         switch (index) {
             case 1:
                 count = 10;
@@ -50,11 +49,10 @@ abstract class ResourcesForOffline {
                 break;
         }
 
-
         User.getSingletonUser().setUserHealth(USER_HEALTH);
         User.getSingletonUser().setGameAppearingZombieAll(count);
         User.getSingletonUser().setGameAppearingZombieTime(durationOn);
         User.getSingletonUser().setGameHidingZombie(durationOff);
-        User.getSingletonUser().setGameBulletsForLevel((int)((count * BULLETS_COEFFICIENT) * (User.getSingletonUser().getWeapon())));
+        User.getSingletonUser().setGameBulletsForLevel((int) ((count * BULLETS_COEFFICIENT) * (User.getSingletonUser().getWeapon())));
     }
 }

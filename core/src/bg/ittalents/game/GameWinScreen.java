@@ -24,8 +24,8 @@ public class GameWinScreen implements Screen{
     public static final int WIDTH_SCREEN = Gdx.graphics.getWidth();
     public static final int HEIGHT_SCREEN = Gdx.graphics.getHeight();
     public static final int CONSTANT_SEE_SCREEN = 3;
-    public static final int CONSTANT_UNLOCKED_WEAPON_2 = 15000;
-    public static final int CONSTANT_UNLOCKED_WEAPON_3 = 25000;
+    public static final int CONSTANT_UNLOCKED_WEAPON_2 = 25000;
+    public static final int CONSTANT_UNLOCKED_WEAPON_3 = 35000;
 
     private Game game;
     private SpriteBatch batch;

@@ -356,8 +356,8 @@ public class Assets {
         bossTexture8 = manager.get(THE_BOSS_8, Texture.class);
         bossTexture9 = manager.get(THE_BOSS_9, Texture.class);
 
-        gamePlayMusic.setVolume(0.15f);
-        gameMenuMusic.setVolume(0.15f);
+//        gamePlayMusic.setVolume(0.8f);
+//        gameMenuMusic.setVolume(0.8f);
 
     }
 

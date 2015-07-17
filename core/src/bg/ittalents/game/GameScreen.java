@@ -125,13 +125,13 @@ public class GameScreen implements Screen, ITextFont {
                     User.getSingletonUser().setGameBulletsForLevel(User.getSingletonUser().getGameBulletsForLevel() - User.getSingletonUser().getWeapon());
                     switch (User.getSingletonUser().getWeapon()) {
                         case 1:
-                            long id = Assets.singleShot.play(0.08f);
+                            long id = Assets.singleShot.play(0.3f);
                             break;
                         case 2:
-                            long idDouble = Assets.doubleShot.play(0.08f);
+                            long idDouble = Assets.doubleShot.play(0.3f);
                             break;
                         case 3:
-                            long idTriple = Assets.tripleShot.play(0.08f);
+                            long idTriple = Assets.tripleShot.play(0.3f);
                             break;
                     }
                 }
